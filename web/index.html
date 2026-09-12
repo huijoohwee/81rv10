@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#191f36">
+<title>Launch Copilot · From ask to grounded proposal</title>
+<link rel="stylesheet" href="/style.css">
+<script type="module" src="/app.mjs">
+</script>
+</head>
+<body>
+<header>
+<a class="brand" href="/" aria-label="Launch Copilot home">
+<span class="brand-mark">L↗</span> Launch Copilot <span class="tag">WORKSPACE</span>
+</a>
+<span id="connection" class="connection">Connecting…</span>
+</header>
+<main>
+<section class="intro">
+<div>
+<p class="eyebrow">YOUR NEXT SMALL, SELLABLE STEP</p>
+<h1>Good ideas deserve<br>
+<em>grounded plans.</em>
+</h1>
+<p>Turn a business ask into a proposal your code can support.</p>
+</div>
+<div class="intro-note">
+<span class="spark">✳</span>
+<p>Start with the customer.<br>Find the evidence.<br>Make the next move.</p>
+</div>
+</section>
+<nav class="steps" aria-label="Proposal workflow">
+<span id="step1">
+<b>01</b> Ground the ask</span>
+<span id="step2">
+<b>02</b> Shape the proposal</span>
+<span id="step3">
+<b>03</b> Review & hand off</span>
+</nav>
+<div class="workspace">
+<aside>
+<section class="card">
+<div class="section-head">
+<h2>The business ask</h2>
+<span class="tag">START HERE</span>
+</div>
+<form id="intake">
+<label for="requirement">What does your customer need?</label>
+<textarea id="requirement" rows="7" minlength="8" maxlength="2000" required placeholder="We need a way to sell one agent-assisted service, deliver the result and give the buyer a receipt.">
+</textarea>
+<button type="button" id="example" class="text-button">Try the agent-commerce example ↗</button>
+<label for="repo">Ground in this repository</label>
+<select id="repo" required>
+</select>
+<label for="slug">Proposal name</label>
+<input id="slug" required maxlength="64" pattern="[a-z0-9]+(-[a-z0-9]+)*" value="first-paid-agent-service">
+<button id="ground" class="primary full" type="submit">Find source evidence <span>→</span>
+</button>
+</form>
+<p class="small muted">Reads selected source files. Your application code stays untouched.</p>
+</section>
+<section class="card compact">
+<p class="eyebrow">THE PROPOSAL LOOP</p>
+<p class="small">One ask. Five connected documents. Every technical claim points to evidence or is labelled <strong>NEW</strong>.</p>
+<div class="role-chips">
+<span>PRD</span>
+<span>TAD</span>
+<span>ADR</span>
+<span>MVP</span>
+<span>GTM</span>
+</div>
+</section>
+</aside>
+<section class="review-area">
+<div class="section-head">
+<div>
+<p class="eyebrow">EVIDENCE BEFORE EXECUTION</p>
+<h2 id="view-title">Your proposal workspace</h2>
+</div>
+<span id="status" class="tag">READY WHEN YOU ARE</span>
+</div>
+<p id="notice" role="status" aria-live="polite">Start with a specific customer outcome. We’ll find what already exists.</p>
+<div id="empty" class="empty">
+<div class="orbit">
+<span>ASK</span>
+<i>
+</i>
+<span>PROOF</span>
+<i>
+</i>
+<span>PLAN</span>
+</div>
+<h3>A plan with a place to start.</h3>
+<p>Source evidence and proposed work will appear here.<br>No invented files. No implied production readiness.</p>
+<div class="empty-grid">
+<div>
+<b>01 / Real source</b>
+<p>Inspectable nodes and explained relationships.</p>
+</div>
+<div>
+<b>02 / Clear scope</b>
+<p>Five documents with one shared direction.</p>
+</div>
+<div>
+<b>03 / Your decision</b>
+<p>Review exact content before publication.</p>
+</div>
+</div>
+</div>
+<div id="result" hidden>
+<div id="metrics" class="metrics">
+</div>
+<div class="tabs" role="tablist">
+<button id="evidence-tab" role="tab" aria-selected="true">Source evidence</button>
+<button id="documents-tab" role="tab" aria-selected="false">Five documents</button>
+<button id="canvas-tab" role="tab" aria-selected="false">Canvas ↗</button>
+</div>
+<div id="evidence-view">
+</div>
+<div id="documents-view" hidden>
+</div>
+<div id="canvas-view" hidden>
+</div>
+<div id="actions" class="actions">
+<button id="compose" class="primary">Draft with OpenAI →</button>
+<button id="outline" class="secondary">Create an evidence outline</button>
+<button id="abort" class="secondary" hidden>Stop drafting</button>
+</div>
+<p class="small muted" id="model-note">
+</p>
+<div id="approval" class="card" hidden>
+<h3>Review the exact proposal</h3>
+<p class="small">Check that each source excerpt supports its claim. A matching reference alone cannot prove it.</p>
+<details>
+<summary>Five files & review digest</summary>
+<pre id="manifest">
+</pre>
+</details>
+<label class="check">
+<input type="checkbox" id="reviewed"> I reviewed all five documents and their source claims.</label>
+<div class="actions">
+<button id="approve" class="primary" disabled>Approve & open proposal PR →</button>
+<button id="download" class="secondary">Download proposal</button>
+<button id="export" class="secondary">Export five files</button>
+<button id="readback" class="secondary">Read back</button>
+<button id="cancel" class="text-button">Cancel proposal</button>
+</div>
+<p class="small muted">Publication requires an admitted agentic-os repository. A PR is separate from integration.</p>
+</div>
+</div>
+</section>
+</div>
+</main>
+<footer>
+<span>Launch Copilot</span>
+<span>Small scope. Real evidence. Clear next step.</span>
+<button id="clear" class="text-button">Clear local draft</button>
+</footer>
+</body>
+</html>

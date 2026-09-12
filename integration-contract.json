@@ -1,0 +1,8 @@
+{
+  "schema": "launch-copilot/owner-contract/v1",
+  "agentic-graph": { "revision": "ddfb165472ce20a2fe4ebca9b799d32c86cb052d", "runtime": "mcp/agent-graph/runtime.mjs", "document": "contracts/agentic-os-document.schema.js", "panel": "canvas/src/components/RichMediaPanel.tsx", "modelProxy": "/__chat_proxy/v1/responses" },
+  "agentic-os": { "revision": "817c1da8dac21d688d7c531b234482c64ee4340b", "generation": "bin/agentic-os-generation.mjs", "lifecycle": "bin/agentic-os.mjs" },
+  "node": ">=24",
+  "newRuntimePackages": 0,
+  "policy": "Explicit local owner roots; rerun owner integration checks when revisions change. No sibling source is copied, installed or modified by this product."
+}

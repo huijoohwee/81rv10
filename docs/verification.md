@@ -1,0 +1,18 @@
+# LC01 implementation verification
+
+Date: 2026-09-12. Scope: local proposal MVP from authoring SSOT `20260912T140000Z-launch-copilot-lc01.md`, version 0.2.0 / r2. The later user instruction “IMPLEMENT” authorized application work. One bootstrap worktree (`agent/local/launch-copilot`) was used because the initially README-only target had no repository profile or local trust. Canonical 81rv10 and all upstream application source remained unchanged.
+
+| Criterion | Observed result | Limit |
+|---|---|---|
+| LC-01 source grounding | Existing Graph runtime; the browser example returned 12 nodes and 6 explained edges across 11 selected Commerce files in 649 ms, 0 model calls. Source snapshot `737ead515860dd0dd5971d707f7bb9af3205bbc233d640abd33070a5e8aa8680`. | Scoped corpus only; search truncation is visible. References lacking spans do not acquire invented line numbers. |
+| LC-02 five joined roles | Exact role/membership validation, common CID/revision/tasks, per-file hashes and review digest; local provider fixture covers successful composition and one repair. | Live OpenAI verification deferred at the user’s request after Graph’s existing proxy reported a missing server key. Deterministic outlines are labelled and do not count as AI composition. |
+| LC-03 canvas | In-app browser showed five actual upstream RichMediaPanel surfaces, real solid source edges, and NEW dashed proposal styling. Canonical serialization round-trip tested through the HTTP export. | Bounded product projection; no claim that the full Graph editor or geospatial features were reproduced. |
+| LC-04 local/export + adapter | Browser exported all five Markdown files and verified hashes. Temporary-Git integration covers exact writes, guarded admission, readback, duplicate approval, lost response and provider-content mismatch. | Positive OS/GitHub command boundary is simulated. Actual target doctor refuses missing trust; no protected proposal PR or integration has been demonstrated. |
+| LC-05 mobile/offline | 390 × 844 browser viewport: document scroll width 390 px, five panels, no console errors. Offline reload retained the proposal and editable summaries; publication disabled. Connectivity and viewport overrides restored. | Mobile browser transport to a desktop host is not implemented. Offline composition requires later connectivity to Graph’s proxy. |
+| LC-06/07 | Deferred as specified. | No deployment, live payment, buyer acceptance, revenue or production-readiness claim. |
+
+Checks: `npm run check` with explicit Graph/OS roots passed all seven tests (including the owner integration test, with no skips); `npm run budgets` passed; browser walkthrough and JavaScript syntax checks passed. CI runs portable contract tests and budget checks; owner integration requires the documented local checkouts. Owner revisions and actual APIs are recorded in `integration-contract.json`; the local Graph parser used its installed TypeScript 5.8.3 runtime.
+
+Browser export receipt: `200ce809-eb45-4832-b8dc-19ba6f21057d`, revision r2; exact review SHA-256 `939d327b91112bf1a68be8351a0713177e9012e1c34c3510989e4f546aa4f9f1`. Its five-file manifest and original evidence remain in the private local state directory, outside Git. This is an evidence outline, not a completed customer proposal or paid pilot.
+
+Release gate: review and integrate the bootstrap implementation/profile through the repository owner’s normal process, establish the matching OS trust and protected-PR policy, then verify live OpenAI composition and one actual docs-only proposal handoff. Preserve uncertain lane effects and use OS recovery; do not equate a PR URL with integration. CopilotKit’s starter template, new dependencies, cloud deployment and outreach were not introduced.

@@ -1,0 +1,63 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { mkdtemp, writeFile, readFile, mkdir, realpath, rm, symlink } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join, resolve } from 'node:path';
+import { existsSync } from 'node:fs';
+import { ground, fresh, git } from '../src/ground.mjs';
+import { createApp } from '../src/server.mjs';
+import { roles, review } from '../src/compose.mjs';
+import { handoff, observe } from '../src/handoff.mjs';
+const graphRoot=resolve(process.env.LC_GRAPH_ROOT||'../agentic-graph'),osRoot=resolve(process.env.LC_OS_ROOT||'../agentic-os');
+const available=existsSync(join(graphRoot,'mcp/agent-graph/runtime.mjs'))&&existsSync(join(osRoot,'bin/agentic-os-generation.mjs'));
+test('real Graph + OS generation: source identity, HTTP review, stale/cancel/authority boundaries', {skip:available?false:'Set LC_GRAPH_ROOT and LC_OS_ROOT for owner integration checks.'},async t=>{
+  const dir=await realpath(await mkdtemp(join(tmpdir(),'lc-test-')));t.after(()=>rm(dir,{recursive:true,force:true}));
+  const root=join(dir,'source');await mkdir(root);await git(root,'init','-b','main');await git(root,'config','user.email','test@example.invalid');await git(root,'config','user.name','Test');
+  await writeFile(join(root,'checkout.ts'),'export function receipt() { return "sandbox"; }\nexport function checkout() { return receipt(); }\n');
+  await writeFile(join(root,'.env'),'NEVER_INGEST=this_is_not_a_real_secret');await git(root,'add','.');await git(root,'commit','-m','fixture');
+  const generation=await import(join(osRoot,'bin/agentic-os-generation.mjs'));
+  const config={graphRoot,osRoot,state:join(dir,'state'),target:root,graphUrl:'http://127.0.0.1:1',model:'test-only',generation,repos:[{id:'source',label:'Fixture',root,include:['**/*']}]};
+  const evidence=await ground(config,'source','checkout receipt service',AbortSignal.timeout(20000));assert.ok(evidence.nodes.length);assert.ok(evidence.edges.length);assert.ok(evidence.nodes.length<=12);assert.ok(evidence.edges.length<=20);assert.ok(!evidence.include.includes('.env'));await fresh(config,evidence);
+  const empty=await ground(config,'source','unmatchedzzzwidgets');assert.equal(empty.nodes.length,0);assert.equal(empty.edges.length,0);
+  await assert.rejects(ground(config,'../../secret','checkout receipt'),/configured/);
+  await writeFile(join(root,'checkout.ts'),'// changed\n');await assert.rejects(fresh(config,evidence),/Stale/);await git(root,'restore','checkout.ts');
+  await symlink('/etc/hosts',join(root,'aliased.ts'));await git(root,'add','aliased.ts');await assert.rejects(ground(config,'source','checkout receipt'),/aliased/);await git(root,'reset','--','aliased.ts');await rm(join(root,'aliased.ts'));
+  const server=await createApp(config);await new Promise(r=>server.listen(0,'127.0.0.1',r));t.after(()=>new Promise(r=>server.close(r)));
+  const origin=`http://127.0.0.1:${server.address().port}`,session=await(await fetch(origin+'/api/config')).json();
+  const request=async(action,body,headers={})=>{const response=await fetch(origin+'/api/'+action,{method:'POST',headers:{'Content-Type':'application/json',Origin:origin,'x-lc-token':session.token,...headers},body:JSON.stringify(body)});return {status:response.status,body:await response.json()};};
+  assert.equal((await request('ground',{}, {Origin:'https://attacker.invalid'})).status,403);
+  assert.equal((await request('ground',{}, {'x-lc-token':'wrong'})).status,403);
+  assert.equal((await request('ground',{slug:'../../escape',repo:'source',requirement:'checkout receipt'})).status,400);
+  let result=await request('ground',{slug:'test-offer',repo:'source',requirement:'checkout receipt'});assert.equal(result.status,200);let run=result.body;
+  const payload={claims:[{id:'C1',text:'Define a tested buyer offer.',ref:'new',owner:'product',check:'Test cancellation and readback.'}],sections:Object.fromEntries(roles.map(r=>[r,{summary:'Unvalidated offer hypothesis.',claimIds:['C1']}])),questions:[]};
+  result=await request('revise',{id:run.id,payload});assert.equal(result.status,200);run=result.body;assert.equal(run.manifest.length,5);
+  const exported=await request('export',{id:run.id,reviewHash:run.reviewHash});assert.equal(exported.status,200);assert.equal(await readFile(join(exported.body.export.directory,run.manifest[0].path),'utf8'),run.docs.prd);
+  const canvas=await(await fetch(origin+'/api/canvas?id='+run.id)).json();assert.equal(canvas.flow.nodes.filter(n=>n.type==='RichMediaPanel').length,5);assert.ok(canvas.flow.nodes.some(n=>n.properties.launchCopilotEvidence));
+  assert.equal((await request('approve',{id:run.id,reviewHash:'stale'})).status,400);
+  result=await request('approve',{id:run.id,reviewHash:run.reviewHash});assert.match(result.body.error,/not admitted/);assert.equal(existsSync(join(root,'docs')),false);
+  const cancelled=await request('cancel',{id:run.id});assert.equal(cancelled.body.status,'cancelled');assert.equal((await request('approve',{id:run.id,reviewHash:run.reviewHash})).status,400);
+  const saved=JSON.parse(await readFile(join(config.state,'runs',run.id+'.json')));assert.equal(saved.status,'cancelled');assert.equal(await git(root,'status','--porcelain'),'');
+  let wrote=false;await assert.rejects(handoff(config,{...run,status:'cancelled'},run.reviewHash,()=>{wrote=true;}));assert.equal(wrote,false);
+  // Fake only the remote/OS command boundary; writes and Git byte proof remain real.
+  const lane=join(dir,'lane');await git(dir,'clone',root,lane);await git(lane,'config','user.email','test@example.invalid');await git(lane,'config','user.name','Test');
+  let admissions=0,publications=0,pr=null;const phases=[];
+  const proposal={...run,id:'00000000-1111-2222-3333-444444444444',status:'review'};delete proposal.handoff;
+  const adapter={...config,invoke:async(file,args)=>{
+    if(file==='gh')return JSON.stringify(pr?[pr]:[]);
+    if(file==='git')return git(root,'fetch',lane,args.at(-1));
+    if(file==='npm')return '';
+    if(args[1]==='doctor')return 'trusted test fixture';
+    if(args[1]==='start'){admissions++;assert.match(args[4],/^--write=docs\/proposals\/test-offer\/prd.md,/);return `worktree ${lane}`;}
+    if(args[1]==='land'){publications++;await git(lane,'add','docs');await git(lane,'commit','-m','reviewed docs');pr={url:'https://github.com/example/test/pull/1',state:'OPEN',headRefOid:await git(lane,'rev-parse','HEAD')};return 'PR opened';}
+    throw Error('Unexpected adapter call');
+  }};
+  const persist=async r=>phases.push(r.handoff.phase);
+  await handoff(adapter,proposal,proposal.reviewHash,persist);assert.equal(proposal.handoff.phase,'pr-open');assert.equal(publications,1);assert.equal(admissions,1);assert.ok(phases.includes('files-written'));
+  await handoff(adapter,proposal,proposal.reviewHash,persist);assert.equal(publications,1);assert.equal(admissions,1);
+  pr={...pr,state:'MERGED',mergeCommit:{oid:pr.headRefOid}};await observe(adapter,proposal,persist);assert.equal(proposal.handoff.phase,'integrated');assert.equal(proposal.handoff.contentVerified,true);
+  const corrupt={...proposal,manifest:proposal.manifest.map(m=>({...m,sha256:'0'.repeat(64)}))};await assert.rejects(observe(adapter,corrupt,persist),/differs/);
+  const tampered={...proposal,docs:{...proposal.docs,prd:'unreviewed'}};await assert.rejects(handoff(adapter,tampered,proposal.reviewHash,persist),/Stored bytes/);
+  let attempted=0;const partial={...run,id:'99999999-1111-2222-3333-444444444444',status:'review'};delete partial.handoff;
+  const interrupted={...config,invoke:async(file,args)=>{if(file==='gh')return '[]';if(args[1]==='doctor')return '';attempted++;throw Error('Lost admission response');}};
+  await assert.rejects(handoff(interrupted,partial,partial.reviewHash,persist),/Effects may be retained/);assert.equal(partial.handoff.phase,'needs-readback');await handoff(interrupted,partial,partial.reviewHash,persist);assert.equal(attempted,1);
+});
