@@ -1,0 +1,216 @@
+{
+  "schema": "drone-dashboard-source-grounding/v1",
+  "continuity_id": "agentic-drone-dashboard",
+  "revision": "0.1.0",
+  "date": "2026-09-27",
+  "authority": false,
+  "repositories": [
+    {
+      "id": "T",
+      "root": "/Users/huijoohwee/Documents/GitHub/81rv10",
+      "revision": "99144fe144889a9d5b5c1cbf92b4e4dd51268782",
+      "head_at_check": "99144fe144889a9d5b5c1cbf92b4e4dd51268782",
+      "head_matches": true,
+      "artifacts": [
+        {"path": "README.md", "sha256": "35a21a7f37edfed368a1d3f3688261716dcfe79bdf3f466b84dda9d3d1e19e64", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/81rv10/blob/99144fe144889a9d5b5c1cbf92b4e4dd51268782/README.md"}
+      ]
+    },
+    {
+      "id": "OS",
+      "root": "/Users/huijoohwee/Documents/GitHub/agentic-os",
+      "revision": "e0ef770860905830157e64c455f0a342084b6d25",
+      "head_at_check": "e0ef770860905830157e64c455f0a342084b6d25",
+      "head_matches": true,
+      "artifacts": [
+        {"path": "AGENTS.md", "sha256": "f2353decc1bf0b18cbb391022b3687cd426a16671160266b3a29745c6db73626", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-os/blob/e0ef770860905830157e64c455f0a342084b6d25/AGENTS.md"},
+        {"path": "guides/SYSTEM-PROMPT-RUNTIME.md", "sha256": "fda9e94b59ccda1dacb4a86bc543bdfcf22eceb64b1317108ecc94053211771d", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-os/blob/e0ef770860905830157e64c455f0a342084b6d25/guides/SYSTEM-PROMPT-RUNTIME.md"},
+        {"path": "docs/START-WORKFLOW.md", "sha256": "b1f0a7d22ebfb83febc3a3267131530cd4b28f236cefabeb14c1bc5d0258c318", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-os/blob/e0ef770860905830157e64c455f0a342084b6d25/docs/START-WORKFLOW.md"},
+        {"path": "docs/adlc-guidelines.md", "sha256": "83c88f87cddc30aac9efdaaf183a3d98b669cf481d39e018332c09707243b7da", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-os/blob/e0ef770860905830157e64c455f0a342084b6d25/docs/adlc-guidelines.md"},
+        {"path": "docs/RELEASE-WORKFLOW.md", "sha256": "2850b26c33c3538bbf0708b797ad27e4ba372a051ae033f61783ff400d35dde2", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-os/blob/e0ef770860905830157e64c455f0a342084b6d25/docs/RELEASE-WORKFLOW.md"},
+        {"path": "guides/DEPLOY-WORKFLOW.md", "sha256": "313635c10317d4ac7c994d69a20fb2006e131c4829a2737c6d5a13c7f9dbb7e8", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-os/blob/e0ef770860905830157e64c455f0a342084b6d25/guides/DEPLOY-WORKFLOW.md"},
+        {"path": "bin/agentic-os-admission.mjs", "sha256": "475ef1523d97c09abf13bace1fb900204f4b230e85957952dfb583d3c6b22353", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-os/blob/e0ef770860905830157e64c455f0a342084b6d25/bin/agentic-os-admission.mjs"},
+        {"path": "package.json", "sha256": "db32a50aed56934c421210f321d081439912084a45fc4a79b7d7f2dc5798a92c", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-os/blob/e0ef770860905830157e64c455f0a342084b6d25/package.json"}
+      ]
+    },
+    {
+      "id": "S",
+      "root": "/Users/huijoohwee/Documents/GitHub/huijoohwee.github.io",
+      "revision": "deddd90682dc412f421e51bdd09c23bacd153505",
+      "head_at_check": "deddd90682dc412f421e51bdd09c23bacd153505",
+      "head_matches": true,
+      "artifacts": [
+        {"path": "guidelines/prd-tad-adr-mvp-gtm-guidelines.md", "sha256": "b4f6c65d0c88dee557ca003f90a7b8dfd0cb7f5483172a2496b454cc119a0f10", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/huijoohwee.github.io/blob/deddd90682dc412f421e51bdd09c23bacd153505/guidelines/prd-tad-adr-mvp-gtm-guidelines.md"},
+        {"path": "guidelines/prd-tad-adr-mvp-gtm-templates.md", "sha256": "84c605473e492bc0ebc409dad1c339d5d409bd49c4ce8c00b1ce7ff8639b8c99", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/huijoohwee.github.io/blob/deddd90682dc412f421e51bdd09c23bacd153505/guidelines/prd-tad-adr-mvp-gtm-templates.md"},
+        {"path": "guidelines/prd-tad-adr-mvp-gtm-planning-record.md", "sha256": "d43c0462fcdc4c2738b8fd7aa2b51229ac860dd415723c4e505930c9f3110b6c", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/huijoohwee.github.io/blob/deddd90682dc412f421e51bdd09c23bacd153505/guidelines/prd-tad-adr-mvp-gtm-planning-record.md"},
+        {"path": "guidelines/prd-tad-adr-mvp-gtm-process-flows.md", "sha256": "564512b9bebc5a32579deda6c547465ffca56527b1d55bb51a89d376e0a6bf06", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/huijoohwee.github.io/blob/deddd90682dc412f421e51bdd09c23bacd153505/guidelines/prd-tad-adr-mvp-gtm-process-flows.md"},
+        {"path": "guidelines/prd-tad-adr-mvp-gtm-codebase-grounding.md", "sha256": "5ce43ed878fdc37a9cb5f2ed08c40bf9b466e21795671fdac9484a2ca5a8109d", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/huijoohwee.github.io/blob/deddd90682dc412f421e51bdd09c23bacd153505/guidelines/prd-tad-adr-mvp-gtm-codebase-grounding.md"},
+        {"path": "guidelines/prd-tad-adr-mvp-gtm-verification.md", "sha256": "58f288de9bc507c35f391e2988d16e1724a2848681ecc4abb33ff50a4cb41c8f", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/huijoohwee.github.io/blob/deddd90682dc412f421e51bdd09c23bacd153505/guidelines/prd-tad-adr-mvp-gtm-verification.md"},
+        {"path": "guidelines/prd-tad-adr-mvp-gtm-venture.md", "sha256": "f2059425a636888e6bb6e94049cb2dd740ee894c004db67ce14860a328d0cbe9", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/huijoohwee.github.io/blob/deddd90682dc412f421e51bdd09c23bacd153505/guidelines/prd-tad-adr-mvp-gtm-venture.md"},
+        {"path": "guidelines/prd-tad-adr-mvp-gtm-readiness.md", "sha256": "6613a3f8ed093d602abd425134be8692aab49460a54ddc4ec9dfac921947cea4", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/huijoohwee.github.io/blob/deddd90682dc412f421e51bdd09c23bacd153505/guidelines/prd-tad-adr-mvp-gtm-readiness.md"},
+        {"path": "guidelines/prd-tad-adr-mvp-gtm-diagram-canvas-render.companion.md", "sha256": "af64438e38385ace602a7846048c625e600a5552879759b4f31337638fc60cfa", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/huijoohwee.github.io/blob/deddd90682dc412f421e51bdd09c23bacd153505/guidelines/prd-tad-adr-mvp-gtm-diagram-canvas-render.companion.md"},
+        {"path": "guidelines/prd-tad-adr-mvp-gtm-diagram-guidelines.companion.md", "sha256": "18a55ed5ed8bd008aec0c01510125ea2afcc486c6fc7f957b0b01744a5542036", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/huijoohwee.github.io/blob/deddd90682dc412f421e51bdd09c23bacd153505/guidelines/prd-tad-adr-mvp-gtm-diagram-guidelines.companion.md"},
+        {"path": "scripts/check-diagram-canvas-render.mjs", "sha256": "dbf7555b5beaa888defc8d55776683937ee7abbd07f8b1232b4e290fee1c6e83", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/huijoohwee.github.io/blob/deddd90682dc412f421e51bdd09c23bacd153505/scripts/check-diagram-canvas-render.mjs"},
+        {"path": "scripts/check-prd-tad-adr-mvp-gtm-guideline.mjs", "sha256": "2f65dd6804081cc6e9a7645bb045a3fbfdf89dc6decc43492cbfb171a985eac4", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/huijoohwee.github.io/blob/deddd90682dc412f421e51bdd09c23bacd153505/scripts/check-prd-tad-adr-mvp-gtm-guideline.mjs"}
+      ]
+    },
+    {
+      "id": "G",
+      "root": "/Users/huijoohwee/Documents/GitHub/agentic-graph",
+      "revision": "adadad351f37ae7f546101fac64e22acd834fbed",
+      "head_at_check": "adadad351f37ae7f546101fac64e22acd834fbed",
+      "head_matches": true,
+      "artifacts": [
+        {"path": "AGENTS.md", "sha256": "ac9bb0a659c0707f5f29138b6d137b5a7ff22c9cf68f96ac183719ecfbdba26b", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-graph/blob/adadad351f37ae7f546101fac64e22acd834fbed/AGENTS.md"},
+        {"path": "canvas/src/components/DashboardCanvas/dashboardWidgetToolContract.mjs", "sha256": "ba2531a57017eb41c6b609923ea78f93d6b7177cdf287528bf80799963a01e46", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-graph/blob/adadad351f37ae7f546101fac64e22acd834fbed/canvas/src/components/DashboardCanvas/dashboardWidgetToolContract.mjs"}
+      ]
+    },
+    {
+      "id": "GL",
+      "root": "/Users/huijoohwee/Documents/GitHub/.worktrees/agentic-graph/device-0232231d4a19--drone-learning",
+      "revision": "5d729f787b3b5f73cc168a2494b003ba377edd8c",
+      "head_at_check": "ea93888c30aa6dc1b4790aa2870b9e8358ba301e",
+      "head_matches": false,
+      "artifacts": [
+        {"path": "canvas/src/components/DashboardCanvas/index.tsx", "sha256": "ccfe38e62cdeda887644cdaf155bf748520b4bfe5bb82c5ece9f0c256339a07e", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-graph/blob/5d729f787b3b5f73cc168a2494b003ba377edd8c/canvas/src/components/DashboardCanvas/index.tsx"},
+        {"path": "canvas/src/components/DashboardCanvas/dashboardWidgetToolContract.mjs", "sha256": "ba2531a57017eb41c6b609923ea78f93d6b7177cdf287528bf80799963a01e46", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-graph/blob/5d729f787b3b5f73cc168a2494b003ba377edd8c/canvas/src/components/DashboardCanvas/dashboardWidgetToolContract.mjs"},
+        {"path": "canvas/src/components/DashboardCanvas/dashboardWidgetContract.mjs", "sha256": "32a82e69708b0f667fe4945248267a1367f02773952ad633a29548889398c56d", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-graph/blob/5d729f787b3b5f73cc168a2494b003ba377edd8c/canvas/src/components/DashboardCanvas/dashboardWidgetContract.mjs"},
+        {"path": "canvas/src/components/DashboardCanvas/dashboardRegistryWidgetCommand.ts", "sha256": "fa7de53b012688d53759eed46bca5fc346a9ee930b8c1e0035b6b682f9ac404f", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-graph/blob/5d729f787b3b5f73cc168a2494b003ba377edd8c/canvas/src/components/DashboardCanvas/dashboardRegistryWidgetCommand.ts"},
+        {"path": "canvas/src/features/agent-ready/agentMissionDashboardSnapshot.ts", "sha256": "c507e19b5b606c9fc725cf3858e58eabd2151b91af07428f13069e9e4ae045a8", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-graph/blob/5d729f787b3b5f73cc168a2494b003ba377edd8c/canvas/src/features/agent-ready/agentMissionDashboardSnapshot.ts"},
+        {"path": "canvas/src/features/toolbar/FloatingPanelBlockLibraryView.tsx", "sha256": "bff9fdd42e5e4e58ea7513102f809b07d29e76e534df62957d1712d6249357c0", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-graph/blob/5d729f787b3b5f73cc168a2494b003ba377edd8c/canvas/src/features/toolbar/FloatingPanelBlockLibraryView.tsx"},
+        {"path": "canvas/src/features/block-editor/blockLibrary.ts", "sha256": "5d170e6b2b58b9d974cacee5afa234c417f4b5d26c1f73d40d7981e122847713", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-graph/blob/5d729f787b3b5f73cc168a2494b003ba377edd8c/canvas/src/features/block-editor/blockLibrary.ts"},
+        {"path": "canvas/src/features/markdown-workspace/main/useInitialWorkspacePaneVisibility.ts", "sha256": "f827555b9219856dbfe77bdb8fa4b5b4f966370a9bc4d88200c44a957f91f2d8", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-graph/blob/5d729f787b3b5f73cc168a2494b003ba377edd8c/canvas/src/features/markdown-workspace/main/useInitialWorkspacePaneVisibility.ts"},
+        {"path": "canvas/src/features/python-learning/PythonLearningPane.tsx", "sha256": "24668112693f4c15f69f843b0d96404924cf02e9853c71a87f222cb15cab7d63", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-graph/blob/5d729f787b3b5f73cc168a2494b003ba377edd8c/canvas/src/features/python-learning/PythonLearningPane.tsx"},
+        {"path": "canvas/src/features/python-learning/learningRuntime.ts", "sha256": "514151e17c610308cbac06ccc15fcedf37dc1e62a88ee0726d286855f5f36803", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-graph/blob/5d729f787b3b5f73cc168a2494b003ba377edd8c/canvas/src/features/python-learning/learningRuntime.ts"},
+        {"path": "canvas/src/features/python-learning/learningLessons.ts", "sha256": "3868a6fc9065aebc6c831bb2b5aa527e199dbcaef22dffab35c046294ce87ab9", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-graph/blob/5d729f787b3b5f73cc168a2494b003ba377edd8c/canvas/src/features/python-learning/learningLessons.ts"},
+        {"path": "canvas/src/features/python-learning/learningToolContract.mjs", "sha256": "6cf2c14ed952be922a025a0e219e3f777269554bd29aa66d713ecbe4cb32829e", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-graph/blob/5d729f787b3b5f73cc168a2494b003ba377edd8c/canvas/src/features/python-learning/learningToolContract.mjs"},
+        {"path": "canvas/src/features/python-learning/learningWebMcp.ts", "sha256": "8d216f0b9bf64e1aba9a07f454a2a7f0ff6d7d4373b62378875fb2e9c4851806", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-graph/blob/5d729f787b3b5f73cc168a2494b003ba377edd8c/canvas/src/features/python-learning/learningWebMcp.ts"},
+        {"path": "canvas/src/features/python-learning/learningFlightPath.ts", "sha256": "9f0d1403114a46b3a285f76cb9659496ed025a6bf0e5bc4727ed64f8a1bc639e", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-graph/blob/5d729f787b3b5f73cc168a2494b003ba377edd8c/canvas/src/features/python-learning/learningFlightPath.ts"},
+        {"path": "canvas/src/features/python-learning/learningFlightTransfer.ts", "sha256": "93ff1c828a2a1d3f6b66181771163cdc39e1a2d8edfb686947d2737cdcc4af5a", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-graph/blob/5d729f787b3b5f73cc168a2494b003ba377edd8c/canvas/src/features/python-learning/learningFlightTransfer.ts"},
+        {"path": "canvas/src/features/python-learning/learningCanvasEmbedProtocol.ts", "sha256": "3741073bf9eed826db16c35900e3eaa12f3c741e78b28dbece87a0c77f4461c9", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-graph/blob/5d729f787b3b5f73cc168a2494b003ba377edd8c/canvas/src/features/python-learning/learningCanvasEmbedProtocol.ts"},
+        {"path": "canvas/src/features/python-learning/LearningSceneStage.tsx", "sha256": "7d05631aec8e7838cd071d47a5faab5d708698b2b4d496e68a4936db522fa8a0", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-graph/blob/5d729f787b3b5f73cc168a2494b003ba377edd8c/canvas/src/features/python-learning/LearningSceneStage.tsx"},
+        {"path": "canvas/src/features/three/xrSceneSurfaceRuntime.ts", "sha256": "fe8623a4e8d1485a156bcccbdceb8a81d3947f4a1786a2f471ff390b7e3e9dd5", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-graph/blob/5d729f787b3b5f73cc168a2494b003ba377edd8c/canvas/src/features/three/xrSceneSurfaceRuntime.ts"},
+        {"path": "canvas/src/lib/ui/theme-tokens.ts", "sha256": "e137c3cfae44b31618b538dc553b797461bbbe38290569b1d040febac5f61f20", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-graph/blob/5d729f787b3b5f73cc168a2494b003ba377edd8c/canvas/src/lib/ui/theme-tokens.ts"},
+        {"path": "canvas/src/__tests__/pythonLearningFlightPath.test.ts", "sha256": "9b89a097cf3bbb9550e473bacc7fdddc22d997a51c87ea1b447c1fc1cd0fce29", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-graph/blob/5d729f787b3b5f73cc168a2494b003ba377edd8c/canvas/src/__tests__/pythonLearningFlightPath.test.ts"},
+        {"path": "canvas/src/__tests__/pythonLearning.test.ts", "sha256": "059989b6c28da4b2dd940bbf7dc571c8060511afc538cbab78918b348e8abc76", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-graph/blob/5d729f787b3b5f73cc168a2494b003ba377edd8c/canvas/src/__tests__/pythonLearning.test.ts"},
+        {"path": "canvas/src/__tests__/pythonLearningLifecycle.test.ts", "sha256": "725066ec2b94f20fe7e8ef1243df274cf56e04c8b6f22f71f9d7538c4eb3917c", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-graph/blob/5d729f787b3b5f73cc168a2494b003ba377edd8c/canvas/src/__tests__/pythonLearningLifecycle.test.ts"},
+        {"path": "canvas/src/__tests__/pythonLearningOffline.test.ts", "sha256": "92b00a188780f950c21b155d71f63d36b3c8fd8050ed7edeeef2d11e4c84b6ea", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-graph/blob/5d729f787b3b5f73cc168a2494b003ba377edd8c/canvas/src/__tests__/pythonLearningOffline.test.ts"},
+        {"path": "canvas/src/__tests__/dashboardWidgetCommands.test.ts", "sha256": "6bd29072764ce55a3816972e4210c6d79adf66cdeecef234dc2e04da660e8b0b", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-graph/blob/5d729f787b3b5f73cc168a2494b003ba377edd8c/canvas/src/__tests__/dashboardWidgetCommands.test.ts"},
+        {"path": "canvas/src/__tests__/dashboardWidgetConfiguration.test.ts", "sha256": "cbca8a39ab25cb70bf3f84d647513b0ac8c34d7f19caf65e9ee34f01d47d039f", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-graph/blob/5d729f787b3b5f73cc168a2494b003ba377edd8c/canvas/src/__tests__/dashboardWidgetConfiguration.test.ts"},
+        {"path": "config/license-registry.json", "sha256": "d811654468263585d62a8478398501af21a6d6901cde07766a372b6da9f20d0c", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-graph/blob/5d729f787b3b5f73cc168a2494b003ba377edd8c/config/license-registry.json"},
+        {"path": "canvas/package.json", "sha256": "674dc066cadda95b23d2cbb9d7ceb6af8986f51143e3b35eecf0ae732bad6230", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-graph/blob/5d729f787b3b5f73cc168a2494b003ba377edd8c/canvas/package.json"},
+        {"path": "package.json", "sha256": "d1eec8605081841ba196c765c9e66226497f1692ead64c80c9e7de161c475f1d", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/agentic-graph/blob/5d729f787b3b5f73cc168a2494b003ba377edd8c/package.json"}
+      ]
+    },
+    {
+      "id": "X",
+      "root": "/Users/huijoohwee/Documents/GitHub/GameXR",
+      "revision": "a9340b3c8dfca66623a975d54b9601a803595e9d",
+      "head_at_check": "a9340b3c8dfca66623a975d54b9601a803595e9d",
+      "head_matches": true,
+      "artifacts": [
+        {"path": "package.json", "sha256": "a5694b1a69ce5b36aacc84d3694f8c2c6061f0276967ae7766de607a6d62a451", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/GameXR/blob/a9340b3c8dfca66623a975d54b9601a803595e9d/package.json"},
+        {"path": "LICENSE", "sha256": "f7335e73f1f103f1e05622cd5134d42fe1527e6a84acefcbdf09aaee9bdcc78f", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/GameXR/blob/a9340b3c8dfca66623a975d54b9601a803595e9d/LICENSE"},
+        {"path": "src/drone/FlightPath.ts", "sha256": "77596f37367d6f9a0d60841886e233a624b8f939edb2373532e4f3f19375c009", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/GameXR/blob/a9340b3c8dfca66623a975d54b9601a803595e9d/src/drone/FlightPath.ts"},
+        {"path": "src/drone/FlightPathTransfer.ts", "sha256": "668d3701debce6711022a089bc19c9e7f1b8489eccaf5aee6436c34b3075872b", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/GameXR/blob/a9340b3c8dfca66623a975d54b9601a803595e9d/src/drone/FlightPathTransfer.ts"},
+        {"path": "src/drone/GraphCanvasPreview.ts", "sha256": "d06596b079cf4fc8e6c923af9639e2668837951dfb634ed61d0cd2a793b28370", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/GameXR/blob/a9340b3c8dfca66623a975d54b9601a803595e9d/src/drone/GraphCanvasPreview.ts"},
+        {"path": "src/drone/protocol.ts", "sha256": "568dfb9a6501289da85c6b21f461e47f06022e6e51fc9242aff4cf2bf1439b02", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/GameXR/blob/a9340b3c8dfca66623a975d54b9601a803595e9d/src/drone/protocol.ts"},
+        {"path": "src/drone/FlightPathView.ts", "sha256": "0a479da4c65a5716b12392d5b29bc55ef2b671dfe71d609b8bf1821369340a56", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/GameXR/blob/a9340b3c8dfca66623a975d54b9601a803595e9d/src/drone/FlightPathView.ts"},
+        {"path": "src/mcp/contracts.ts", "sha256": "eb1b93106c1110768119c517e282c8547a3f89ee0a792f1356a9837b5e332e68", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/GameXR/blob/a9340b3c8dfca66623a975d54b9601a803595e9d/src/mcp/contracts.ts"},
+        {"path": "tools/drone-bridge/receiver-state.ts", "sha256": "82a63af46fa319e9e9b0f44a2d00aae99dec5ae423490783f970e86d2cf01df4", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/GameXR/blob/a9340b3c8dfca66623a975d54b9601a803595e9d/tools/drone-bridge/receiver-state.ts"},
+        {"path": "tests/drone-flight-path.test.ts", "sha256": "1f604c73f42d39965b2b57441915a5692eded195689389499309cc5ea41a6668", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/GameXR/blob/a9340b3c8dfca66623a975d54b9601a803595e9d/tests/drone-flight-path.test.ts"},
+        {"path": "tests/drone-flight-transfer.test.ts", "sha256": "f65fcd5d9f408ba6851f3dd8e32a18ba26ca45edc42107217fcc3b9ae99a8764", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/GameXR/blob/a9340b3c8dfca66623a975d54b9601a803595e9d/tests/drone-flight-transfer.test.ts"},
+        {"path": "tests/drone-protocol.test.ts", "sha256": "c6ab020ae31e67fd29cb36048b0771fac6c6281c5975a21ce6ba2c72a1268ea4", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/GameXR/blob/a9340b3c8dfca66623a975d54b9601a803595e9d/tests/drone-protocol.test.ts"},
+        {"path": "tests/drone-bridge.test.ts", "sha256": "c13503fd5ab75e6de1279760416ce00a20c334cb67789e232a4d53002d67ba72", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/GameXR/blob/a9340b3c8dfca66623a975d54b9601a803595e9d/tests/drone-bridge.test.ts"},
+        {"path": "firmware/esp32-usb-diagnostics/README.md", "sha256": "6dba82fea3becae3c425f69e53e554504f0872cc3610adbf2af3879c11c94baa", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/GameXR/blob/a9340b3c8dfca66623a975d54b9601a803595e9d/firmware/esp32-usb-diagnostics/README.md"},
+        {"path": "docs/drone/prd-tad-adr-mvp-gtm-drone-flight-path.md", "sha256": "d37bef42f70c1646e7932fe21e920f72a0934bb36f8e59cb0c84ce74b3ea6ac7", "working_bytes_match": true, "source_url": "https://github.com/huijoohwee/GameXR/blob/a9340b3c8dfca66623a975d54b9601a803595e9d/docs/drone/prd-tad-adr-mvp-gtm-drone-flight-path.md"}
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "K1",
+      "claim": "Target currently has a reference README, not a dashboard application.",
+      "disposition": "confirmed",
+      "source": "T",
+      "limit": "No runtime or release profile inferred."
+    },
+    {
+      "id": "K2",
+      "claim": "Native Dashboard, editor, Block Library and simulation owners exist.",
+      "disposition": "confirmed",
+      "source": "GL",
+      "limit": "Public package export and target composition are not established."
+    },
+    {
+      "id": "K3",
+      "claim": "XR exists as a built-in Dashboard card template.",
+      "disposition": "contradicted",
+      "source": "GL",
+      "limit": "Current enum lacks XR; owner extension required."
+    },
+    {
+      "id": "K4",
+      "claim": "Exported path data can drive simulated receiver review/run.",
+      "disposition": "confirmed",
+      "source": "GL,X",
+      "limit": "Source contract only; no runtime test performed here."
+    },
+    {
+      "id": "K5",
+      "claim": "Existing firmware implements physical S3 flight.",
+      "disposition": "contradicted",
+      "source": "X",
+      "limit": "Diagnostics targets ESP32-D0WDQ6; no motor PWM/stabilization/arming."
+    },
+    {
+      "id": "K6",
+      "claim": "Existing GameXR WebMCP tool drives DronePanel path.",
+      "disposition": "contradicted",
+      "source": "X",
+      "limit": "Inspected tools target game runtime, not the separate drone panel."
+    },
+    {
+      "id": "K7",
+      "claim": "Graph application/build code has an established FOSS reuse grant.",
+      "disposition": "contradicted",
+      "source": "GL",
+      "limit": "License registry has NONE-private and no-reuse build classes. No relicensing performed."
+    },
+    {
+      "id": "K8",
+      "claim": "Product-market fit, first dollar or repeat demand is proven.",
+      "disposition": "unverified",
+      "source": "user-context",
+      "limit": "No customer evidence supplied or generated."
+    },
+    {
+      "id": "K9",
+      "claim": "UI screenshot is production/runtime authority.",
+      "disposition": "contradicted",
+      "source": "user-annotations",
+      "limit": "Visual reuse intent only; port 4198 mapped to GL; 54842 not listening at check."
+    },
+    {
+      "id": "K10",
+      "claim": "Agentic OS target admission/release succeeds.",
+      "disposition": "contradicted",
+      "source": "OS,T",
+      "limit": "Doctor, START and RELEASE all exit 1 with missing repository trust anchor."
+    }
+  ],
+  "closing_observations": {
+    "checked_at": "2026-09-27T00:28:45+08:00",
+    "target_head_unchanged": true,
+    "target_untracked": [
+      ".DS_Store"
+    ],
+    "graph_lane_head": "ea93888c30aa6dc1b4790aa2870b9e8358ba301e",
+    "graph_lane_dirty_paths": [
+      "canvas/scripts/run_python_learning_offline_smoke.mjs",
+      "docs/documents/prd-tad-adr-mvp-gtm-drone-flight-path.md"
+    ],
+    "snapshot_retained": true,
+    "integration_recheck_required": true,
+    "reason": "Independent writer changed lesson bootstrap after the initial clean source inspection; preserve both source history and ongoing edits."
+  }
+}

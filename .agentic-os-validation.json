@@ -1,0 +1,45 @@
+{
+  "schema": "agentic-os/repository-validation-policy/v1",
+  "repository": "github.com/huijoohwee/81rv10",
+  "broadInputs": [
+    ".github/",
+    ".agentic-os.json",
+    "AGENTS.md"
+  ],
+  "always": [
+    "budgets"
+  ],
+  "fallback": [
+    "budgets",
+    "test"
+  ],
+  "checks": [
+    {
+      "id": "budgets",
+      "command": [
+        "npm",
+        "run",
+        "budgets"
+      ],
+      "inputs": [
+        "*"
+      ],
+      "requires": [],
+      "reuse": "local",
+      "timeoutMs": 60000
+    },
+    {
+      "id": "test",
+      "command": [
+        "npm",
+        "test"
+      ],
+      "inputs": [
+        "*"
+      ],
+      "requires": [],
+      "reuse": "local",
+      "timeoutMs": 120000
+    }
+  ]
+}
