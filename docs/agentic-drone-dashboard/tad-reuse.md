@@ -1,29 +1,29 @@
 ---
 title: "Reference implementation — Drone Dashboard TAD and reuse"
 doc_type: "PRD-TAD-ADR-MVP-GTM"
-version: "0.1.0"
-revision: "0.1.0"
+version: "0.2.0"
+revision: "0.2.0"
 date: "2026-09-27"
 lang: "en-US"
 owner: "Drone Dashboard architecture function"
 continuity_id: "agentic-drone-dashboard"
-prd_revision: "0.1.0"
-tad_revision: "0.1.0"
-adr_revision: "0.1.0"
-mvp_revision: "0.1.0"
-gtm_revision: "0.1.0"
+prd_revision: "0.2.0"
+tad_revision: "0.2.0"
+adr_revision: "0.2.0"
+mvp_revision: "0.2.0"
+gtm_revision: "0.2.0"
 local_rung: "spec-complete"
 delivered_rung: "undocumented"
 lane: "authoring"
 universal_scope: false
-worktree_id: "projectless-drone-dashboard-authoring"
+worktree_id: "agent/device-0232231d4a19/drone-dashboard"
 agent_id: "codex-root"
 agenticOsCanvasRenderMode: "2d"
 agenticOsCanvas2dRenderer: "flowchart"
 ---
 # Reference implementation — TAD and reuse
 
-Consumes [PRD-01–10 and A1–A5](prd-tad-adr-mvp-gtm.md) at `agentic-drone-dashboard@0.1.0`. Source IDs and file digests resolve through [source-grounding.json](source-grounding.json). **G** is Graph canonical `adadad351f37ae7f546101fac64e22acd834fbed`; **GL** is the inspected clean drone-learning worktree `5d729f787b3b5f73cc168a2494b003ba377edd8c`; **X** is GameXR `a9340b3c8dfca66623a975d54b9601a803595e9d`. GL serves port 4198, confirmed from the listener process working directory. These are inspected references, not accepted production pins. Final readback observed independent GL drift to `ea93888c30aa6dc1b4790aa2870b9e8358ba301e` with dirty owner paths; the retained source snapshot remains inspectable, and lesson-bootstrap integration must be re-grounded. The supplied port 54842 was not listening during this session; its screenshot is historical UI evidence.
+Consumes [PRD-01–10 and A1–A5](prd-tad-adr-mvp-gtm.md) at `agentic-drone-dashboard@0.2.0`. Source IDs and file digests resolve through [source-grounding.json](source-grounding.json). **G** is Graph canonical `adadad351f37ae7f546101fac64e22acd834fbed`; **GL** is the inspected clean drone-learning worktree `5d729f787b3b5f73cc168a2494b003ba377edd8c`; **X** is GameXR `a9340b3c8dfca66623a975d54b9601a803595e9d`. GL serves port 4198, confirmed from the listener process working directory. These are inspected references, not accepted production pins. Final readback observed independent GL drift to `ea93888c30aa6dc1b4790aa2870b9e8358ba301e` with dirty owner paths; the retained source snapshot remains inspectable, and lesson-bootstrap integration must be re-grounded. The supplied port 54842 was not listening during this session; its screenshot is historical UI evidence.
 
 ## Reference implementation — component inventory and reuse
 

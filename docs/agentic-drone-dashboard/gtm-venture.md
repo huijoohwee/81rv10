@@ -1,27 +1,27 @@
 ---
 title: "Reference implementation — Drone Dashboard GTM and venture projections"
 doc_type: "PRD-TAD-ADR-MVP-GTM"
-version: "0.1.0"
-revision: "0.1.0"
+version: "0.2.0"
+revision: "0.2.0"
 date: "2026-09-27"
 lang: "en-US"
 owner: "Drone Dashboard commercial function"
 continuity_id: "agentic-drone-dashboard"
-prd_revision: "0.1.0"
-tad_revision: "0.1.0"
-adr_revision: "0.1.0"
-mvp_revision: "0.1.0"
-gtm_revision: "0.1.0"
+prd_revision: "0.2.0"
+tad_revision: "0.2.0"
+adr_revision: "0.2.0"
+mvp_revision: "0.2.0"
+gtm_revision: "0.2.0"
 local_rung: "spec-complete"
 delivered_rung: "undocumented"
 lane: "authoring"
 universal_scope: false
-worktree_id: "projectless-drone-dashboard-authoring"
+worktree_id: "agent/device-0232231d4a19/drone-dashboard"
 agent_id: "codex-root"
 ---
 # Reference implementation — GTM and venture projections
 
-Consumes [PRD pains, requirements and ADR A5](prd-tad-adr-mvp-gtm.md) plus [R0–R5](mvp-release.md) at `agentic-drone-dashboard@0.1.0`. Prices and financial numbers are labelled scenarios, not facts about the buyer or user's finances. This is a discovery business plan and textual deck/model projection; there is no outbound campaign, external deck publication or investment recommendation.
+Consumes [PRD pains, requirements and ADR A5](prd-tad-adr-mvp-gtm.md) plus [R0–R5](mvp-release.md) at `agentic-drone-dashboard@0.2.0`. Prices and financial numbers are labelled scenarios, not facts about the buyer or user's finances. This is a discovery business plan and textual deck/model projection; there is no outbound campaign, external deck publication or investment recommendation.
 
 ## Reference implementation — ranked buyer and offer
 
