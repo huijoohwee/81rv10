@@ -1,7 +1,7 @@
 {
   "schema": "drone-dashboard-source-grounding/v1",
   "continuity_id": "agentic-drone-dashboard",
-  "revision": "0.1.0",
+  "revision": "0.2.0",
   "date": "2026-09-27",
   "authority": false,
   "repositories": [

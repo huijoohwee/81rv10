@@ -1,8 +1,8 @@
 ---
 title: "Reference implementation — Drone Dashboard validation record"
 doc_type: "Evidence Record"
-version: "0.1.0"
-revision: "0.1.0"
+version: "0.2.0"
+revision: "0.2.0"
 date: "2026-09-27"
 lang: "en-US"
 owner: "Documentation validation function"
@@ -11,7 +11,7 @@ lane: "authoring"
 ---
 # Reference implementation — validation record
 
-Subject: [agentic-drone-dashboard@0.1.0](prd-tad-adr-mvp-gtm.md), staged documentation only. Evidence originates in this session on the inspected host. Local CLI source observations are not authenticated release receipts. No product runtime tests, browser interaction, flash, hardware flight, external messages or paid services were performed.
+Subject: [agentic-drone-dashboard@0.2.0](prd-tad-adr-mvp-gtm.md), staged documentation only. Evidence originates in this session on the inspected host. Local CLI source observations are not authenticated release receipts. No product runtime tests, browser interaction, flash, hardware flight, external messages or paid services were performed.
 
 ## Reference implementation — observed checks
 
