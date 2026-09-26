@@ -1,27 +1,27 @@
 ---
 title: "Reference implementation — Drone Dashboard MVP, release and handoff"
 doc_type: "PRD-TAD-ADR-MVP-GTM"
-version: "0.2.0"
-revision: "0.2.0"
+version: "0.2.1"
+revision: "0.2.1"
 date: "2026-09-27"
 lang: "en-US"
 owner: "Drone Dashboard delivery function"
 continuity_id: "agentic-drone-dashboard"
-prd_revision: "0.2.0"
-tad_revision: "0.2.0"
-adr_revision: "0.2.0"
-mvp_revision: "0.2.0"
-gtm_revision: "0.2.0"
+prd_revision: "0.2.1"
+tad_revision: "0.2.1"
+adr_revision: "0.2.1"
+mvp_revision: "0.2.1"
+gtm_revision: "0.2.1"
 local_rung: "spec-complete"
 delivered_rung: "undocumented"
 lane: "authoring"
 universal_scope: false
-worktree_id: "agent/device-0232231d4a19/drone-dashboard"
+worktree_id: "agent/device-0232231d4a19/drone-dashboard-layout"
 agent_id: "codex-root"
 ---
 # Reference implementation — MVP, release and handoff
 
-Consumes [PRD and ADR](prd-tad-adr-mvp-gtm.md) and [TAD](tad-reuse.md) at `agentic-drone-dashboard@0.2.0`. Product acceptance is pending. This file records implementation order and evidence required; no checklist tick means a product feature was implemented in this session.
+Consumes [PRD and ADR](prd-tad-adr-mvp-gtm.md) and [TAD](tad-reuse.md) at `agentic-drone-dashboard@0.2.1`. Product acceptance is pending. This file records implementation order and evidence required; no checklist tick means a product feature was implemented in this session.
 
 ## Reference implementation — demonstration skeleton
 
@@ -112,8 +112,8 @@ Record key for this draft: `drone-dashboard-spec-20260927`; successor key: `dron
 
 | PRD-TAD-ADR-MVP-GTM | CID | RAO | Updated Date |
 |---|---|---|---|
-| agentic-drone-dashboard@0.2.0 | C: source-grounding pins + five user annotations. I: a reviewable reuse-first proposal. D: Generate the joined specification with exact source claims, explicit gaps and bounded checks. | R: Product author. A: Author transforms inspected evidence into the joined artifact. O: Five-role package with checkable acceptance and source records; check: named document validators in validation.md. | 2026-09-27 |
-| agentic-drone-dashboard@0.2.0 | C: C1–C9 and missing target trust. I: an implementable composition without copied owners. D: Audit consumable exports and licenses after native admission, recording exact compatibility evidence. | R: Architecture owner. A: Architect transforms admitted source references into a compatibility report. O: Owner/export/pin/error matrix with unresolved rows; check: E2 contract fixtures and source/license inspection. | 2026-09-27 |
+| agentic-drone-dashboard@0.2.1 | C: source-grounding pins + five user annotations. I: a reviewable reuse-first proposal. D: Generate the joined specification with exact source claims, explicit gaps and bounded checks. | R: Product author. A: Author transforms inspected evidence into the joined artifact. O: Five-role package with checkable acceptance and source records; check: named document validators in validation.md. | 2026-09-27 |
+| agentic-drone-dashboard@0.2.1 | C: C1–C9 and missing target trust. I: an implementable composition without copied owners. D: Audit consumable exports and licenses after native admission, recording exact compatibility evidence. | R: Architecture owner. A: Architect transforms admitted source references into a compatibility report. O: Owner/export/pin/error matrix with unresolved rows; check: E2 contract fixtures and source/license inspection. | 2026-09-27 |
 
 ## Reference implementation — findings and risk handoff
 
@@ -144,3 +144,8 @@ Development: specification only, source unchanged. Production Release: not admit
 | COST-03 | Operator opportunity cost / economic minutes | Unknown actual; separate from cash model and never double-counted as recovery |
 
 Next owner action and recheck trigger are in execution recovery. Update this same joined artifact before the next implementing session ends; if published, use an authorized successor version. Record implemented criteria, exact source/receipt links, affected checks, remaining uncertainty and measured resources every time.
+
+
+## Reference implementation — visual successor, 0.2.1
+
+A native successor of published `36e48aab64af595fa6343b2a886e7f1f192d727e` carries the four-file presentation increment. Acceptance for this slice is desktop/mobile layout, console keyboard selection, unchanged point/review controls, discoverable prepared export, and native owner frame load/close. Run native check planning/validation and the joined-document verifier before publication. An open protected PR remains a handoff, not integration or deployment. This slice does not close any additional whole-product VCC; route calibration, capture mapping, native XR synchronization, receiver acknowledgment and farm trials remain open.

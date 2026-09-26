@@ -1,7 +1,7 @@
 ---
 title: "Reference implementation — Agentic Drone Dashboard runtime"
 doc_type: "Handbook"
-version: "0.2.0"
+version: "0.2.1"
 date: "2026-09-27"
 lang: "en-US"
 owner: "Engineering"
@@ -10,7 +10,7 @@ local_rung: "spec-complete"
 delivered_rung: "undocumented"
 lane: "authoring"
 universal_scope: true
-worktree_id: "agent/device-0232231d4a19/drone-dashboard"
+worktree_id: "agent/device-0232231d4a19/drone-dashboard-layout"
 agent_id: "codex-root"
 ---
 # Reference implementation — local runtime
@@ -50,3 +50,16 @@ No remote deployment controller or device firmware is part of this increment. No
 Automated: the native repository validation owner runs bootstrap identity/pin/plan tests plus 10 consumer contract tests covering malformed evidence, false physical/receiver claims, UTF-8 byte identity, owner/replay URL boundaries, unsupported mutations, actual stdio initialization, and HTTP root/write restrictions. Per-file budgets enforce <600 lines and <500 kB. These checks do not validate Graph/GameXR runtime parity or real flight.
 
 Browser observations: native Graph editor mounted; native close and keyboard point selection worked; 390×844 and 1280×800 document/scroll widths matched; corrupt PNG rejected; valid synthetic PNG enabled a follow-up review; live WebMCP inspection returned the expected fixture state; prepared dossier JSON was read back, copied and reopened; the cached shell reloaded while its local server was stopped. The browser's blob-download observation timed out, so native file-save completion is unverified in this browser; the tested JSON copy/reopen route is available. Real-phone, zoom/screen-reader, memory/fps and receiver tests remain open.
+
+
+## Reference implementation — compact workspace, 0.2.1
+
+The current visual successor runs from the same native checkout at the same local URL. The top bar retains Owner connections; select inspection points at left and review captures at right. The central card retains the native Program, Mission dashboard, XR and Flight replay contexts. The bottom Mission console has Path handoff, Dossier and Agent access tabs. Arrow keys cycle tabs; Home/End select the first/last tab. Export preparation switches to Dossier and reveals its Save/copy area. Phone layout stacks the same controls and keeps a two-column inspection list.
+
+The initial canvas drawing is an original schematic of the six review points, explicitly uncalibrated. It is replaced when a native frame is loaded. It does not animate or represent a measured route, live receiver or crop capture. A new `drone-dashboard-shell-v0.2.1-layout` cache identity separates the revised shell from the prior visual source; use Prepare offline shell again to provision it. No new dependencies or external visual assets are loaded.
+
+Visual rollback: export the dossier, close the native frame, stop the dashboard process and run published predecessor `36e48aab64af595fa6343b2a886e7f1f192d727e` from a separately admitted native checkout. Do not reset the published successor or mutate the predecessor. Re-provision that version's offline shell if using offline mode. Protected source rollback still requires a new revert PR and matching checks.
+
+Visual verification: browser document/scroll widths matched at 1280 px and 390 px. The phone inspector followed P6 selection; Dossier exposed a prepared JSON with six points; keyboard End selected Agent access and the read-only command returned six points, no attachments and an unobserved receiver. ArrowRight selected Dossier from Path handoff. A separate test tab mounted the running Graph owner at port 5173. That owner displayed its current canvas home/physics preset rather than the requested lesson; only frame composition is verified in this revision, not document deep-link parity. The historical default port 4198 was not listening; set the actual compatible owner in Owner connections. No owner source was changed. Review controls and file contracts retain the preceding baseline tests; no new physical, headset, real-phone or file-download completion claim is made.
+
+Measured UI scope: four existing files, 43,509 bytes total, 11,714 bytes added versus the published predecessor; largest file 16,898 bytes and 273 lines. Existing native budget and test checks passed; final publication revalidates the exact source. Joined document, link and financial-projection checks also passed. Screenshots and the exact source handoff are retained in the task outputs. Source publication is separate from protected merge and deployment.

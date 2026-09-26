@@ -1,29 +1,29 @@
 ---
 title: "Reference implementation — Drone Dashboard TAD and reuse"
 doc_type: "PRD-TAD-ADR-MVP-GTM"
-version: "0.2.0"
-revision: "0.2.0"
+version: "0.2.1"
+revision: "0.2.1"
 date: "2026-09-27"
 lang: "en-US"
 owner: "Drone Dashboard architecture function"
 continuity_id: "agentic-drone-dashboard"
-prd_revision: "0.2.0"
-tad_revision: "0.2.0"
-adr_revision: "0.2.0"
-mvp_revision: "0.2.0"
-gtm_revision: "0.2.0"
+prd_revision: "0.2.1"
+tad_revision: "0.2.1"
+adr_revision: "0.2.1"
+mvp_revision: "0.2.1"
+gtm_revision: "0.2.1"
 local_rung: "spec-complete"
 delivered_rung: "undocumented"
 lane: "authoring"
 universal_scope: false
-worktree_id: "agent/device-0232231d4a19/drone-dashboard"
+worktree_id: "agent/device-0232231d4a19/drone-dashboard-layout"
 agent_id: "codex-root"
 agenticOsCanvasRenderMode: "2d"
 agenticOsCanvas2dRenderer: "flowchart"
 ---
 # Reference implementation — TAD and reuse
 
-Consumes [PRD-01–10 and A1–A5](prd-tad-adr-mvp-gtm.md) at `agentic-drone-dashboard@0.2.0`. Source IDs and file digests resolve through [source-grounding.json](source-grounding.json). **G** is Graph canonical `adadad351f37ae7f546101fac64e22acd834fbed`; **GL** is the inspected clean drone-learning worktree `5d729f787b3b5f73cc168a2494b003ba377edd8c`; **X** is GameXR `a9340b3c8dfca66623a975d54b9601a803595e9d`. GL serves port 4198, confirmed from the listener process working directory. These are inspected references, not accepted production pins. Final readback observed independent GL drift to `ea93888c30aa6dc1b4790aa2870b9e8358ba301e` with dirty owner paths; the retained source snapshot remains inspectable, and lesson-bootstrap integration must be re-grounded. The supplied port 54842 was not listening during this session; its screenshot is historical UI evidence.
+Consumes [PRD-01–10 and A1–A5](prd-tad-adr-mvp-gtm.md) at `agentic-drone-dashboard@0.2.1`. Source IDs and file digests resolve through [source-grounding.json](source-grounding.json). **G** is Graph canonical `adadad351f37ae7f546101fac64e22acd834fbed`; **GL** is the inspected clean drone-learning worktree `5d729f787b3b5f73cc168a2494b003ba377edd8c`; **X** is GameXR `a9340b3c8dfca66623a975d54b9601a803595e9d`. GL serves port 4198, confirmed from the listener process working directory. These are inspected references, not accepted production pins. Final readback observed independent GL drift to `ea93888c30aa6dc1b4790aa2870b9e8358ba301e` with dirty owner paths; the retained source snapshot remains inspectable, and lesson-bootstrap integration must be re-grounded. The supplied port 54842 was not listening during this session; its screenshot is historical UI evidence.
 
 ## Reference implementation — component inventory and reuse
 
@@ -245,3 +245,8 @@ No safety certification, flight suitability, crop sanitation, rotor-wash harmles
 | Assurance mechanism | Parses receipts and evaluates VCC outputs independently | Document checks are narrow; no self-grading production status |
 
 Graph implementation reuse is a confirmed licensing constraint under the requested FOSS-only rule, not yet an admissible distributed dependency. A rights-holder decision/export is an external prerequisite; recheck on a concrete grant, with no ETA. GameXR declares MIT; dependency and asset notices still require audit. No vendor SDK, proprietary model or paid hosting is introduced. Local static/browser and local gateway variants each have $0 incremental service spend targets; hardware, electricity, setup and support time remain separate unknown economic costs. Public free hosting is deferred until license, quota/reset/headroom and stop/local fallback are recorded. No quota exhaustion may authorize paid overage.
+
+
+## Reference implementation — workspace presentation, 0.2.1
+
+The host view now composes a left point explorer, central native surface, right evidence inspector and bottom tabbed console. A small controller in the existing app module owns only console visibility/focus and reveals prepared exports. Native Graph and GameXR interfaces, contract adapters and read-only invocation schemas are unchanged. Original inline SVG/CSS provide an explicitly uncalibrated rack schematic; no external assets or new renderer are loaded. See the joined visual checkpoint and runtime handbook for acceptance evidence and limits.

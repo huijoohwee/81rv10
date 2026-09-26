@@ -8,12 +8,35 @@ const previews = new Map();
 function notice(message, error = false) { $('notice').textContent = message; $('notice').classList.toggle('error', error); }
 function guard(action) { return async event => { try { await action(event); } catch (error) { notice(error.message, true); } }; }
 function releasePreviews() { for (const url of previews.values()) URL.revokeObjectURL(url); previews.clear(); }
+function selectConsole(name, focus = false) {
+  document.querySelectorAll('[data-console]').forEach(button => {
+    const active = button.dataset.console === name;
+    button.setAttribute('aria-selected', String(active)); button.tabIndex = active ? 0 : -1;
+    $(button.getAttribute('aria-controls')).hidden = !active;
+    if (active && focus) button.focus();
+  });
+}
+const consoleTabs = [...document.querySelectorAll('[data-console]')];
+consoleTabs.forEach((button, index) => {
+  button.onclick = () => selectConsole(button.dataset.console);
+  button.onkeydown = event => {
+    let next;
+    if (event.key === 'ArrowRight') next = (index + 1) % consoleTabs.length;
+    else if (event.key === 'ArrowLeft') next = (index + consoleTabs.length - 1) % consoleTabs.length;
+    else if (event.key === 'Home') next = 0;
+    else if (event.key === 'End') next = consoleTabs.length - 1;
+    else return;
+    event.preventDefault(); selectConsole(consoleTabs[next].dataset.console, true);
+  };
+});
 function save(bytes, type, filename) {
   if (exportUrl) URL.revokeObjectURL(exportUrl);
   exportUrl = URL.createObjectURL(new Blob([bytes], { type }));
   $('export-link').href = exportUrl; $('export-link').download = filename; $('export-link').textContent = `Save ${filename}`;
   $('export-json').value = typeof bytes === 'string' ? bytes : new TextDecoder('utf-8', { fatal: true }).decode(bytes);
-  $('prepared-export').hidden = false; notice(`Prepared ${filename}. Use its Save link below.`);
+  $('prepared-export').hidden = false; selectConsole('dossier');
+  $('prepared-export').scrollIntoView({ block: 'nearest' });
+  notice(`Prepared ${filename}. Use its Save link in Dossier.`);
 }
 function markChanged() { $('dossier-status').textContent = 'Unsaved changes · export to keep this dossier.'; }
 function render() {

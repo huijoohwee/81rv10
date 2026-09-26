@@ -1,12 +1,12 @@
 ---
 title: "Reference implementation — Drone Dashboard package guide"
 doc_type: "Handoff"
-version: "0.2.0"
+version: "0.2.1"
 date: "2026-09-27"
 lang: "en-US"
 owner: "Drone Dashboard product function"
 continuity_id: "agentic-drone-dashboard"
-revision: "0.2.0"
+revision: "0.2.1"
 ---
 # Reference implementation — Agentic Drone Dashboard
 
@@ -30,4 +30,4 @@ The supplied reuse intent is preserved. Current source proves a simulated path w
 
 Run `python3 verify-package.py` from this directory for portable document/math checks. Add `--sources` on the inspected host to verify exact Git-object hashes. A passing verifier is not product acceptance, a FOSS grant, or proof of a physical flight.
 
-Current implementation: [runtime, invocation, checks and rollback](runtime.md). The source join is 0.2.0; the initial nine-file counts below describe R0 only.
+Current implementation: [runtime, invocation, checks and rollback](runtime.md). The source join is 0.2.1; the initial nine-file counts below describe R0 only.

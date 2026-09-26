@@ -1,27 +1,27 @@
 ---
 title: "Reference implementation — Drone Dashboard GTM and venture projections"
 doc_type: "PRD-TAD-ADR-MVP-GTM"
-version: "0.2.0"
-revision: "0.2.0"
+version: "0.2.1"
+revision: "0.2.1"
 date: "2026-09-27"
 lang: "en-US"
 owner: "Drone Dashboard commercial function"
 continuity_id: "agentic-drone-dashboard"
-prd_revision: "0.2.0"
-tad_revision: "0.2.0"
-adr_revision: "0.2.0"
-mvp_revision: "0.2.0"
-gtm_revision: "0.2.0"
+prd_revision: "0.2.1"
+tad_revision: "0.2.1"
+adr_revision: "0.2.1"
+mvp_revision: "0.2.1"
+gtm_revision: "0.2.1"
 local_rung: "spec-complete"
 delivered_rung: "undocumented"
 lane: "authoring"
 universal_scope: false
-worktree_id: "agent/device-0232231d4a19/drone-dashboard"
+worktree_id: "agent/device-0232231d4a19/drone-dashboard-layout"
 agent_id: "codex-root"
 ---
 # Reference implementation — GTM and venture projections
 
-Consumes [PRD pains, requirements and ADR A5](prd-tad-adr-mvp-gtm.md) plus [R0–R5](mvp-release.md) at `agentic-drone-dashboard@0.2.0`. Prices and financial numbers are labelled scenarios, not facts about the buyer or user's finances. This is a discovery business plan and textual deck/model projection; there is no outbound campaign, external deck publication or investment recommendation.
+Consumes [PRD pains, requirements and ADR A5](prd-tad-adr-mvp-gtm.md) plus [R0–R5](mvp-release.md) at `agentic-drone-dashboard@0.2.1`. Prices and financial numbers are labelled scenarios, not facts about the buyer or user's finances. This is a discovery business plan and textual deck/model projection; there is no outbound campaign, external deck publication or investment recommendation.
 
 ## Reference implementation — ranked buyer and offer
 
@@ -156,3 +156,8 @@ Audience: prospective indoor-farm operations lead, later only after outreach aut
 Variant register: customer 240 s/one dossier decision; technical partner 240 s/same claims with C1–C10 appendix; investor variant deferred (no fundraising scope). Claim manifest is the table above: every slide resolves to one joined source, all unvalidated headlines labelled. Refresh after any changed source/assumption/VCC, capture audience/decision/objections only if a real authorized presentation occurs.
 
 Business plan projection consumes purpose/customer (PRD), market and alternatives (this file), operations and obligations (this file/TAD), product and delivery (MVP), risks (table above), milestones (R0–R5), financial model (F1–F12/CSV), bootstrap decision (A5). These links arrange the same content rather than create a second requirement set. No external audience may receive a stale claim manifest.
+
+
+## Reference implementation — demo presentation, 0.2.1
+
+The operator demo now uses a compact dark workspace with inspection explorer, canvas, evidence inspector and mission console. This is a presentation increment under the same crop-scouting hypothesis. Buyer validation, offer evidence, illustrative pricing and the financial scenarios are unchanged; visual polish is not PMF, willingness-to-pay or crop-loss evidence. Incremental hosted services and runtime dependencies remain zero.

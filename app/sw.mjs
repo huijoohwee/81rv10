@@ -1,4 +1,4 @@
-const CACHE = 'drone-dashboard-shell-v0.2.0';
+const CACHE = 'drone-dashboard-shell-v0.2.1-layout';
 const SHELL = ['./', './index.html', './style.css', './app.mjs', './contracts.mjs', './tools.mjs'];
 self.addEventListener('install', event => event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(SHELL)).then(() => self.skipWaiting())));
 self.addEventListener('activate', event => event.waitUntil(self.clients.claim()));
