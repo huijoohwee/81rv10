@@ -1,0 +1,44 @@
+{
+  "schema": "agentic-os/repository-profile/v1",
+  "repository": "github.com/huijoohwee/81rv10",
+  "canonical": {
+    "localRef": "refs/heads/main",
+    "remoteRef": "refs/remotes/origin/main"
+  },
+  "adapters": {
+    "repository": {
+      "id": "git",
+      "version": "1"
+    },
+    "provider": {
+      "id": "github",
+      "version": "1"
+    }
+  },
+  "requiredChecks": [
+    "budgets",
+    "test"
+  ],
+  "capabilities": [
+    "host-qualified-repository-pin",
+    "integration-method:squash-preferred",
+    "protected-integration:pull-request",
+    "read-only-repository-observation",
+    "read-only-review-observation",
+    "retain-all-cleanup",
+    "shallow-observation-default"
+  ],
+  "authority": {
+    "runtime": "consumer",
+    "release": "consumer"
+  },
+  "cleanup": {
+    "worktreeProjection": "retain",
+    "worktreeRegistration": "retain",
+    "remoteTrackingRef": "retain",
+    "localBranch": "retain",
+    "remoteBranch": "retain",
+    "unreachableObjects": "retain"
+  },
+  "profileDigest": "8cb5494fd1d8c85284ecdde2221a495eed92dd493c3415377042d0564fdcce33"
+}
