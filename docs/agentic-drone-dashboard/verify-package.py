@@ -26,7 +26,7 @@ def slug(text):
 
 documents = ['prd-tad-adr-mvp-gtm.md', 'tad-reuse.md', 'mvp-release.md', 'gtm-venture.md']
 files = [p for p in ROOT.iterdir() if p.is_file()]
-require(len(files) <= 9, 'More than 9 package files (archive is tenth deliverable)')
+require(len(files) <= 10, 'More than 10 documentation files including the runtime handbook')
 require(sum(p.stat().st_size for p in files) < 250_000, 'Package over byte cap')
 for file in files:
     require(file.stat().st_size < 500_000, f'Chunk limit: {file.name}')
@@ -47,7 +47,7 @@ for name in documents:
         require(key in values, f'Frontmatter key {key}: {name}')
     require(values.get('continuity_id') == 'agentic-drone-dashboard', f'Join ID: {name}')
     for key in ['revision', 'version', 'prd_revision', 'tad_revision', 'adr_revision', 'mvp_revision', 'gtm_revision']:
-        require(values.get(key) == '0.1.0', f'Join revision {key}: {name}')
+        require(values.get(key) == '0.2.1', f'Join revision {key}: {name}')
     require(values.get('local_rung') == 'spec-complete', f'Unexpected product rung: {name}')
     require(values.get('delivered_rung') == 'undocumented', f'Unexpected delivered rung: {name}')
 
@@ -93,7 +93,7 @@ for scenario in ['downside', 'base', 'upside']:
     recognized = collected = units = Decimal(0)
     first_break_even = None
     for index, row in enumerate(schedule):
-        require(row['continuity_id'] == 'agentic-drone-dashboard' and row['revision'] == '0.1.0', 'CSV continuity')
+        require(row['continuity_id'] == 'agentic-drone-dashboard' and row['revision'] == '0.2.1', 'CSV continuity')
         require(row['basis'] == 'illustrative-unverified', 'CSV must label forecasts')
         month_index = 9 + index
         require(row['period'] == f'{2026 + month_index // 12:04}-{month_index % 12 + 1:02}', 'CSV periods')

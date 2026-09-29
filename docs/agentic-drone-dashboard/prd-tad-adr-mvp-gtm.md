@@ -1,23 +1,23 @@
 ---
 title: "Reference implementation — Agentic Drone Dashboard"
 doc_type: "PRD-TAD-ADR-MVP-GTM"
-version: "0.1.0"
-revision: "0.1.0"
+version: "0.2.1"
+revision: "0.2.1"
 date: "2026-09-27"
 lang: "en-US"
 owner: "Drone Dashboard product function"
 continuity_id: "agentic-drone-dashboard"
-prd_revision: "0.1.0"
-tad_revision: "0.1.0"
-adr_revision: "0.1.0"
-mvp_revision: "0.1.0"
-gtm_revision: "0.1.0"
+prd_revision: "0.2.1"
+tad_revision: "0.2.1"
+adr_revision: "0.2.1"
+mvp_revision: "0.2.1"
+gtm_revision: "0.2.1"
 local_rung: "spec-complete"
 delivered_rung: "undocumented"
 lane: "authoring"
 universal_scope: false
 frontmatter_contract: "required"
-worktree_id: "projectless-drone-dashboard-authoring"
+worktree_id: "agent/device-0232231d4a19/drone-dashboard-layout"
 agent_id: "codex-root"
 load_policy: "on-demand"
 guideline_revision: "3.3.0"
@@ -26,7 +26,7 @@ guideline_revision: "3.3.0"
 
 **Decision:** compose an indoor crop-scouting dashboard from existing owners, beginning with a fixed-route simulation and reviewable scouting evidence. Physical flight is a later, separately verified increment. The product is designed to run from `/Users/huijoohwee/Documents/GitHub/81rv10`; this package does not claim that runtime exists today.
 
-This joined artifact is the product SSOT at **agentic-drone-dashboard@0.1.0**. [TAD and reuse](tad-reuse.md), [MVP and execution](mvp-release.md), and [GTM and venture projections](gtm-venture.md) are bounded sections of this same artifact, not competing plans. [Source grounding](source-grounding.json) pins inspected bytes. [Validation](validation.md) separates document checks from unperformed product checks.
+This joined artifact is the product SSOT at **agentic-drone-dashboard@0.2.1**. [TAD and reuse](tad-reuse.md), [MVP and execution](mvp-release.md), and [GTM and venture projections](gtm-venture.md) are bounded sections of this same artifact, not competing plans. [Source grounding](source-grounding.json) pins inspected bytes. [Validation](validation.md) separates document checks from unperformed product checks.
 
 **Context / intent / directive.** The user requests five REUSE surfaces and a non-autonomous, pre-programmed indoor Wi-Fi drone with no human manual piloting. Produce a source-grounded plan joining buyer pain, native contracts, acceptance criteria and the shortest credible paid learning loop. Product function specifies one bounded composition; the observable output is this five-role package. Document checking is separate from product acceptance.
 
@@ -165,3 +165,28 @@ Ten local contract tests passed. A 390×844 browser check observed document widt
 The maintainer explicitly authorized the proposed **initial 81rv10 enrollment** in this follow-up turn: isolated bootstrap PR, exact MIT Agentic OS package pin, matching protected checks, native setup, then normal lane admission. The native fork-only exception does not cover this existing non-fork, so this specific maintainer decision is retained as the bootstrap authority; it never waives normal subsequent admission. An isolated bootstrap branch is preparing the profile, validation policy, planning reference and CI. No setup/trust/merge or production receipt exists yet at this checkpoint. Existing Launch Copilot bytes remain unchanged.
 
 Current source/release state: staged runnable candidate; initial enrollment in progress. Existing R0 admission failures and 0/10 VCC records above are historical planning evidence, not evidence that this candidate has been integrated. Budget: first composition slice ≤12 modules /120 kB added runtime/test source; measured first check 10 modules/49,414 bytes. Separate authorized bootstrap ≤8 configuration/test modules and ≤45 active minutes; GitHub results are an external dependency with recheck on completion. Incremental paid services $0; model token/cash telemetry unknown.
+
+## Reference implementation — admitted implementation checkpoint, 0.2.0
+
+Bootstrap [PR #3](https://github.com/huijoohwee/81rv10/pull/3) merged at `d1c1caa6d2a59ba2ffecf02b9acb34512215a342` with `test` and `budgets` green. Matching strict branch protection is active, including administrators. Native setup and doctor succeeded, and normal START admitted `agent/device-0232231d4a19/drone-dashboard` at that exact base. The earlier trust blocker is resolved. The running preview now uses the admitted target checkout. The joined roles/projections advance together to 0.2.0; normalized CSV line endings remove the initial CRLF diff-check warning without changing the illustrative figures.
+
+Implemented baseline and current checks are in [runtime.md](runtime.md). New C1/C8/C9 code is a dependency-free target host plus contract-only native owner links/frames, image-review annotations, original-path metadata/digest retention, dossier export/copy/reopen, read-only MCP/WebMCP and opt-in offline shell. Python/Block/JSON and Block Library remain native Graph UI. Browser observations confirm the native editor mounts inside the host card; no shared owner code is copied. Live WebMCP worked in the current in-app browser. Test coverage includes 10 adapter contract tests and 3 native bootstrap identity tests; the native repository validator passed both selected checks before publication. Final candidate checks are retained in the Git-private validation receipt, not fabricated here.
+
+The actual copied empty dossier reopened with six points. Synthetic image review and both tested widths behaved as described in the handbook. A cached shell reloaded while its local server was stopped. Blob download completion could not be observed through this browser; a visible Save link plus verified inspect/copy JSON fallback replaces any false download-success claim. Re-preparing offline assets waits for activation before reporting success.
+
+Remaining acceptance: true native XR widget extraction/synchronization, source/editor round-trip trace freshness, the actual six-point scene/route/capture mapping, GameXR final acknowledgment/fault injection, measured mobile performance/accessibility, customer and physical trials. The host's six points are an uncalibrated review fixture, not a proven farm route. **0/10 whole-product VCCs fully closed**; useful subcriteria now have local evidence. C5 is still an owner export/license seam; C7 receiver connection is not emulated; C10 remains absent. No inference from UI availability changes that verdict.
+
+Publication scope: this first local baseline, native bootstrap already integrated. Source publication is the next selected effect; it does not grant remote deployment, physical actuation, cleanup or sales. Preserve the serving checkout for user review. Initial paid service spend remains $0; no model API, paid add-on, cache upload or hosted artifact allocation was enabled. Graph runtime observed at `2dfd97fbd4f346c797b0d5f677c9b39dba03f97f`, clean, through the operator's existing server; historical source hashes remain pinned in grounding and are not silently refreshed.
+
+
+## Reference implementation — visual workspace checkpoint, 0.2.1
+
+The maintainer requested a compact spatial-workspace layout. Native `successor drone-dashboard-layout` admitted the continuation from published source `36e48aab64af595fa6343b2a886e7f1f192d727e`, preserving the same checkout and limiting writes to `app` and this joined documentation. The original source publication remains immutable. This increment advances all five joined roles and projections together to 0.2.1; commercial assumptions and historical grounding hashes are unchanged.
+
+PRD delta: replace the large introductory section with a slim mission bar, left inspection explorer, dominant native canvas, right evidence inspector and bottom mission console. The console exposes Path handoff, Dossier and Agent access through keyboard-operable tabs. On phones, the explorer becomes a two-column point list and the panels stack. Selected point, evidence review, native owner links/frames, original path retention, dossier and read-only tools keep their existing owners and contracts. The initial rack drawing is an original inline schematic explicitly labeled an uncalibrated fixture; it is neither telemetry nor a measured flight path.
+
+TAD/ADR delta: plain HTML/CSS plus a small console controller reuse the existing runtime. No new package, font, image fetch, renderer or copied third-party implementation is introduced. Four existing UI files change; the service-worker shell cache receives a new identity so offline preparation can install the revised assets. Console tabs use selected states, roving tab stops, arrow keys, Home/End and linked panels; prepared exports automatically reveal Dossier. Existing native surfaces remain lazy and externally configured. Visual composition does not establish XR parity or device authority.
+
+MVP delta: validate desktop/phone layout, point selection, console keyboard actions, visible export JSON and native-frame load/close; run the existing native contract/budget checks and joined-document verifier. Browser results are recorded in the runtime handbook. The earlier whole-product acceptance gaps and 0/10 fully closed VCC verdict remain unchanged. GTM delta: this is an operator demo presentation improvement, with no new buyer, price, revenue, paid service or physical-flight claim.
+
+Sprint cap: 30 active minutes, four UI modules, less than 60 kB added UI source; per-file ceilings remain 600 lines and 500 kB. The screenshot review and source publication are the selected effects. Protected integration and deployment remain separate effects. Keep the serving checkout for review; use a native successor for further source changes after publication. Source rollback and offline-cache recovery remain in the runtime handbook.
