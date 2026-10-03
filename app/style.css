@@ -271,3 +271,52 @@ details summary{min-height:44px}
 
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}
 }
+
+/* Shared evidence view: domain labels and constraints come from the admitted profile. */
+.workspace-switch{display:flex;gap:8px;padding:14px 24px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.workspace-switch button{font-size:14px;min-height:44px}
+.workspace-switch button[aria-pressed=true]{border-color:#90b5ff;background:#23334e}
+.evidence-workspace{max-width:1440px;margin:auto;padding:28px 24px 40px;font-size:15px;line-height:1.6;color:#d5dce8}
+.evidence-heading{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:20px}
+.evidence-heading h1{font-size:30px;letter-spacing:-.6px;margin:0;font-weight:600}
+.evidence-heading p{margin:8px 0;color:#b5c1d5}
+.evidence-workspace .eyebrow{font-size:11px;color:#b5c1d5}
+.evidence-tag{border:1px solid #416958;color:#a7e0c9;background:#162720;padding:8px 12px;border-radius:6px;white-space:nowrap;font-size:13px}
+.evidence-notice{padding:12px 16px;border-left:3px solid #81b9ec;background:#182638;overflow-wrap:anywhere}
+.evidence-notice.error{border-color:#ffad9e;color:#ffd0c7;background:#322025}
+.evidence-grid{display:grid;grid-template-columns:1.15fr 1fr .85fr;gap:16px;margin:20px 0}
+.evidence-card{min-width:0;border:1px solid #39465b;border-radius:10px;background:#141b28;padding:20px;margin-bottom:16px;overflow-wrap:anywhere}
+.evidence-grid .evidence-card{margin:0}
+.evidence-card h2{font-size:19px;font-weight:550;line-height:1.4;margin:0 0 12px}
+.evidence-card h3{font-size:15px;margin:6px 0}
+.evidence-card p{font-size:14px;color:#b5c1d5;margin:10px 0}
+.evidence-card label{font-size:14px;color:#c4cfe1;margin:12px 0}
+.evidence-card button,.evidence-card input,.evidence-card select,.evidence-card textarea{font-size:14px;min-height:44px}
+.evidence-card input[type=file]{font-size:12px}
+.evidence-card input[type=file]::file-selector-button{min-height:32px}
+.evidence-card .identity{font-size:11px;color:#b5c1d5}
+.evidence-card summary{font-size:14px;min-height:44px}
+.evidence-card pre{font-size:12px;color:#b7e5d8}
+.evidence-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:14px 0}
+.evidence-actions span{font-size:13px;color:#b5c1d5}
+.evidence-download{display:block;min-height:44px;padding:10px 0;text-decoration:underline}
+.evidence-section-head{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.evidence-section-head>span{color:#a7e0c9;font-size:14px}
+.evidence-table-wrap{max-width:100%;overflow:auto;border:1px solid #39465b;border-radius:6px;margin:16px 0}
+.evidence-table-wrap table{width:100%;border-collapse:collapse;font-size:13px;text-align:left}
+.evidence-table-wrap caption{text-align:left;padding:12px;color:#b5c1d5}
+.evidence-table-wrap th{color:#e3eafa;background:#202d40}
+.evidence-table-wrap td,.evidence-table-wrap th{padding:12px;vertical-align:top;border-bottom:1px solid #39465b;min-width:145px}
+.evidence-table-wrap td small{display:block;color:#b5c1d5;font-size:12px;margin-top:4px}
+.evidence-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.evidence-value{padding:12px;border:1px solid #39465b;border-radius:6px;min-width:0}
+.evidence-value strong{display:block;font-size:14px;color:#e3eafa}
+.evidence-value p{font-size:13px}
+#evidence-command{font-family:ui-monospace,monospace}
+#evidence-sources article{border-top:1px solid #39465b;padding:12px 0}
+@media(max-width:1000px){.evidence-grid{grid-template-columns:1fr 1fr}.evidence-grid>:last-child{grid-column:1/-1}}
+@media(max-width:640px){.evidence-workspace{padding:20px 12px}.evidence-heading{display:block}.evidence-heading h1{font-size:25px}.evidence-tag{display:inline-block;margin-top:8px}.evidence-grid{display:block}.evidence-grid .evidence-card{margin-bottom:16px}.evidence-card{padding:16px}.workspace-switch{padding:12px}.evidence-summary{grid-template-columns:1fr}}
+
+.native-preview{min-height:600px;border:1px solid #39465b;border-radius:8px;overflow:hidden;background:#10151f}
+.native-preview iframe{width:100%;height:80dvh;min-height:600px;border:0;display:block}
+#native-workspace-panel .evidence-actions button,#native-workspace-panel .evidence-actions a{font-size:14px;min-height:44px}

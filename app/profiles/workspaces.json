@@ -1,0 +1,13 @@
+{
+  "schema": "workspace-connections/v1",
+  "native": {
+    "title": "Flight Sim demo",
+    "description": "The authored Flight Sim document opens in its existing native workspace. Its simulation and external map assets have their own offline requirements.",
+    "baseUrl": "http://127.0.0.1:4213/",
+    "documentPath": "docs/workspace-seeds/agentic-graph-game-flight-sim-demo.md",
+    "parameters": {
+      "kgPreview": "1",
+      "kgLiveHero": "1"
+    }
+  }
+}
