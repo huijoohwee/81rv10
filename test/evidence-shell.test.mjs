@@ -22,6 +22,11 @@ test('offline shell caches every local module and authored input without externa
   const source = await read('app/sw.mjs');
   const assets = [...source.matchAll(/'\.\/([^']*)'/gu)].map(match => match[1]);
   for (const name of ['evidence-kernel.mjs', 'evidence-replay.mjs', 'evidence-view.mjs', 'profiles/aviation-v1.json', 'profiles/workspaces.json', 'fixtures/aviation-synthetic-v1.json']) assert.ok(assets.includes(name), name);
+  const config = JSON.parse(await read('app/profiles/workspaces.json'));
+  for (const example of config.evidence.examples) {
+    assert.match(example.path, /^\.\/fixtures\/[a-z0-9-]+\.json$/u);
+    assert.ok(assets.includes(example.path.slice(2)), `Offline example missing: ${example.path}`);
+  }
   for (const name of assets.filter(Boolean)) assert.ok(Buffer.byteLength(await read('app/' + name)) < 500000, name);
   for (const name of ['evidence-kernel.mjs', 'evidence-replay.mjs']) {
     const module = await read('app/' + name);
@@ -32,8 +37,9 @@ test('native workspace connection is authored and preserves exact existing docum
   const config = JSON.parse(await read('app/profiles/workspaces.json'));
   assert.equal(config.native.documentPath, 'docs/workspace-seeds/agentic-graph-game-flight-sim-demo.md');
   assert.deepEqual(config.native.parameters, { kgPreview: '1', kgLiveHero: '1' });
-  const kernel = await read('app/evidence-kernel.mjs'), replay = await read('app/evidence-replay.mjs');
+  const kernel = await read('app/evidence-kernel.mjs'), replay = await read('app/evidence-replay.mjs'), view = await read('app/evidence-view.mjs');
   assert.doesNotMatch(kernel + replay, /4213|Singapore|Flight Sim|registration|weather|aviation-evidence-bundle/);
+  assert.doesNotMatch(view, /Singapore|Johor|Riau|aviation-singapore/);
 });
 
 for (const scenario of ['hit', 'miss', 'open-failure', 'match-failure']) {

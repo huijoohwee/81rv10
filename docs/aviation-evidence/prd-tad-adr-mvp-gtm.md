@@ -1,16 +1,16 @@
 ---
 title: "Aviation Evidence Layer — local file MVP"
 doc_type: "PRD-TAD-ADR-MVP-GTM"
-version: "0.3.1"
-revision: "0.3.1"
+version: "0.3.2"
+revision: "0.3.2"
 date: "2026-10-04"
 lang: "en-US"
 continuity_id: "aviation-evidence-layer"
-prd_revision: "0.3.1"
-tad_revision: "0.3.1"
-adr_revision: "0.3.1"
-mvp_revision: "0.3.1"
-gtm_revision: "0.3.1"
+prd_revision: "0.3.2"
+tad_revision: "0.3.2"
+adr_revision: "0.3.2"
+mvp_revision: "0.3.2"
+gtm_revision: "0.3.2"
 owner: "Aviation Evidence product function"
 local_rung: "spec-complete"
 delivered_rung: "undocumented"
@@ -24,21 +24,21 @@ guideline_revision: "3.4.0"
 
 # Aviation Evidence Layer
 
-This joined package is the implementation successor **aviation-evidence-layer@0.3.1**. Its bounded sections are [validation and runbook](validation-runbook.md), [rights and recovery](rights-recovery.md), [discovery and pilot](discovery-pilot.md), [financial model](financial-model.md), and [venture projections](venture-projections.md). They consume this revision; they do not introduce independent product ownership.
+This joined package is the implementation successor **aviation-evidence-layer@0.3.2**. Its bounded sections are [validation and runbook](validation-runbook.md), [rights and recovery](rights-recovery.md), [discovery and pilot](discovery-pilot.md), [financial model](financial-model.md), and [venture projections](venture-projections.md). They consume this revision; they do not introduce independent product ownership.
 
-Published predecessor0.3.0 is `209483a5fc777ace22d8acca1e9d6fe9a6921418`, tree `b807272b4915a8347aa434cd6b2de895a53464bc`, [PR6](https://github.com/huijoohwee/81rv10/pull/6). Its green synthetic-merge CI is not protected integration. Native successor `aviation-normalization-proof` admits this repair; its54-test/browser repair proof is recorded below; publication is pending. The historical specification is @0.2.0, SHA-256 `817d6af75e5d8e327560dbf6408291c1e0bd0f3fce9b5095501d2e24b1d185d9`. Its historical sources, diagrams, findings and evidence remain preserved in that record and its immutable sidecars. This increment changes the real-data feasibility host to the user-selected **81rv10 FOSS shell**, and implements the three Must stories using an explicitly synthetic local bundle. It does not claim observed flight data, validated demand or operational aviation authority.
+Published **0.3.1**: `00de702300d6369e304bd7d39a9e04d8ceb71a92`, tree `2d44626b3d02ed2bcb79498603dbf32d6b25111c`, [PR #7](https://github.com/huijoohwee/81rv10/pull/7), green synthetic-merge CI. Successor `aviation-singapore-corpus` adds observed data and offline preparation: seven adapter tests/bounded browser checks passed; 61 tests/budgets passed; publication pending. The original @0.2.0 specification retains historical diagrams/findings; no protected integration, deployment, demand or operational authority follows.
 
 ## Context, scope and authority
 
-The user selected the existing FOSS shell and authorized implementation. Native START admitted the 81rv10 lane on `438038865fd25c9d2a07ff50fcb75e2666e08b7c`. The existing Drone Dashboard and Launch Copilot reference remain owned by their existing records. The aviation page has its own authored profile and fixture; a universal runtime consumes them. There is no Graph/GameXR source incorporation or external renderer requirement.
+The user selected the FOSS shell; native START admitted baseline438038865fd25c9d2a07ff50fcb75e2666e08b7c. Drone Dashboard/Launch Copilot retain their owners. Aviation specifics live in authored data; runtime remains generic. No external renderer is required.
 
-Implementation, independent checks and local preview are covered work. Exact publication, protected integration and deployment each require their native receipts. Customer contact, consent, restricted-data ingestion, contracts, payment and production promotion have no completed evidence here. Existing native Flight simulation proof does not satisfy any aviation VCC.
+Covered work includes implementation, checks and local preview. Publication, integration and deployment need separate native receipts. Customer/contact/payment/production outcomes are absent. Flight simulation proof closes no aviation VCC.
 
 ## PRD
 
 ### Outcome and buyer hypothesis
 
-Enable an analyst to import a bounded permitted bundle, inspect the source and age of every fact, reproduce its chronology offline, and hand another reviewer the unchanged original plus a verifiable derived record. Buyer: an operations, safety or analytics team lead; user: the analyst reconstructing one disputed flight. Both segment fit and WTP remain hypotheses.
+Enable an analyst to import a bounded permitted bundle, inspect the source and age of every fact, reproduce its chronology offline, and hand another reviewer the unchanged original plus a verifiable derived record. Buyer: an operations, safety or analytics team lead; user: the analyst reconstructing one disputed flight. Both segment fit and WTP remain hypotheses. The first real demonstration follows one Singapore–Riau observation segment within an authored Singapore/Johor/Riau study window; the selected points do not establish a Johor flight or a regional market.
 
 | Pain / priority | Hook → break → fix → close | Reuse/build and evidence |
 |---|---|---|
@@ -66,11 +66,11 @@ The deferred criteria retain the exact predecessor thresholds; omission from thi
 | Metric | Target and basis | Current disposition |
 |---|---|---|
 | Clean setup | ≤60 minutes on the documented supported environment | Predecessor clean archive installed in1.443673792s on Node22.22.3/npm10.9.8/macOS27; fresh origin53350 had0 workers/caches before provision succeeded. Full setup timing pending |
-| First useful record | ≤15 minutes / 3 main actions after provisioned shell and fixture | Algorithm-v2 provisioned offline record375ms/1action; predecessor fresh-origin record391ms/1action. Synthetic, not buyer value |
-| Replay and export | ≤5 minutes after accepted import / 3 main actions | Published209483a Previous+Prepare638ms/2actions; actual save unverified, so target remains open |
-| Local serving effects | 0 models, 0 billed APIs, 0 required external requests | Verified for bounded fixture read paths; native workspace remains a separate explicit external connection |
-| Bounds | Original UTF-8 JSON <500,000 B; ≤10 flights, ≤5,000 facts, ≤24-hour window | Successor54-test validation passed; exact candidate publication pending |
-| New product code | ≤2 generic core modules +1 generic UI module; <600 lines/file; each emitted resource <500,000 B; initial added JS ≤75,000 B |3 original modules/0 added by repair; served JS67,987B versus23,022B baseline, added44,965B; largest kernel22,197B/306lines; budgets passed |
+| First useful record | ≤15 minutes / 3 main actions after provisioned shell and fixture | Published0.3.1 synthetic record375ms/1action;0.3.2 real-corpus timing pending; neither measures buyer value |
+| Replay and export | ≤5 minutes after accepted import / 3 main actions | Historical Previous+Prepare638ms/2actions; actual primary save unverified, so target remains open |
+| Local serving effects | 0 models, 0 billed APIs, 0 required external requests | Published0.3.1 synthetic path verified;0.3.2 real sample observed0 external requests; native workspace is separate |
+| Bounds | Original UTF-8 JSON <500,000 B; ≤10 flights, ≤5,000 facts, ≤24-hour window | Published0.3.1 passed54 tests;0.3.2 passed61 tests/budgets; publication pending |
+| New product code | ≤2 generic core modules +1 generic UI module; <600 lines/file; each emitted resource <500,000 B; initial added JS ≤75,000 B |Current JS68,402B (+415B;45,380B vs baseline); offline adapter7,324B/1 preparation module, not served; native budgets passed |
 | Device reach | Desktop and 360–430 CSS px mobile; keyboard/touch, readable table, focus, reduced motion, 200% zoom | Emulated widths/keyboard/sample contrast/reduced motion/page scale observed; physical touch/full text zoom/clean new-device setup untested |
 | Value / retention | ≥10 minutes saved on a comparable task and weekly use for four weeks | EXP-4 unrun; cannot be inferred from synthetic tests |
 
@@ -86,18 +86,27 @@ Impact, reach, labour valuation and support costs remain unknown. [ROI/TCO formu
 | REPLAY | Stable ordering, latest accepted fact at UTC, canonical derived identity and read queries | Generic pure core module; no clock/random/network |
 | SHELL / VIEW | Local intake, accepted-session revision fence, accessible records/replay/export and status | One generic UI adapter in the existing FOSS shell; no new renderer |
 | TOOLS | One declared schema/dispatcher for module, CLI, MCP, browser and aliases | Existing tool/stdio owners extend asynchronously; transport adapters do not duplicate semantics |
-| PROFILE / FIXTURE | Domain fields, constraints, units/datum policy, sample labels, scenario and synthetic facts | Authored JSON; no mission, vendor or geographic rule hardcoded into generic runtime |
+| PROFILE / FIXTURE | Fields, units/datum policy, sample labels, study selection and real/synthetic examples | Authored JSON; generic runtime has no mission, vendor or geographic rule |
+| OFFLINE PREPARATION | Bounded provider-format mapping with preserved upstream bytes and mapping pointers | `scripts/import-readsb.mjs` consumes a source and authored selection; no browser feed or provider fetch |
 | STATIC / CACHE | Read-only local service and explicit provisioned shell cache | Existing server/service-worker owners; bundle files are separately authoritative |
 
-Source bindings: CONTRACT `app/evidence-kernel.mjs`; REPLAY `app/evidence-replay.mjs`; VIEW `app/evidence-view.mjs`; profile `app/profiles/aviation-v1.json`; fixture `app/fixtures/aviation-synthetic-v1.json`; shared declaration `app/tools.mjs`; CLI/MCP `mcp.mjs`. Source bundle schema is `aviation-evidence-bundle/v1`; portable pack is `evidence-pack/v1`. Original input limit499,999B remains; pack limit2,000,000B accounts for preserved JSON bytes/metadata, with bounded outer escaped transport framing. These data-input limits are not emitted-resource budget waivers.
+Bindings: CONTRACT `app/evidence-kernel.mjs`; REPLAY `app/evidence-replay.mjs`; VIEW `app/evidence-view.mjs`; `app/profiles/aviation-v1.json`; synthetic/observed examples in `app/fixtures`; declaration `app/tools.mjs`; CLI/MCP `mcp.mjs`. Input schema `aviation-evidence-bundle/v1` <500,000B; pack `evidence-pack/v1` ≤2,000,000B including originals/metadata, with bounded outer escaping. Input limits waive no emitted-resource budget.
 
-Latest user-directed connection: authored `app/profiles/workspaces.json` selects Graph at `http://127.0.0.1:4213/` and exact `docs/workspace-seeds/agentic-graph-game-flight-sim-demo.md`. The frame combines the existing `kgDoc` link with authored `kgPreview=1&kgLiveHero=1`, matching the native preview contract; Open source workspace retains plain `kgDoc`. The existing generic frame owner handles load/close. Graph remains at unchanged061df9dc9df465f9b54281d576fc9c81f1b092da, with separate source/renderer, availability, license, bytes and offline requirements. A frame loading does not prove selected-document parity; simulation never populates the aviation evidence bundle.
+### Singapore–Riau observed corpus
+
+`app/profiles/singapore-region.json` authors the WGS84 study extent latitude **0.5–2.6**, longitude **102.7–105.1**, and UTC selection **2026-10-03 10:37–10:53**. This is an analyst filter, never an official FIR, sovereignty boundary or clearance zone. The actual selected span is **10:37:19.240–10:52:12.830Z**:56 non-stale `adsb_icao` positions from aircraft hex `76b452`, each paired with an altitude fact, plus5 explicit unknowns (registration, operator, weather, schedule, restrictions):117 facts. Preserved source metadata is not promoted into time-aligned facts. No interpolation, flight-leg/touchdown inference or route enrichment occurs.
+
+The276,932B bundle retains all708 upstream rows/146,788B inside `sources[0].original.text` → parsed `upstream.text`, plus selection/row indices/fact pointers. Exact bundle, envelope, upstream and derived hashes are in the runbook/config. Altitude follows readsb bit8: geometric, otherwise pressure; feet stay feet. Ground/null never imply numeric altitude or touchdown. [Rights](rights-recovery.md#source-and-data-admission) binds pinned terms/schema.
+
+`app/profiles/workspaces.json` owns real/synthetic choices; the generic view renders them. Cache0.3.2 provisions both examples. Aviation profile v1 and algorithm `evidence-order/v2` are unchanged, so existing v2 packs remain compatible. The adapter is offline preparation, not a live runtime source. The corpus is one crowdsourced segment, not a30-minute predictive benchmark, independent truth or regional coverage claim.
+
+The authored `workspaces.json` also selects Graph4213 with exact `docs/workspace-seeds/agentic-graph-game-flight-sim-demo.md` and native `kgPreview=1&kgLiveHero=1`; the plain kgDoc link opens source editing. Existing frame ownership remains. Graph061df9dc9df465f9b54281d576fc9c81f1b092da retains separate renderer/source/license/offline requirements. Frame load alone is not document parity; simulation never populates evidence.
 
 Source → CONTRACT → REPLAY → TOOLS and VIEW is the acyclic dependency direction. PROFILE is data admitted by CONTRACT; VIEW never becomes the schema owner. No database, generic package extraction, second tool registry, background feed or remote API is introduced.
 
 ### Admission and evidence semantics
 
-The original byte sequence is authoritative. Decode strict UTF-8, enforce byte/count/time bounds, validate the exact profile revision and reject malformed timestamps, nonfinite coordinates, unknown units, duplicate IDs or incompatible datum before replacement. Profile/schema/algorithm revisions bind derived identity. A digest identifies bytes; it proves neither truthful origin nor legal non-repudiation.
+Original bytes are authoritative. Strict UTF-8, bounds and exact revisions are checked before state replacement; malformed times/coordinates/units/IDs/datum fail. Hashes identify bytes, not authenticity.
 
 Every fact has stable fact/flight/source identity, observed and retrieved UTC, declared units/reference and evidence linkage. Unknown registration/operator/weather/schedule/restrictions retain an explicit reason. WGS84 coordinate and altitude interpretation belongs to the authored aviation profile. Do not equate pressure, geometric, AMSL, AGL or flight level; only declared compatible unit conversion is allowed.
 
@@ -107,52 +116,46 @@ Invalid import keeps the accepted state. An earlier asynchronous read cannot ove
 
 ### Five flows
 
-The predecessor's six diagrams remain historical @0.2.0 notation. This revision's operative flow inventory below replaces the host-specific proposed topology without claiming a new rendered diagram check.
+The six predecessor diagrams remain historical @0.2.0 notation. Current flows, without a new rendered-diagram claim:
 
 | Flow | Ordered boundary / alternate |
 |---|---|
-| Journey | Analyst file → local import → source/gap inspection → UTC replay → portable export → reviewer reimport → pilot decision |
-| Workflow | Select bytes → bounded admit → current revision commit → inspect/replay/export; invalid/stale result → typed rejection and retained accepted state |
-| Data | Original bytes + profile revision → accepted session → rebuildable ordered projections → original export + canonical identity; originals are never overwritten by projections |
-| Harness | UI/CLI/MCP/WebMCP/alias → one typed declaration/dispatcher → one pure query → typed bounded result; unknown/mutation names fail; no model, retry loop or external effect |
-| Topology | Operator files ↔ local browser; optional loopback static server and stdio process consume the same contracts. Provisioned cache stores shell resources, not evidence or customer authority. External providers are absent. |
+| Journey | Local import → source/gap inspection → UTC replay → export → reviewer reimport → pilot decision |
+| Workflow | Bounded admission → current-revision commit → read/export; invalid or stale completion retains accepted state |
+| Data | Original bytes + revisions → rebuildable projections and identity; originals never overwritten |
+| Harness | UI/CLI/MCP/WebMCP/alias → shared typed dispatcher → pure query; unsupported/mutation inputs fail |
+| Topology | Operator files ↔ browser; optional loopback/stdio share contracts; explicit cache includes examples; no runtime provider call |
 
 ### Invocation and trust
 
-Inspection and replay are read-only; local export prepares a user-controlled file, not publication. CLI/stdio arguments refer only to explicitly supplied local bytes and typed query inputs. WebMCP is feature-detected; an unavailable API must retain visible UI/command fallback. Unknown tool names, extra fields, unsupported revisions and mutation requests fail loudly. All route names and argument fields are bound to the implementation's single capability declaration, with actual invocation examples maintained in the [runbook](validation-runbook.md).
+Inspection/replay are read-only; export prepares an operator file. CLI/stdio accept only supplied bytes and typed inputs. WebMCP is feature-detected with visible fallback. Unknown names/fields/revisions/mutations fail. The shared declaration and [runbook](validation-runbook.md) own invocation, not adapter-specific schemas.
 
-One invocation is the maximum evidence-query loop. No dynamic code execution, arbitrary shell, ingestion scheduler, payment, aircraft command or token issuer is an evidence capability. The explicit native workspace connection is separate from data reads; evidence URLs are never auto-fetched. Original/evidence export may disclose the supplied bundle, so the UI states its local-file boundary.
+Evidence queries execute once with no dynamic code, scheduler, payment, aircraft command or token issuer. The explicit native connection is separate; evidence URLs are never fetched. Export stays operator-controlled.
 
 ## ADR
 
-All choices below concern one local synthetic-file feasibility slice. Unknown data/provider rights block their dependent adoption, not local inspection or authored fixtures.
+These choices concern bounded local-file reconstruction. The observed sample has an explicit database licence; missing rights or labels still block their dependent source or benchmark adoption.
 
 | ID | Decision / alternatives | Consequence / cost / recovery |
 |---|---|---|
 | ADR-001 | Deterministic record/replay first; defer predictive models and free-text agents | No model/paid dependency or predictive promise. Revisit on paid P1 demand plus permitted truth; fall back to record/replay. |
-| ADR-002 | Local synthetic/permitted file input first; live aggregator/receiver adapter deferred | Synthetic authoring resolves this fixture's source provenance without granting real-data rights. No live completeness; disable a drifted source and retain originals. |
+| ADR-002 | Local permitted files; offline readsb mapper plus authored Singapore selection; live adapters deferred | ADSB.lol database attribution/ODbL travel with the real sample; synthetic remains separately labelled. Preserve full upstream bytes and mapping; no live completeness claim. |
 | ADR-003 | Portable originals + rebuildable memory; database/sync deferred | Detach caller-owned byte views. Algorithm v2 rejects v1-derived packs; explicit original-byte reimport creates a new derived identity. Container schema stays evidence-pack/v1; no silent migration. |
 | ADR-004 | User-selected 81rv10 MIT shell at 4380388; existing server/cache/tools reused. Private Graph wrapper and new renderer excluded | Small inspected source delta and FOSS distribution basis for this repository's own code. No Graph assets or host chunk waiver. Measure every new emitted resource and offline dependency. |
 | ADR-005 | One read-only declared tool owner, shared across adapters; write-back/gateway deferred | Add no independent schemas or external authority. Unsupported WebMCP falls back visibly. Revisit remote gateway only for two authorized consumers. |
 | ADR-006 | Original-byte hashes plus revision-bound derived digest; signing/notarization deferred | Integrity comparison, not authenticity/legal evidence. Retain exact originals and disclose this limit; signing requires a separate custody/recovery design. |
 
-Constraint screen: selected local shell passes the inspected MIT source/no-paid-dependency design constraints; emitted size/offline/runtime constraints need new proof. Operational sources fail until rights/coverage are checked. Mandatory hosted/live variants fail this local/offline slice. A new renderer fails minimum-change scope. No unsupported economic winner is claimed: user selection establishes host choice, while DM-A/B/C costs stay separate.
+Constraint screen: existing MIT shell/no-paid design fits this local slice; exact current size/offline checks remain required. Additional sources need rights/coverage review. Hosted/live variants and a new renderer are outside this minimum-change scope. DM-A/B/C costs stay separate; host choice is not an economic winner claim.
 
 ## MVP and verification
 
-The implemented slice remains PRD-E1-S1/E1-S2/E5-S1. New counterexamples invalidate the predecessor's broad5/6-Must claim: caller Buffer mutation changed admitted originals; equivalent UTC strings and decimal-converted units produced false conflicts. Successor54 tests and v2 browser checks now exercise those corrections and offline update-race recovery; prior46-test receipts remain historical. [Validation](validation-runbook.md) retains history. VCC-5 remains partial, including primary-download timing, phone/touch and full200% browser zoom. Deferred VCC-3/4/7/9/10 and their thresholds are unchanged; no full-product acceptance follows.
-
-Historical0.3.0 browser evaluation SHA-256 `813c9c36ee149fe44fc3bb05f85e0639364ff93676e4a29b86a0041849fea8a4` records UI/WebMCP inspection and replay equality; copied13,734B pack→saved file→actual file-chooser reimport→CLI agreement;13/13 service-worker responses and0 external/model/billed-API calls. Original identity `4750f8d966fc1ebbe690343a1c44ed2d60241d5035844b55642be96fb93438fd`; derived `5707401b826894efc2cf53c362aa13e26453461debbcc2cdfdbf8d25a37f1e95`. Direct in-app download events timed out; the verified clipboard/file fallback is explicit. Actual adapter-unavailable/rejection and worker storage-failure handler tests passed in final validation.
-
-The historical0.3.0 browser recheck after shared registration refactoring retained UI/WebMCP equality (`browser-parity-final.json`, SHA-256 `53067df4d49834649f907cfce2a932adc9a0d93debbb52c98ec37d7d76c7d353`) and recorded11/11 service-worker responses in the newest cache reload (`offline-network-exact.json`, `034c8db08822540c1c4d1490a9ac7405d757464230981692a834ebc6c77a013f`). Earlier counts remain historical. Mixed-timestamp selection, cleared hidden data and corrupt-pack identity retention were observed; the exact external Flight document was Ready in the native embed. Local rung stays spec-complete, delivered rung undocumented because VCC-5 is incomplete.
-
-Historical0.3.0 native validation receipt `final-validation/receipt.json`, SHA-256 `f3868e08790da6bf338d59a23e5450f5cbd54cf42b322d35ffffd73e90ddd270`, passed46/46 tests and budgets across24 changed paths at sourceDigest `5f4135dd246f6e3e87d76b5435d09c3c8d363206dd5e655af9419aaee11f71bc`. It includes actual adapter/worker negatives. Predecessor publication binds209483a/PR6 with green synthetic-merge CI; no protected merge/deploy follows. Successor54-test/budget receipt and browser artifacts are in the runbook; this documentation update follows that receipt. Native publication must bind its resulting exact candidate.
+The implemented slice remains PRD-E1-S1/E1-S2/E5-S1. Published0.3.1 repaired byte aliasing, equivalent UTC strings and decimal-converted false conflicts, superseding the earlier broad5/6-Must claim. Its54 tests/budgets and bounded v2 browser receipts remain in the [runbook](validation-runbook.md) and immutable published predecessor. This0.3.2 increment has seven passing adapter tests and bounded browser/offline proof:117 facts,390px table,11/11 worker responses/0 external, UI pack read via DOM and actual-chooser identity-preserving reimport. Clipboard bridge failed; direct save remains unverified. 61 native tests and budgets passed; exact publication remains pending. VCC-5 remains partial: primary-download timing, physical iPhone/touch, full200% browser zoom and complete clean setup remain open. All11 VCC conditions and deferred VCC-3/4/7/9/10 thresholds remain unchanged. Local rung is spec-complete; delivered rung undocumented; no full-product acceptance follows.
 
 Use the 180-second [demo](validation-runbook.md#180-second-demo). Its Reveal is repeatable canonical output plus original-byte export/reimport, not a simulation. Rehearsal can prove a bounded technical workflow; only EXP-1/3/4 can supply buyer and usage evidence.
 
 ## GTM and venture record
 
-Offer hypothesis: one team receives a portable reconstruction walkthrough for one permitted case, with provenance/gaps and independent reproduction. Alternatives are manual reconciliation, source tools, in-house analytics and doing nothing. No validated advantage or customer reference exists.
+Offer hypothesis: one analyst team reviewing Singapore and surrounding airspace receives a portable reconstruction walkthrough for one permitted case, with provenance/gaps and independent reproduction. Geography selects the initial demonstration; it does not qualify a buyer or establish regional demand. Alternatives are manual reconciliation, source tools, in-house analytics and doing nothing. No validated advantage or customer reference exists.
 
 [Discovery and pilot](discovery-pilot.md) supplies consent, interview, offer and experiment records. Price/currency are deliberately unset pending an authorized real offer; a literal first dollar is collection evidence only, not sustainable WTP. Order, fulfilment, recognized revenue, cash, refunds and repeat use are separate events.
 
@@ -183,13 +186,13 @@ Offer hypothesis: one team receives a portable reconstruction walkthrough for on
 
 | PRD-TAD-ADR-MVP-GTM | CID | RAO | Updated Date |
 |---|---|---|---|
-| aviation-evidence-layer@0.3.1 | C: permitted synthetic-file MVP selected; predecessor817d and native host4380388. I: deliver reproducible local evidence review. D: implement and independently test three Must stories in the admitted owner. | R: Engineering. A: implement generic contracts/replay/UI with authored profile and shared adapters. O: bounded local import/replay/export with exact-source VCC evidence. check: VCC-1/2/5/6/8/11. | 2026-10-04 |
-| aviation-evidence-layer@0.3.1 | C: no customer, rights or payment outcomes. I: prepare an honest paid learning loop. D: prepare consent/interview/offer/model records without sending or collecting. | R: Product. A: prepare bounded experiment and venture materials. O: usable drafts with pending inputs and effect boundaries. check: package joins, formulas, claim/source labels; outcomes require EXP-1/3/4. | 2026-10-04 |
+| aviation-evidence-layer@0.3.2 | C: published00de/PR7; selected Singapore–Riau real sample and synthetic control. I: ground reproducible local review in observed data. D: admit bounded offline mapping and authored study selection; validate exact successor. | R: Engineering. A: implement generic contracts/replay/UI with authored profile and shared adapters. O: bounded local import/replay/export with exact-source VCC evidence. check: VCC-1/2/5/6/8/11. | 2026-10-04 |
+| aviation-evidence-layer@0.3.2 | C: source-specific ODbL admission; no customer or payment outcomes. I: prepare an honest paid learning loop. D: prepare consent/interview/offer/model records without sending or collecting. | R: Product. A: prepare bounded experiment and venture materials. O: usable drafts with pending inputs and effect boundaries. check: package joins, formulas, claim/source labels; outcomes require EXP-1/3/4. | 2026-10-04 |
 
 ## ADLC and handover
 
-Source inspection baseline: 81rv10 `438038865fd25c9d2a07ff50fcb75e2666e08b7c`; repository MIT license; Agentic OS package `e0ef770860905830157e64c455f0a342084b6d25`. Preserve the original Drone Dashboard @0.2.1 joins. Predecessor release and successor working-tree proof are bound above; successor publication remains pending.
+Source inspection baseline: 81rv10 `438038865fd25c9d2a07ff50fcb75e2666e08b7c`; repository MIT license; Agentic OS package `e0ef770860905830157e64c455f0a342084b6d25`. Preserve the original Drone Dashboard @0.2.1 joins. Published0.3.1 release is bound above;0.3.2 passed61 tests/budgets; publication pending; bounded browser proof is in the runbook. No protected integration or deployment is claimed.
 
-R1 cap: ≤8 active hours, ≤3 iterations and stop/refresh after two no-progress attempts; first cycle≤90 active minutes; ≤3 new product modules, source limits above. Documentation cap refreshed after the full model/consent/projection and workspace-connection scope: ≤20 active minutes, six new documents, ≤75 KiB, <600 lines/file. Paid/model serving spend cap0; authoring token/cost actuals remain unknown unless telemetry supplies them. External waits name the missing input and recheck on response, not an ETA.
+R1: ≤8 active hours/3 iterations; refresh after2 no-progress attempts; first cycle≤90min. Runtime: ≤3 new product modules, limits above. Docs: ≤20 active minutes,6 files/75KiB total,<600 lines each. Paid/model serving cap0; authoring token/cost telemetry unknown. External waits state missing input/recheck, not ETA.
 
-Follow native START → check:plan → check → RELEASE publication; immutable candidates use successor. Protected integration is separate. Local preview is not production; DEPLOY needs selected controller/target, integrated source, predecessor and effect authorization. [Recovery](rights-recovery.md) distinguishes session, shell, source and delivery recovery. Final handover must state exact code/checks, remaining acceptance, rights/commercial gaps and the next owner action.
+Native START → check:plan → check → RELEASE publication; immutable candidates require successor. Integration and DEPLOY need separate authority/receipts, selected target/controller and retained predecessor. Local preview is not production. [Recovery](rights-recovery.md) distinguishes session/source/shell/delivery; handover states exact checks, unresolved acceptance and next owner action.

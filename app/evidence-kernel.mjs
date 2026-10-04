@@ -40,7 +40,7 @@ export function canonicalJson(value) {
   };
   return visit(value, 0);
 }
-function parseJson(raw, path) {
+export function parseJson(raw, path) {
   let value;
   try { value = JSON.parse(raw); } catch { throw new EvidenceError('JSON', 'Malformed JSON.', path); }
   // JSON.parse alone silently accepts duplicate member names. Refuse that ambiguity.

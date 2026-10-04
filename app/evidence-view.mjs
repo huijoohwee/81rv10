@@ -1,4 +1,5 @@
 import profile from './profiles/aviation-v1.json' with { type: 'json' };
+import workspaceConnections from './profiles/workspaces.json' with { type: 'json' };
 import { createSession, inspect, exportPack, originalBytes } from './evidence-kernel.mjs';
 import { replay } from './evidence-replay.mjs';
 import { capabilities, invokeCommand } from './tools.mjs';
@@ -135,10 +136,15 @@ export function mountEvidence() {
     const raw = $('evidence-input').value, bytes = encoder.encode(raw);
     return importEvidence(decoder.decode(bytes) === raw ? bytes : Promise.reject(new Error('Text contains invalid Unicode.')));
   };
-  $('evidence-example').onclick = guard(() => importEvidence(fetch(profile.ui.fixturePath).then(async response => {
-    if (!response.ok) throw new Error('Example is unavailable. Import a saved file or prepare the offline shell.');
-    return new Uint8Array(await response.arrayBuffer());
-  })));
+  $('evidence-examples').replaceChildren(...workspaceConnections.evidence.examples.map(example => {
+    const button = text('button', example.label); button.id = example.id; button.type = 'button';
+    button.onclick = guard(() => importEvidence(fetch(example.path).then(async response => {
+      if (!response.ok) throw new Error('Example is unavailable. Import a saved file or prepare the offline shell.');
+      return new Uint8Array(await response.arrayBuffer());
+    })));
+    return button;
+  }));
+  $('evidence-examples-description').textContent = workspaceConnections.evidence.description;
   $('evidence-clear').onclick = () => {
     ++importIntent; session.clear(); discardExport(); $('evidence-input').value = ''; $('evidence-file').value = '';
     render(); status('Imported evidence removed from this tab. Previously saved files remain on your device.');
@@ -169,5 +175,5 @@ export function mountEvidence() {
     if (session.read() === accepted) { $('evidence-command-result').textContent = JSON.stringify(result, null, 2); status('Read-only command completed against the accepted original bytes.'); }
   });
   window.addEventListener('pagehide', discardExport);
-  render(); status('Ready. Import a permitted file or explore the clearly labelled synthetic example.');
+  render(); status('Ready. Import a permitted file or choose a labelled example.');
 }

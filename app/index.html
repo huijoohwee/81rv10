@@ -22,7 +22,8 @@
     <div class="evidence-grid">
       <section class="evidence-card" aria-labelledby="import-heading"><span class="eyebrow">01 / RECORD</span><h2 id="import-heading">Open your evidence</h2><p>Data stays in this tab. Save an export before closing.</p>
         <label>Import evidence bundle or pack<input id="evidence-file" type="file" accept="application/json,.json"></label>
-        <div class="evidence-actions"><button id="evidence-example">Load synthetic example</button><button id="evidence-clear" disabled>Remove imported evidence</button></div>
+        <div id="evidence-examples" class="evidence-actions" role="group" aria-label="Bundled evidence examples"></div><p id="evidence-examples-description"></p>
+        <div class="evidence-actions"><button id="evidence-clear" disabled>Remove imported evidence</button></div>
         <details><summary>Paste JSON instead</summary><label>Evidence JSON<textarea id="evidence-input" rows="5" spellcheck="false"></textarea></label><button id="evidence-admit">Inspect pasted JSON</button></details>
         <p id="evidence-limits"></p><p id="evidence-identity" class="identity">No file admitted.</p>
       </section>

@@ -1,15 +1,17 @@
 ---
 title: "Aviation Evidence — financial model preparation"
 doc_type: "Financial model"
-version: "0.3.1"
+version: "0.3.2"
 continuity_id: "aviation-evidence-layer"
-source_revision: "aviation-evidence-layer@0.3.1"
+source_revision: "aviation-evidence-layer@0.3.2"
 date: "2026-10-04"
 owner: "Financial Modeler"
 ---
 # Financial model preparation
 
 This is the formula and input owner for the [joined plan](prd-tad-adr-mvp-gtm.md), as of 2026-10-04. It prepares the model structure; numeric forecasts and independent reconciliation remain incomplete. Inputs marked unknown propagate as unknown; division by zero/unknown is undefined. No numeric market, price, customer, revenue, cash or profit result is invented.
+
+The first real demo uses117 Singapore–Riau facts from a permitted ODbL sample; this changes neither market size nor paid-demand assumptions. Offline preparation and attribution/recovery work belong in A08/A09; free data access does not make labour or TCO zero.
 
 All money must use one declared currency per scenario, currently unset. Currency conversion needs dated sourced rates; do not add currencies. Hours, users, tasks, ratios and money remain distinct units. Every changed assumption requires source, date, owner, estimate/observed/constraint disposition and revision.
 
@@ -26,7 +28,7 @@ All money must use one declared currency per scenario, currently unset. Currency
 | A07 | operator labour valuation / currency per hour | Unknown; owner-declared opportunity-cost input, not a fabricated wage |
 | A08 | build hours and allocation / hours, currency | Unknown; actual execution ledger and declared allocation policy |
 | A09 | compute, data, storage, security / currency per month by variant | Unknown economic cost; incremental paid provider spend capped0 by user instruction |
-| A10 | serving model/API use and unit price | Constraint0; predecessor synthetic paths observed0, successor fixture paths observed0; nonzero path disallowed |
+| A10 | serving model/API use and unit price | Constraint0; published0.3.1 synthetic path observed0;0.3.2 browser observed0 external requests; nonzero serving path disallowed |
 | A11 | available operating hours / hours per month | Unknown; one-pilot-at-a-time planning cap is not a measured hourly capacity |
 | A12 | opening cash, assets, liabilities, owner capital / currency | Unknown; owner-supplied balances, no funding assumed |
 | A13 | tax and revenue recognition basis | Unknown; actual entity/jurisdiction/qualified review before commercial reporting |
@@ -44,8 +46,7 @@ One proposed pilot at the same task volume is the comparison scale. Do not blend
 | DM-B hosted single tenant | Hosting/egress/storage/backup/patching/security, data terms, operator support, build allocation | Deferred; unknown free quota/overage and rights, no provider adopted |
 | DM-C customer environment | Customer deployment/approval, integration, compute/storage/security operations, support responsibility and data agreement | Deferred; customer inputs and contract unknown |
 
-For each variant x: `TCO12_x = allocatedBuild_x + 12 × (compute_x + data_x + storage_x + support_x + security_x)`.
-Each input has currency/year or currency/month consistently. Add one-time deployment cost separately where material. Managed/self-managed/hybrid operations are separate rows within a candidate, with the same workload and responsibility scope. Unknown input prevents numeric comparison; user selection of DM-A is not proof of cheapest economic TCO.
+For each variant x: `TCO12_x = allocatedBuild_x + 12 × (compute_x + data_x + storage_x + support_x + security_x)`. Keep yearly/monthly units consistent; add one-time deployment separately. Compare managed/self-managed/hybrid at equal workload/responsibility. Unknown inputs prevent numeric ranking; DM-A selection is not proof of cheapest TCO.
 
 ## Linked monthly statements
 
@@ -72,7 +73,7 @@ Use months m=1…12 after the agreed pilot start. All formulas below are algebra
 | Equity_m | OpeningEquity_m + ownerCapital_m + NetIncome_m − distributions_m |
 | BalanceCheck_m | Assets_m − Liabilities_m − Equity_m must equal0; unknown balances are not a passing reconciliation |
 
-Avoid double counting labour/build as both cash payment and imputed cost in one view. Show economic contribution and cash contribution separately. Capitalisation/depreciation is not assumed; select the actual accounting basis before numeric statements. Opening cash m+1 equals closing cash m; backlog, receivables and deferred balances roll likewise.
+Separate imputed economic cost from cash; never count labour/build twice. Accounting/capitalisation basis remains unselected. Opening balances roll from prior closings.
 
 ## Unit economics, ROI and decision rules
 
@@ -87,7 +88,7 @@ Avoid double counting labour/build as both cash payment and imputed cost in one 
 - Customer value = comparable tasks×observed saved minutes/60×declared analyst value/hour. Frequency, accuracy and causality require EXP-4, not demo timing.
 - Feature ROI ratio = incremental attributable benefit in currency / total incremental build+operating cost in the same currency and period. Planning threshold≥1; impact1–5 and reach are separately sourced drivers, never added to currency or presented as observed ROI.
 
-Reconcile the guideline's required feature inputs in one row per Must: impact1–5, monthly reach, build hours, monthly TCO, serving-token cost, period, source and threshold result. Currently all economic benefit drivers are unknown; serving token use0 has bounded predecessor-fixture evidence, with successor fixture observation also0. Cost-free provider access does not make development or customer effort free.
+Reconcile the guideline's required feature inputs in one row per Must: impact1–5, monthly reach, build hours, monthly TCO, serving-token cost, period, source and threshold result. Currently all economic benefit drivers are unknown; serving token use0 has bounded published0.3.1 synthetic evidence;0.3.2 browser observed0 external requests. Cost-free provider access does not make development or customer effort free.
 
 ## Base, Downside and Upside
 
@@ -106,9 +107,9 @@ Top-down market = eligible organisations×relevant teams×tested annual value. B
 |---|---|---|
 | L-DISCOVERY | source review/research/consent preparation time and tool use | Active time partially observable; no numeric allocation yet |
 | L-BUILD | code/test/docs active work, failed attempts, compute and authoring tokens | Exact execution receipts to be joined; token/cost absent stays unknown |
-| L-VERIFY | contracts, parity, browser/offline, resource measurement and evaluator time | Historical46-test receipts;54 successor checks and v2 browser proof recorded; active time unknown |
-| L-RELEASE | native source/CI/publication/integration |209483a/PR6 published with green synthetic-merge CI; successor pending; no protected merge/deploy |
+| L-VERIFY | contracts, parity, browser/offline, resource measurement and evaluator time | Published0.3.1:54 tests and v2 browser proof;0.3.2 seven adapter tests/browser proof; native checks pending; active time unknown |
+| L-RELEASE | native source/CI/publication/integration |00de702/PR7 published with green synthetic-merge CI;0.3.2 pending; no protected merge/deploy |
 | L-PILOT | onboarding/support/fulfilment/retention observations | No pilot; not zero-cost evidence |
-| L-SERVING | runtime model/API/provider calls per accepted operation | Constraint0; predecessor and successor fixture paths observed0 |
+| L-SERVING | runtime model/API/provider calls per accepted operation | Constraint0; published0.3.1 synthetic path observed0;0.3.2 browser observed0 external requests |
 
 Record elapsed versus active time separately and do not count parallel wall time twice. Store failed-work cost, retained reusable outputs and opportunity-cost assumptions; no savings claim without a comparable baseline. Projection numbers must cite these owned inputs, formulas and dates. Before audience or commercial use, populate/reconcile independently or retain an explicit incomplete status.

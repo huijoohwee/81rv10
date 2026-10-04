@@ -1,34 +1,34 @@
 ---
 title: "Aviation Evidence — internal deck and business plan"
 doc_type: "Venture projections"
-version: "0.3.1"
+version: "0.3.2"
 continuity_id: "aviation-evidence-layer"
-source_revision: "aviation-evidence-layer@0.3.1"
+source_revision: "aviation-evidence-layer@0.3.2"
 date: "2026-10-04"
 owner: "Product and Financial Modeler"
 ---
 # Internal venture projections
 
-These are compact, **unpresented internal drafts** of the [joined plan](prd-tad-adr-mvp-gtm.md), not investor-ready materials. No claim first originates here. Sources resolve to the owned PRD, ADRs, experiment record or model at aviation-evidence-layer@0.3.1. No external sharing, outreach, buyer acceptance or funding request has occurred.
+These are compact, **unpresented internal drafts** of the [joined plan](prd-tad-adr-mvp-gtm.md), not investor-ready materials. No claim first originates here. Sources resolve to the owned PRD, ADRs, experiment record or model at aviation-evidence-layer@0.3.2. No external sharing, outreach, buyer acceptance or funding request has occurred.
 
 ## Compact deck / slide register
 
-Audience hypothesis: an analyst team lead considering a bounded reconstruction trial. Intended decision: whether to authorize a permitted-file discovery session, not operational deployment. Three-minute narrative cap; an optional180-second live demo adds a separately disclosed three minutes.
+Audience hypothesis: a team lead reviewing Singapore and surrounding airspace and considering a bounded reconstruction trial. The Singapore–Riau sample establishes scenario grounding, not customer qualification. Intended decision: whether to authorize a permitted-file discovery session, not operational deployment. Three-minute narrative cap; an optional180-second live demo adds a separately disclosed three minutes.
 
 | Slide / seconds | Message and visual/text equivalent | Owned source / evidence status |
 |---|---|---|
 | S1 /15 | One flight, one reproducible evidence bundle | PRD outcome; proposed value |
 | S2 /25 | Reconciliation and chronology gaps may consume analyst time | PRD P2/P3; unvalidated hypothesis, no customer quotation |
-| S3 /20 | Import → inspect sources/gaps → replay UTC → export/reimport | PRD J1–J6;54 successor checks; device proof partial |
+| S3 /20 | Import → inspect sources/gaps → replay UTC → export/reimport | PRD J1–J6; published0.3.1:54 checks;0.3.2 seven adapter tests/browser proof; native checks pending; device partial |
 | S4 /35 | Reveal: equal inputs yield equal canonical output; tampering fails | VCC-2/8 and demo; run only against actual passing receipt, otherwise show pending |
-| S5 /20 | Files stay local; synthetic/unknown evidence is explicit | TAD/rights; successor offline fixture0 external requests |
-| S6 /20 | Existing MIT shell, three generic modules, authored profile | ADR-004; successor67,987B served JS; publication pending |
+| S5 /20 | Real Singapore–Riau observations,5 explicit unknowns and separate synthetic control | TAD/ODbL rights;0.3.2 offline11/11 worker responses/0 external; device partial |
+| S6 /20 | Existing MIT shell, three generic modules, authored profile | ADR-004; published0.3.1 JS67,987B;0.3.2 budget/publication pending |
 | S7 /20 | Compare one real workflow before claiming value | EXP-1/4; no observations |
 | S8 /15 | One bounded pilot; price/currency and terms unset | EXP-3 unsent offer; no payment/revenue |
 | S9 /10 | Request an authorized discovery decision and permitted data review | Planning successor; no funding ask or outreach authorization |
 | Total /180 | No extra unbounded slide or hidden demo time | Draft timing, unrehearsed |
 
-Claim manifest: each slide inherits its source status. No customer logos, invented TAM, commercial endorsements, accuracy/fuel-savings claim, operational clearance, certification or hypothetical testimonial. Reveal is gated by its own VCC evidence, not a screenshot of a simulator. Final presentation requires current source joins, measured timings, readable rendering, licensed assets and the intended audience/effect authorization.
+Claim manifest: each slide inherits its source status. No invented customer/TAM/accuracy/clearance claims. Reveal requires its VCC evidence; presentation requires current joins, timings, readable licensed material and audience/effect authorization.
 
 ## Compact business plan
 
@@ -36,7 +36,7 @@ Claim manifest: each slide inherits its source status. No customer logos, invent
 
 **Offer and delivery.** The unsent offer covers one permitted historical case, a local walkthrough, source/gap record and portable reproduction. It excludes operational decisions, prediction, live monitoring and data procurement. One operator and one pilot constrain capacity. Exact price, currency, timing, acceptance, support/refund/data terms are required before an actual offer.
 
-**Product and technical advantage hypothesis.** Existing FOSS shell plus generic bounded admission/replay preserves original bytes and deterministic derived identity. The authored profile carries aviation rules and the fixture stays visibly synthetic. Local/offline operation and interoperability are acceptance targets until actual VCC receipts; neither establishes market advantage.
+**Product and technical advantage hypothesis.** Existing FOSS shell plus generic bounded admission/replay preserves original bytes and deterministic derived identity. The authored profile carries aviation rules; authored selection isolates the observed Singapore–Riau segment while the synthetic control remains labelled. The offline adapter retains upstream bytes and ODbL attribution; it supplies no official airspace/clearance or independent prediction truth. Local/offline operation and interoperability are acceptance targets until actual VCC receipts; neither establishes market advantage.
 
 **Market and channel.** Two independent market-size methods are defined in the financial model; inputs and numeric market size are unknown. Warm introductions and private file walkthroughs are channel hypotheses. No purchased list, automated messaging, lead scraping or prospect contact is authorized. Referrals need their own consent.
 
@@ -54,7 +54,7 @@ Claim manifest: each slide inherits its source status. No customer logos, invent
 
 ## Projection reconciliation and audience checklist
 
-- All files bind aviation-evidence-layer@0.3.1 and the same owned facts/assumptions.
+- All files bind aviation-evidence-layer@0.3.2 and the same owned facts/assumptions.
 - Price/currency unset in deck, plan, offer and model; no invented revenue or funding ask.
 - Market/WTP/retention remain unknown everywhere.
 - Technical assertions consume exact current receipts and their limitations; no inference from precursor Drone/Flight proof.
@@ -62,5 +62,4 @@ Claim manifest: each slide inherits its source status. No customer logos, invent
 - Demo and slide timings are labelled targets until rehearsed.
 - External delivery needs the selected audience, current evidence, permission and actual handoff record.
 
-Audience handoff record, presently empty: artifact hashes/revision; intended recipient and decision; effect authorization; reviewed claims; rendering/rehearsal result; delivery channel/date; response; outcome and next experiment. Do not fill an audience outcome from internal preparation.
-
+Audience handoff remains empty. Record revision/hashes, recipient/decision, authority, reviewed claims, rehearsal, delivery and observed response; preparation is not an outcome.

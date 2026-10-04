@@ -1,9 +1,9 @@
 ---
 title: "Aviation Evidence — rights, operations and recovery"
 doc_type: "Handbook"
-version: "0.3.1"
+version: "0.3.2"
 continuity_id: "aviation-evidence-layer"
-source_revision: "aviation-evidence-layer@0.3.1"
+source_revision: "aviation-evidence-layer@0.3.2"
 date: "2026-10-04"
 owner: "Operator and release owner"
 ---
@@ -18,9 +18,15 @@ This [joined-plan](prd-tad-adr-mvp-gtm.md) section is an operational preparation
 | 81rv10 code | MIT at inspected438038865fd25c9d2a07ff50fcb75e2666e08b7c; use its existing shell/server/tools | Preserve license/notices; recheck added dependencies and exact distributed bytes |
 | Authored synthetic fixture | Newly authored demonstration facts must carry synthetic labels and no real-person/customer identifiers | Record author, profile/fixture hashes, creation date and allowed demo/export use; do not represent it as observation |
 | Operator-supplied file | Not automatically permitted because import succeeds | Source owner, access authority, purpose, retention, redistribution/export and confidentiality terms recorded |
-| Live/provider/airport/weather/airspace data | Not adopted by this MVP | Exact source/version/terms, coverage, quota, allowed derivation, attribution, offline/cache, export and termination conditions |
+| Other live/provider/airport/weather/airspace data | Not adopted by this increment | Exact source/version/terms, coverage, quota, allowed derivation, attribution, offline/cache, export and termination conditions |
 | Private native surfaces | No source/assets bundled for this aviation page | A link/frame or local access does not grant redistribution; retain each owner's separate contract |
 | Open-source dependency | Repository lock/pin and license inventory are inspectable | Source license and dataset rights are distinct; free service availability does not establish FOSS/no-overage eligibility |
+
+The real Singapore–Riau sample uses [ADSB.lol history terms](https://github.com/adsblol/globe_history_2026/blob/fa2cfaa721eb8360f481bbf1f1f0a7c63a605131/README.md), pinned `fa2cfaa721eb8360f481bbf1f1f0a7c63a605131`: the **database is ODbL-1.0**; contributors' CC0 statements do not make the database CC0. Retain “ADSB.lol contributors — https://www.adsb.lol — ODbL-1.0” and license distributed adapted databases accordingly. Full terms ship in `app/fixtures/ADSBLOL-LICENSE-ODbL.txt`, SHA-256 `d93f996262c15e7cf9d6b54f9f48e3f9d8b9c3a47fa2308dc8ef1f0f5cb88611`; source-code MIT terms are separate. The bundle retains this rights statement and exact upstream text. Its `operator-attested` status records the admission decision, not legal certification or source authenticity.
+
+Source: [2026-10-03 trace76b452](https://adsb.lol/globe_history/2026/10/03/traces/52/trace_full_76b452.json), retrieved2026-10-04T00:58:26.294Z. Mapping follows [readsb trace schema](https://github.com/wiedehopf/readsb/blob/094720939c01943de82b14df6f42f67fff1cd514/README-json.md#trace-jsons), pin `094720939c01943de82b14df6f42f67fff1cd514`. The retained receipt binds HTTP/source/schema/licence bytes. Selection is56 non-stale `adsb_icao` points within the authored Singapore/Johor/Riau window; observed points are Singapore–Riau, not proof of Johor coverage. It is historical crowdsourced observation, without independent accuracy, touchdown, schedule, restriction or clearance truth.
+
+OneMap restriction geometry remains conditional: [CAAS](https://www.caas.gov.sg/unmanned-aircraft/no-fly-zones-and-ua-flying-areas/) points to its [Theme API](https://www.onemap.gov.sg/apidocs/themes) under [data terms](https://www.onemap.gov.sg/legal/opendatalicence.html). No token, selected layer or actual geometry is admitted; no official FIR/notice/clearance, independent label or VCC-10 acceptance follows. Other regional sources need separate rights review.
 
 ### Per-source rights record
 
@@ -54,6 +60,7 @@ Incident record: case ID; discovered UTC; source/runtime/profile identity; permi
 |---|---|---|
 | Invalid/corrupt import | Retain accepted state; show reason; choose a valid file explicitly | Accepted revision and digest unchanged; failed bytes never committed |
 | Delayed prior read | Discard stale completion using current selection token | Later accepted selection remains; negative concurrency test |
+| Existing algorithm-v2 pack | Reimport normally under unchanged aviation profile v1/algorithm v2 |0.3.2 corpus choice adds no migration; exact compatibility check remains pending |
 | Prior algorithm-v1 pack | Keep the pack; extract `original.text` as UTF-8, verify against `original.sha256`, explicitly import those raw originals into v2 | Old derived identity is rejected; new profile/algorithm-bound identity is explicit. Retain the old pack and never silently relabel it |
 | Tab crash / session reset | Reopen shell and reimport saved originals with matching profile/algorithm | Recomputed identity matches; unsaved session can be lost |
 | Export uncertainty | Keep current session; use inspectable/copyable original data fallback if implemented | A prepared link is not completed download; verify actual saved bytes |
