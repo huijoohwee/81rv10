@@ -190,3 +190,13 @@ TAD/ADR delta: plain HTML/CSS plus a small console controller reuse the existing
 MVP delta: validate desktop/phone layout, point selection, console keyboard actions, visible export JSON and native-frame load/close; run the existing native contract/budget checks and joined-document verifier. Browser results are recorded in the runtime handbook. The earlier whole-product acceptance gaps and 0/10 fully closed VCC verdict remain unchanged. GTM delta: this is an operator demo presentation improvement, with no new buyer, price, revenue, paid service or physical-flight claim.
 
 Sprint cap: 30 active minutes, four UI modules, less than 60 kB added UI source; per-file ceilings remain 600 lines and 500 kB. The screenshot review and source publication are the selected effects. Protected integration and deployment remain separate effects. Keep the serving checkout for review; use a native successor for further source changes after publication. Source rollback and offline-cache recovery remain in the runtime handbook.
+
+## Reference implementation — aviation owner binding, 2026-10-04
+
+The user selected this MIT shell for an aviation file-evidence MVP. Native START admitted `agent/device-0232231d4a19/aviation-evidence-layer` at `438038865fd25c9d2a07ff50fcb75e2666e08b7c`. [Aviation Evidence Layer@0.3.0](../aviation-evidence/prd-tad-adr-mvp-gtm.md) owns its generic contract/replay/UI, authored profile/fixture, shared read adapters, validation and commercial preparation. Its predecessor specification SHA-256 is `817d6af75e5d8e327560dbf6408291c1e0bd0f3fce9b5095501d2e24b1d185d9`.
+
+The Drone Dashboard continuity and all0.2.1 joins remain unchanged. Existing dossier/owner routes and Launch Copilot reference are retained. The latest user steering also requests the existing native Flight demo through an authored workspace connection; Graph retains its code, renderer, file and simulation ownership. Its external availability/offline limits are separate from the pure aviation evidence slice. Exact-source aviation checks and release receipts remain pending; no farm VCC, physical-flight, buyer or production claim follows.
+
+## Aviation evidence normalization successor · 2026-10-04
+
+Native successor `aviation-normalization-proof` continues published209483a/PR6; its green synthetic-merge CI is separate from protected integration. [Aviation Evidence Layer@0.3.1](../aviation-evidence/prd-tad-adr-mvp-gtm.md) advances all six aviation joins for detached original bytes and UTC/decimal normalization. Reproduced failures supersede broad prior acceptance; 54 successor tests/budgets and bounded v2 browser proof are recorded; publication remains pending. Drone Dashboard0.2.1 and its ownership stay unchanged.
