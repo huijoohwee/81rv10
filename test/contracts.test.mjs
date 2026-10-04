@@ -55,7 +55,8 @@ test('invocation parity and mutation refusal', () => {
 });
 test('MCP read-only discovery, structured errors and actual stdio transport', () => {
   const list = handle({ jsonrpc: '2.0', id: 1, method: 'tools/list' });
-  assert.equal(list.result.tools.length, 2); assert.ok(list.result.tools.every(t => t.annotations.readOnlyHint));
+  assert.deepEqual(list.result.tools.map(t => t.name), ['drone_dashboard.inspect', 'drone_dashboard.resolve_owners', 'aviation.inspect', 'aviation.replay']);
+  assert.ok(list.result.tools.every(t => t.annotations.readOnlyHint));
   assert.equal(handle({ jsonrpc: '2.0', id: 2, method: 'tools/call', params: { name: 'arm' } }).result.isError, true);
   assert.equal(handle({ jsonrpc: '2.0', method: 'notifications/initialized' }), null);
   const child = spawnSync(process.execPath, ['mcp.mjs'], { cwd: new URL('..', import.meta.url), encoding: 'utf8', input: JSON.stringify({ jsonrpc: '2.0', id: 3, method: 'initialize', params: { protocolVersion: '2024-11-05' } }) + '\n' });

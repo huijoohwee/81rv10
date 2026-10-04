@@ -3,18 +3,46 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#0d1017">
-  <title>Agentic Drone Dashboard · Rack scout</title>
+  <title>Evidence workspace · Agentic Drone Dashboard</title>
   <link rel="stylesheet" href="./style.css"><script type="module" src="./app.mjs"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to workspace</a>
 <header class="mast">
-  <a class="brand" href="#main"><span class="mark" aria-hidden="true">⌘</span><span>Agentic Drone <span class="brand-sub">DASHBOARD</span></span></a>
-  <span class="header-divider"></span><span class="project-name">Rack scout <span class="slash">/</span> Mission 001</span>
-  <span class="badge"><span class="dot"></span>Simulation only</span>
-  <button id="settings-open" class="quiet"><span aria-hidden="true">⚙</span> Owner connections</button>
+  <a class="brand" href="#main"><span class="mark" aria-hidden="true">⌘</span><span>Local evidence <span class="brand-sub">WORKSPACE</span></span></a>
+  <span class="header-divider"></span><span class="project-name">Files <span class="slash">/</span> Portable records</span>
+  <span class="badge"><span class="dot"></span>Device only</span>
+  <button id="settings-open" class="quiet" hidden><span aria-hidden="true">⚙</span> Owner connections</button>
 </header>
 <main id="main" tabindex="-1">
+  <nav class="workspace-switch" aria-label="Workspaces"><button id="evidence-workspace" aria-pressed="true">Evidence workspace</button><button id="native-workspace" aria-pressed="false">Native workspace</button><button id="drone-workspace" aria-pressed="false">Drone dashboard</button></nav>
+  <section id="evidence-workspace-panel" class="evidence-workspace" aria-labelledby="evidence-title">
+    <div class="evidence-heading"><div><p class="eyebrow">LOCAL FILES · READ-ONLY ANALYSIS</p><h1 id="evidence-title">Evidence workspace</h1><p id="evidence-description">Inspect a record, replay a moment, keep a verifiable copy.</p></div><span class="evidence-tag">No account · no API calls</span></div>
+    <p id="evidence-status" class="evidence-notice" role="status" aria-live="polite">Loading evidence tools. If this persists, use a current browser with ES modules and JSON import support.</p>
+    <div class="evidence-grid">
+      <section class="evidence-card" aria-labelledby="import-heading"><span class="eyebrow">01 / RECORD</span><h2 id="import-heading">Open your evidence</h2><p>Data stays in this tab. Save an export before closing.</p>
+        <label>Import evidence bundle or pack<input id="evidence-file" type="file" accept="application/json,.json"></label>
+        <div id="evidence-examples" class="evidence-actions" role="group" aria-label="Bundled evidence examples"></div><p id="evidence-examples-description"></p>
+        <div class="evidence-actions"><button id="evidence-clear" disabled>Remove imported evidence</button></div>
+        <details><summary>Paste JSON instead</summary><label>Evidence JSON<textarea id="evidence-input" rows="5" spellcheck="false"></textarea></label><button id="evidence-admit">Inspect pasted JSON</button></details>
+        <p id="evidence-limits"></p><p id="evidence-identity" class="identity">No file admitted.</p>
+      </section>
+      <section class="evidence-card" aria-labelledby="replay-heading"><span class="eyebrow">02 / REPLAY</span><h2 id="replay-heading">Examine a moment</h2><p>Latest observations at or before your time. Gaps remain visible.</p>
+        <form id="evidence-query"><label><span id="evidence-entity-label">Entity</span><select id="evidence-entity" disabled></select></label><label>Replay time (UTC)<input id="evidence-time" type="text" placeholder="YYYY-MM-DDTHH:mm:ss.sssZ" required disabled></label><button id="evidence-replay" class="primary" disabled>Replay moment</button></form>
+        <label>Recorded moment<input id="evidence-timeline" type="range" min="0" max="0" value="0" disabled></label><div class="evidence-actions"><button id="evidence-previous" disabled>Previous moment</button><button id="evidence-next" disabled>Next moment</button></div>
+      </section>
+      <section class="evidence-card" aria-labelledby="export-heading"><span class="eyebrow">03 / KEEP</span><h2 id="export-heading">Keep the originals</h2><p>Export source bytes and the derived record together. Reimport checks both identities.</p><button id="evidence-export" class="primary" disabled>Prepare verifiable export</button><a id="evidence-download" class="evidence-download" hidden>Save evidence pack</a><p>Hashes establish byte identity; they do not establish accuracy or legal origin.</p><p id="evidence-export-identity" class="identity"></p><details id="evidence-export-fallback" hidden><summary>Copy export JSON</summary><label>Portable pack JSON<textarea id="evidence-export-json" rows="5" readonly></textarea></label><button id="evidence-copy-export">Copy portable pack</button><p>If downloads are unavailable, save this exact JSON as evidence-pack.json. Its hashes are checked on reimport.</p></details></section>
+    </div>
+    <section id="evidence-results" class="evidence-card" hidden aria-labelledby="record-heading"><div class="evidence-section-head"><div><p class="eyebrow">ACCEPTED RECORD</p><h2 id="record-heading">Time-aligned facts</h2></div><span id="evidence-count"></span></div><p id="evidence-dataset"></p><div id="evidence-summary" class="evidence-summary"></div>
+      <div class="evidence-table-wrap" tabindex="0" role="region" aria-label="Evidence facts table"><table><caption>Source observations in deterministic time, source and fact order</caption><thead><tr><th scope="col">Observed UTC</th><th scope="col">Entity / fact</th><th scope="col">Value</th><th scope="col">Source / provenance</th></tr></thead><tbody id="evidence-facts"></tbody></table></div>
+      <div class="evidence-actions"><button id="evidence-page-back" disabled>Previous facts</button><span id="evidence-page"></span><button id="evidence-page-next" disabled>Next facts</button></div>
+      <details><summary>Source rights and originals</summary><div id="evidence-sources"></div></details>
+    </section>
+    <section id="evidence-replay-result" class="evidence-card" hidden aria-labelledby="replay-result-heading"><h2 id="replay-result-heading">Replay result</h2><p id="evidence-replay-summary"></p><div id="evidence-replay-values" class="evidence-summary"></div><details><summary>Exact replay JSON</summary><pre id="evidence-replay-json"></pre></details></section>
+    <section class="evidence-card" aria-labelledby="evidence-tool-heading"><h2 id="evidence-tool-heading">Read-only tools</h2><p id="evidence-webmcp-status">Checking browser tool support…</p><form id="evidence-command-form"><label>Evidence command<input id="evidence-command" spellcheck="false" autocomplete="off"></label><button id="evidence-command-run" disabled>Run read-only command</button></form><details><summary>Exact tool result</summary><pre id="evidence-command-result"></pre></details></section>
+  </section>
+  <section id="native-workspace-panel" class="evidence-workspace" hidden aria-labelledby="native-title"><div class="evidence-heading"><div><p class="eyebrow">EXISTING WORKSPACE CONNECTION</p><h1 id="native-title">Native workspace</h1><p id="native-description"></p></div></div><div class="evidence-actions"><button id="native-load" class="primary">Load native workspace</button><button id="native-close" disabled>Close native workspace</button><a id="native-open" target="_blank" rel="noopener noreferrer">Open source workspace</a></div><p id="native-status" role="status">Not loaded.</p><div id="native-preview" class="native-preview"></div></section>
+  <div id="drone-workspace-panel" hidden>
   <div class="workspace">
     <aside class="route">
       <div class="panel-title"><h1>Inspection plan</h1><span class="tiny">06</span></div>
@@ -84,7 +112,8 @@
       </section>
     </div>
   </section>
-  <footer><p id="notice" class="notice" role="status" aria-live="polite">Ready for a local rehearsal.</p><span id="offline-status">Offline shell not provisioned.</span><button id="offline-enable" class="quiet">Prepare offline shell</button></footer>
+  </div>
+  <footer><p id="notice" class="notice" role="status" aria-live="polite">Local workspace ready.</p><span id="offline-status">Offline shell not provisioned.</span><button id="offline-enable" class="quiet">Prepare offline shell</button><button id="offline-remove" class="quiet">Remove offline cache</button></footer>
 </main>
 <dialog id="settings"><form method="dialog"><div class="card-head"><h2>Owner connections</h2><button value="cancel" aria-label="Close settings">×</button></div><p class="subtle">Use your running native surfaces. Settings stay in this tab. External surfaces load only when selected.</p><label>Graph base URL<input id="graph-url" type="url" value="http://127.0.0.1:4198/" required></label><label>Program source path<input id="program-path" value="docs/python-lessons/04-drone-flight-and-landing.py" required></label><label>Mission manifest path<input id="mission-path" placeholder="Select the exact agent-mission.manifest.json path from Graph"></label><label>GameXR base URL<input id="game-url" type="url" placeholder="https://your-local-gateway/gamexr/"></label><button id="save-settings" class="primary" value="save">Apply connections</button></form></dialog>
 </body>
