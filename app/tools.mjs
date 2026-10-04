@@ -21,6 +21,33 @@ export function invoke(name, args = {}) {
   throw new Error('Unsupported capability. Device commands are not exposed.');
 }
 export function invokeCommand(command, dossier) {
-  if (command.trim() !== capabilities[0].command) throw new Error(`Use ${capabilities[0].command}`);
+  if (typeof command !== 'string' || command.trim() !== capabilities[0].command) throw new Error(`Use ${capabilities[0].command}`);
   return invoke(capabilities[0].name, { dossier: JSON.stringify(dossier) });
+}
+
+export async function registerBrowserTools(modelContext, { resolveArgs = (_name, args) => args, report = () => {} } = {}) {
+  const totalCount = capabilities.length;
+  if (typeof modelContext?.registerTool !== 'function') {
+    report('WebMCP unavailable in this browser. Use the visible read-only command, local CLI or stdio MCP adapter.');
+    return { status: 'unavailable', registeredCount: 0, totalCount };
+  }
+  let registeredCount = 0;
+  try {
+    for (const { command, ...tool } of capabilities) {
+      await modelContext.registerTool({ ...tool,
+        annotations: { readOnlyHint: true, destructiveHint: false, openWorldHint: false },
+        execute: async args => {
+          const input = await resolveArgs(tool.name, args);
+          const result = await invoke(tool.name, input);
+          return { content: [{ type: 'text', text: JSON.stringify(result) }] };
+        },
+      });
+      registeredCount += 1;
+    }
+  } catch (error) {
+    report(`WebMCP registration failed after ${registeredCount} of ${totalCount} tools: ${error instanceof Error ? error.message : String(error)}. Use the visible read-only command instead.`);
+    return { status: registeredCount ? 'partial' : 'failed', registeredCount, totalCount };
+  }
+  report(`Read-only WebMCP tools registered (${registeredCount}/${totalCount}). The same tools are available through the command forms and local MCP adapter.`);
+  return { status: 'registered', registeredCount, totalCount };
 }

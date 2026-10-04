@@ -1,5 +1,5 @@
 import { MAX_BYTES, newDossier, readDossier, summary, digest, inspectPath, ownerLinks, replayUrl } from './contracts.mjs';
-import { capabilities, invoke, invokeCommand } from './tools.mjs';
+import { invokeCommand, registerBrowserTools } from './tools.mjs';
 const $ = id => document.getElementById(id);
 let dossier = newDossier(), selected = 0, surface = 'program', pathBytes = null, revision = 0;
 let config = { graph: $('graph-url').value, game: '', program: $('program-path').value, mission: '' };
@@ -71,6 +71,13 @@ function updateLinks() {
   if (links.game) { $('game-open').href = links.game; $('game-open').removeAttribute('aria-disabled'); }
   else { $('game-open').removeAttribute('href'); $('game-open').setAttribute('aria-disabled', 'true'); }
 }
+function mountNativeFrame(url, title, host) {
+  closeSurface();
+  const frame = document.createElement('iframe'); frame.title = title;
+  frame.referrerPolicy = 'no-referrer'; frame.allow = 'fullscreen; xr-spatial-tracking';
+  frame.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-downloads allow-pointer-lock');
+  frame.src = url; host.replaceChildren(frame);
+}
 function closeSurface(message = 'Closed · native rendering stopped') {
   $('native-frame').replaceChildren(); const empty = document.createElement('div'); empty.className = 'empty';
   const title = document.createElement('h3'); title.textContent = 'Ready when you are.';
@@ -93,10 +100,7 @@ $('load-surface').onclick = guard(() => {
   const path = surface === 'mission' ? config.mission : config.program;
   if (surface === 'mission' && !path) throw new Error('Set the exact mission manifest path in Owner connections first.');
   const url = surface === 'replay' ? replayUrl($('replay-url').value, config.graph) : ownerLinks(config.graph, null, path).graph;
-  const frame = document.createElement('iframe'); frame.title = surface === 'replay' ? 'Native Graph flight replay' : 'Native Graph workspace';
-  frame.referrerPolicy = 'no-referrer'; frame.allow = 'fullscreen; xr-spatial-tracking';
-  frame.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-downloads allow-pointer-lock');
-  frame.src = url; $('native-frame').replaceChildren(frame); $('close-surface').disabled = false;
+  mountNativeFrame(url, surface === 'replay' ? 'Native Graph flight replay' : 'Native Graph workspace', $('native-frame')); $('close-surface').disabled = false;
   $('frame-status').textContent = 'Owner frame requested · verify its visible status';
   $('graph-open').href = url;
 });
@@ -153,25 +157,24 @@ $('dossier-file').onchange = guard(async () => {
   $('dossier-status').textContent = 'Imported references are self-reported. Reattach originals to inspect their bytes.';
   notice('Dossier reopened. Image bytes and original path remain separate files.');
 });
-$('command-form').onsubmit = guard(event => {
-  event.preventDefault(); $('command-result').textContent = JSON.stringify(invokeCommand($('command').value, dossier), null, 2);
+$('command-form').onsubmit = guard(async event => {
+  event.preventDefault(); $('command-result').textContent = JSON.stringify(await invokeCommand($('command').value, dossier), null, 2);
 });
+function toolStatus(value) { $('webmcp-status').textContent = value; }
 async function registerWebMcp() {
-  const modelContext = document.modelContext || navigator.modelContext;
-  if (!modelContext?.registerTool) { $('webmcp-status').textContent = 'WebMCP unavailable in this browser. The local invocation and stdio MCP adapter remain available.'; return; }
-  try {
-    for (const { command, ...tool } of capabilities) await modelContext.registerTool({ ...tool,
-      annotations: { readOnlyHint: true }, execute: async args => {
-        const input = tool.name === 'drone_dashboard.inspect' && args?.dossier === undefined ? { ...args, dossier: JSON.stringify(dossier) } : args;
-        return { content: [{ type: 'text', text: JSON.stringify(invoke(tool.name, input)) }] };
-      } });
-    $('webmcp-status').textContent = 'WebMCP registered: inspect and resolve_owners. No device commands.';
-  } catch (error) { $('webmcp-status').textContent = `WebMCP registration failed: ${error.message}`; }
+  return registerBrowserTools(document.modelContext || navigator.modelContext, {
+    report: toolStatus,
+    resolveArgs(name, args) {
+      if (name === 'drone_dashboard.inspect' && args?.dossier === undefined) return { ...args, dossier: JSON.stringify(dossier) };
+      return args;
+    },
+  });
 }
 $('offline-enable').onclick = guard(async () => {
   if (!('serviceWorker' in navigator)) throw new Error('Offline shell unsupported in this browser.');
   const registration = await navigator.serviceWorker.register('./sw.mjs', { type: 'module' });
-  const pending = registration.installing || registration.waiting;
+  await registration.update();
+  const pending = registration.installing || registration.waiting || registration.active;
   if (pending && pending.state !== 'activated') await new Promise((resolve, reject) => {
     const timer = setTimeout(() => { pending.removeEventListener('statechange', check); reject(new Error('Offline preparation timed out. Keep the server available and retry.')); }, 15000);
     function check() {
@@ -182,8 +185,17 @@ $('offline-enable').onclick = guard(async () => {
     pending.addEventListener('statechange', check); check();
   });
   await navigator.serviceWorker.ready;
-  $('offline-status').textContent = 'Dashboard shell cached · native owners need their own offline setup.';
-  notice('Offline shell prepared. Export your dossier before closing this tab.');
+  $('offline-status').textContent = 'Dashboard shell cached. External native owners need their own offline setup.';
+  notice('Offline shell prepared. Save your dossier, then reload to use the prepared revision.');
+});
+$('offline-remove').onclick = guard(async () => {
+  if (!('serviceWorker' in navigator) || !('caches' in window)) throw new Error('Offline storage unsupported.');
+  const registration = await navigator.serviceWorker.getRegistration('./');
+  if (registration && new URL(registration.active?.scriptURL || registration.waiting?.scriptURL || registration.installing?.scriptURL).pathname === '/sw.mjs') await registration.unregister();
+  for (const key of await caches.keys()) if (key.startsWith('drone-dashboard-shell-')) await caches.delete(key);
+  $('offline-status').textContent = 'Offline cache removed. The current dossier remains in this tab.';
+  notice('Offline assets removed. Reload from the local server before preparing offline again.');
 });
 window.addEventListener('pagehide', () => { releasePreviews(); if (exportUrl) URL.revokeObjectURL(exportUrl); });
 render(); updateLinks(); void registerWebMcp();
+if (navigator.serviceWorker?.controller) $('offline-status').textContent = 'Using the provisioned dashboard shell. Save dossier files separately.';
