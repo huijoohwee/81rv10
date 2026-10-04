@@ -1,93 +1,102 @@
 ---
 title: "Aviation Evidence — validation and local runbook"
 doc_type: "Handbook"
-version: "0.3.2"
+version: "0.3.3"
 continuity_id: "aviation-evidence-layer"
-source_revision: "aviation-evidence-layer@0.3.2"
+source_revision: "aviation-evidence-layer@0.3.3"
 date: "2026-10-04"
 owner: "Engineering and independent evaluator"
 ---
 # Validation and local runbook
 
-This [joined-plan](prd-tad-adr-mvp-gtm.md) section preserves published0.3.1 repair proof without treating it as0.3.2 corpus acceptance. Seven adapter tests and bounded real-corpus browser checks passed; 61 tests and budgets passed; publication pending. VCC-5 remains partial; all11 conditions and deferred thresholds are unchanged.
+[Joined revision 0.3.3](prd-tad-adr-mvp-gtm.md) adds source drilldown/input ownership fixes and a synthetic volume candidate. **75/75 tests and budgets passed; bounded browser readback passed; publication is pending**. All eleven acceptance conditions remain unchanged. iPhone Safari is **SKIP/KIV by user decision**, never passed.
 
 ## Local operation
 
-1. Work in the native admitted checkout. Install the lockfile dependencies using the repository's supported Node ≥22 environment; use `npm ci --ignore-scripts --no-audit --no-fund` when installation is required.
-2. Run `npm run dev`; open the exact loopback URL printed by the server. Use the aviation page supplied by the implementation. Do not guess another process's port or expose the server externally.
-3. In Evidence workspace choose **Load Singapore flight observations**, **Load synthetic example**, or **Import evidence bundle or pack**. The real sample has117 facts/1 source, entity `76b452`, observed `2026-10-03T10:37:19.240Z`–`10:52:12.830Z`;5 fields remain unknown. The synthetic control has13 facts/2 sources and entity `synthetic-flight-01` at `2026-01-01T12:00:00Z`–`12:02:30Z`. Confirm classification, attribution, profile/revision, original digest and gaps. **Paste JSON instead → Inspect pasted JSON** rejects invalid Unicode without changing accepted data.
-4. Choose the entity and **Replay time (UTC)**, then **Replay moment**; **Recorded moment**, **Previous moment** and **Next moment** select authored times. Inspect source/time/unit labels, conflict/missing indicators and stale status. Equal query inputs must yield the same canonical result.
-5. Choose **Prepare verifiable export → Save evidence pack**, save locally and reimport through the same file input. If direct download is unavailable, expand **Copy export JSON → Copy portable pack**, save that exact JSON as `evidence-pack.json`, then choose the file. Compare original-byte and derived identities. The published0.3.1 synthetic clipboard/file/chooser path was verified;0.3.2 actual-chooser round trip was observed, and direct in-app download observation previously timed out. A prepared link is not completed download evidence.
-6. Save current evidence before preparing the offline shell. Preparation explicitly checks for a worker update and waits for activation; after success, save any remaining changes and reload to use that revision. Cache success does not persist unsaved session data or establish offline first installation.
-7. Reset/delete clears the selected session. Keep only the local files that the operator is entitled to retain. Stop only the dev process started for this checkout.
+1. Use the admitted checkout and supported Node ≥22. If installation is needed, use the lockfile with `npm ci --ignore-scripts --no-audit --no-fund`.
+2. Run `npm run dev` and visibly open its exact printed loopback URL. Do not expose another process or guess its port.
+3. In Evidence, choose **Load Singapore flight observations**, **Load synthetic example**, or **Import evidence bundle or pack**. The real sample has 117 facts/1 source, entity `76b452`, observed 2026-10-03T10:37:19.240Z–10:52:12.830Z and 5 explicit unknowns. The synthetic control has 13 facts/2 sources, entity `synthetic-flight-01`, on 2026-01-01. Confirm classification, attribution, profile/algorithm, identity and gaps. Invalid pasted/imported data retains accepted state.
+4. Inspect a fact's original source: verify rights, retrieved time, original media type/text/SHA and resolved reference. Source text must be inert text, including hostile markup; source URLs are not fetched. Reopened packs must resolve to the same record. Choose entity/UTC and **Replay moment**, or Previous/Next recorded moment; compare repeated canonical results and inspect missing/conflict/stale labels.
+5. **Prepare verifiable export → Save evidence pack**, then reimport the actual saved file. Copy-export JSON is a fallback; verify bytes and both identities. A prepared link or DOM-extracted pack is not completed primary-download evidence. Primary save/timing remains unverified.
+6. Save evidence before **Prepare offline**. It checks worker updates and waits for activation; reload after success to use that revision. Unsaved session data is not persisted. Provisioning is not offline first installation.
+7. Reset/remove clears only the selected session. Keep permitted files; stop only the dev process owned by this checkout.
 
-Shared declarations in `app/tools.mjs` own `aviation.inspect({bundle})` and `aviation.replay({bundle,flightId,atUtc})`; `bundle` is a UTF-8 JSON string. Aliases `/aviation.inspect @evidence #flight` and `/aviation.replay @evidence #flight` share typed context. CLI: `node mcp.mjs --invoke` or `npm run --silent evidence`, one stdin JSON object `{"name":"aviation.inspect","arguments":{"bundle":"<original JSON string>"}}`; serialize JSON, never interpolate untrusted text into shell. Replay adds flightId/atUtc. `npm run mcp` uses stdio protocol2024-11-05; unsupported revisions fail.
+For the lazy volume workspace, load its **labelled example** or a compatible local volume bundle/pack; choose entity/UTC and **Project at UTC**. Inspect datum, floor/ceiling, validity, schematic and original-fact table. The authored example is synthetic, not a notice or official airspace. Invalid data or mismatched datum must retain the accepted view. **Prepare export** and reimport verify original identity. Desktop and390px layout, datum-retention and numeric render readbacks passed below. Primary save and physical-phone checks remain unverified/KIV.
 
-For the separate demo select **Flight Sim demo → Load native workspace**. Authored `workspaces.json` supplies Graph4213 and `kgDoc=docs/workspace-seeds/agentic-graph-game-flight-sim-demo.md`, `kgPreview=1&kgLiveHero=1`. Verify the document/HUD, then **Close native workspace**. **Open source workspace** uses plain kgDoc. Graph's source, simulation and external assets remain separate from aviation/offline proof.
+Separate Flight demo: **Flight Sim demo → Load native workspace** selects authored Graph4213 and `docs/workspace-seeds/agentic-graph-game-flight-sim-demo.md`; verify document/HUD then close. Source editing and Graph assets/offline proof retain their owner.
 
-## Six Must verification conditions
+The shared `app/tools.mjs` declaration owns read-only module/CLI/MCP/WebMCP invocation and aliases. Existing `aviation.inspect({bundle})` / `aviation.replay({bundle,flightId,atUtc})` accept original JSON text. `aviation.source({bundle,factId})` and `volume.project({bundle,entityId,atUtc})` use aliases `/aviation.source @evidence #fact` and `/volume.project @evidence #volume`; module/alias/CLI/stdio parity passed and the volume browser tool matched the visible command result; no adapter-specific semantics. CLI: `node mcp.mjs --invoke` (or `npm run --silent evidence`), one serialized stdin JSON object with name/arguments. Never interpolate source text into shell. `npm run mcp` uses stdio protocol2024-11-05; unsupported revisions fail.
 
-The predecessor's VCC identities are retained. Commands are implementation-owned; the table defines checks, not fictitious executable names.
+## Complete acceptance register
 
-| VCC | Required observation | Minimum meaningful negative/control |
+These are verbatim inherited conditions, including historical NEW/deferred labels. They are requirement IDs, not claims that named executables exist. ETA/advisory/notice/benchmark software is now authorized but pending; volume software is a current candidate. Real labels/rights and each observable threshold still govern acceptance. Synthetic tests cannot substitute for real truth. The six Must criteria are VCC-1/2/5/6/8/11.
+
+| VCC / story → TAD / ADR | Observable condition, stated check and constraint |
+|---|---|
+| VCC-1 / PRD-E1-S1 → CONTRACT / 002 | `check-aviation-record` (NEW): 100% accepted facts carry explicit source/time/units; null/gaps preserved; malformed/duplicate/oversized/non-finite/conflicting-datum cases fail before replacing accepted state. No external enrichment. |
+| VCC-2 / PRD-E1-S2 → REPLAY / 001,003 | `check-aviation-replay` (NEW): two offline runs with equal bundle/algorithm/query inputs give byte-identical canonical output and original positions; shuffled input/tied times resolve by declared ordering. No Date.now/random/interpolation/network. |
+| VCC-3 / PRD-E2-S1 → ETA / 001 | `check-eta-backtest` (NEW, deferred): ≥200 arrivals with permitted touchdown truth, UTC seconds; freeze baseline (scheduled arrival and constant-groundspeed track estimate, report each), sample 30 min before truth, chronological train/test separation. Median absolute error improves on each stated applicable baseline; 90% prediction interval has ≥85% empirical coverage. Missing truth excluded with counts; no simulated truth passed as real. |
+| VCC-4 / PRD-E2-S1 → ALERT / 005 | `check-alert-lead` (NEW, deferred): on held-out plan-late arrivals >10 min, ≥70% advisory lead ≥20 min; report precision and coverage denominators. Requires permitted plan and actual-arrival data; no operational instructions. |
+| VCC-5 / PRD-E1-S1, PRD-E1-S2, PRD-E5-S1 → SHELL/VIEW / 004 | `check-aviation-device-offline` (NEW): clean setup ≤60 min; provisioned shell + fixture record ≤15 min/3 steps; 360–430 px phone and desktop complete keyboard/touch/readable-table replay/export offline. Record device/browser/storage errors and network requests; no external tiles. |
+| VCC-6 / PRD-E1-S1, PRD-E1-S2, PRD-E5-S1 → TOOLS/SHELL / 001 | `check-aviation-zero-spend` (NEW): import/read/replay/export tool paths invoke 0 models/0 billed APIs, obey byte/module limits; scan network/config and runtime counters; zero provider effects. Build assistant usage excluded from serving claim. |
+| VCC-7 / PRD-E4-S1 → AIRSPACE / 002 | `check-notice-parse` (NEW, deferred): ≥98% geometry/time/altitude agreement on 100 independently labelled structured notices; incompatible/missing datum unresolved; never silently parse free text into operational clearance. |
+| VCC-8 / PRD-E5-S1 → CONTRACT/SHELL / 006 | `check-aviation-pack` (NEW): originals match input byte hashes; equal accepted bundle/revision gives equal derived digest; export/reimport equivalent; tampered bytes fail; delayed prior import cannot overwrite newer accepted session. No origin/non-repudiation claim. |
+| VCC-9 / PRD-E3-S1 → BENCH / 001 | `check-route-benchmark` (NEW, deferred): same inputs/model/constraints produce identical result with cited counterfactual and error band; record excluded regions and unsupported types. |
+| VCC-10 / PRD-E6-S1 → AIRSPACE/VIEW / 004 | `check-volume-render` (NEW, deferred): compatible-datum test volumes rendered within 1 m of admitted floor/ceiling and unit conversion; pressure/geometric/AGL mismatches fail; no map-data rights assumed. |
+| VCC-11 / PRD-E1-S1, PRD-E1-S2, PRD-E5-S1 → TOOLS / 005 | `check-aviation-invocation-parity` (NEW): UI/local module/CLI/MCP return same typed inspection/replay result for equal inputs; unsupported WebMCP has visible fallback, unknown/mutation tool rejected, no writes/spawn/network. Protocol compatibility tested for supported revisions only. |
+
+Current VCC-10 evaluation must compare actual SVG floor/ceiling coordinates through its declared transform to admitted metric bounds within 1 m, including feet conversion. Test rejected pressure/geometric/AGL mismatches, nulls, duplicate scalars, malformed/self-intersecting rings and invalid time. Pure module checks alone do not establish browser rendering. The schematic's horizontal projection has no terrain/geodetic accuracy promise. VCC-7's 100-label corpus remains independent of synthetic volume geometry.
+
+## Evidence register
+
+| Evidence ID | Required scope | Current disposition |
 |---|---|---|
-| VCC-1 record | All accepted facts expose source, time and units; null/gaps/conflicts remain explicit | Malformed UTF-8/JSON/schema, byte/fact/flight/time bound, duplicate ID, bad UTC, nonfinite/out-of-range coordinate, unknown unit or incompatible datum rejected before replacement |
-| VCC-2 replay | Two offline executions of equal accepted bytes/profile/algorithm/query yield equal canonical bytes; declared ordering survives shuffled facts/ties | Future facts excluded; before-first query empty/explicit; gaps and staleness visible; no interpolation/clock/random/network; changed revision changes identity |
-| VCC-5 device/offline | Clean setup ≤60min; provisioned record ≤15min/3 main actions; desktop and 360–430px mobile complete readable keyboard/touch replay/export offline | Offline reload, cache failure and storage failure stated; no external tiles; zoom/reduced-motion/focus/non-colour status observed; distinguish actual device from emulation |
-| VCC-6 zero-spend/bounds | Import/inspect/replay/export invoke zero models and billed APIs; record runtime network/counters and exact resource sizes | Fail a deliberately unexpected transport/config path; new modules and emitted resources below caps; authoring cost excluded from serving claim |
-| VCC-8 pack/concurrency | Original bytes/digest survive export/reimport; derived digest binds accepted content/profile/algorithm | Tampered originals or claimed digest fail; malformed replacement preserves accepted state; earlier delayed selection cannot overwrite newer accepted state |
-| VCC-11 parity | Module/UI/CLI/MCP and available WebMCP return equivalent typed inspection/replay for equal inputs; unavailable WebMCP has visible fallback | Unsupported protocol/tool/extra argument/mutation rejected; no writes/spawn/network; distinguish adapter parity from arbitrary external clients |
+| AEL-SOURCE | Exact source/tree, profile/fixture hashes, lock/declaration revision and resource inventory | PR8 predecessor below; current final identities pending |
+| AEL-CONTRACT | VCC-1/2/8 deterministic/rejection/concurrency stdout and inputs | 75/75 tests and budgets passed, including source/ownership and9 projection cases |
+| AEL-VOLUME | VCC-10 projection/negative controls and actual SVG bound readback | 10 SVG points: max1.60e-12m error; datum mismatch retained record |
+| AEL-PARITY | VCC-11 equal inputs/output across supported adapters and visible fallback | Source/volume module/alias/CLI/MCP parity passed; volume UI/WebMCP equal |
+| AEL-DEVICE | Setup/actions/readability/keyboard/touch/zoom/preferences and environment | Partial; physical iPhone Safari SKIP/KIV; primary save, full setup and native zoom not passed |
+| AEL-OFFLINE | Provision→network block→reload→import/replay/export/reimport, request/cache evidence | Current15/15 worker responses;0 external;18/18 cached-resource hashes match source |
+| AEL-EFFECTS | Zero models/billed APIs/provider effects and exact source/initial-load sizes | Current served JS94,193 B; added71,171 B;5 product modules,2 lazy |
+| AEL-RECOVERY | Corrupt/stale input retains state; originals reimport; exact predecessor recovery | Ownership/invalid input/pack cases passed; datum rejection retained visible volume |
+| AEL-RELEASE | Native check:plan/check and exact publication/provider receipts | Current publication pending; no protected merge/deploy claim |
 
-VCC-3/4/7/9/10 remain deferred under the joined plan; neither a synthetic test nor this single observed segment closes their independent-label or qualified-corpus conditions.
+Published **0.3.2**: [PR8](https://github.com/huijoohwee/81rv10/pull/8), source `5ef1a432e8360a7b1b0a1b77cc4fcec9303025da`, tree `e76eae30c7f3e1d69e6b08d484c3a6113fa4ebc7`. [CI37167132324](https://github.com/huijoohwee/81rv10/actions/runs/37167132324) passed on synthetic merge `68392d93d4cafb4fa581618af6f10d967bbb6d76`. The [immutable runbook](https://github.com/huijoohwee/81rv10/blob/5ef1a432e8360a7b1b0a1b77cc4fcec9303025da/docs/aviation-evidence/validation-runbook.md) preserves all 0.3.1/0.3.2 raw receipt references, failures and limitations. Its local 61 tests/budgets, 390px real-corpus browser, offline and UI/WebMCP observations remain predecessor evidence; they do not validate edited source.
 
-## Independent evidence register
+Predecessor export: clipboard failed; a DOM-read 354,029 B pack was saved externally and chooser-reimported with equal identities. Primary download/copy-save/three-action proof remains absent. Cache evidence covered 13 requests/entries, 12 unique resources; current inventory requires remeasurement.
 
-Implementer supplies the reproducible command and inputs. A separate evaluator mechanism checks the produced result; implementer assertion is not independent acceptance. Record negative results as well as successes.
+Unchanged corpus: 276,932 B, SHA-256 `e88ad4100e1ac1d164087e17c87d55190ccc13dd8fbf9e120c3a0ec2ec7b8926`; derived `4913a0c5fb4a3d3155f967807552f07435c3f0152a23555b341b2eef90b531e4`; envelope `82ee633949cb9bcff6215eeb128af6a9f7c09a49268d0fb529d068833fa47055`. Offline regeneration: `node scripts/import-readsb.mjs <retained-source.json> app/profiles/singapore-region.json <new-bundle.json>`; destination must not exist. Compare exact bytes, 56 selected row pairs, 5 unknowns and retained upstream SHA from the authored selection. Reject altered SHA, empty/oversized selection and malformed rows. No fetch required.
 
-| Evidence ID | Scope / exact inputs required | Status |
-|---|---|---|
-| AEL-SOURCE | Commit/tree, clean-state observation, profile/fixture SHA-256, tool declaration revision, dependency lock, resource inventory | Published00de702/tree2d44626/PR7;0.3.2 source/corpus identities below, exact publication pending |
-| AEL-CONTRACT | VCC-1/2/8; exact command and actual stdout/exit/time; deterministic and rejection cases | Published0.3.1:54/54 repair checks;0.3.2 seven adapter tests passed; 61 tests/budgets passed |
-| AEL-PARITY | VCC-11; same fixture/query across each supported adapter; actual MCP initialize/call and visible fallback | Published0.3.1 v2 synthetic parity passed;0.3.2 UI/WebMCP canonical equality at10:48:27.060Z; 61 native tests passed |
-| AEL-DEVICE | VCC-5; browser/version/OS, desktop/mobile widths, keyboard/touch/zoom/preferences, screenshots/readback, elapsed/actions | Partial; clean predecessor install and fresh-origin provision observed; full setup/primary export timing, phone/touch/full zoom pending |
-| AEL-OFFLINE | Provision online → disconnect/block network → reload → import/replay/export/reimport; all requests and cache status recorded | Published0.3.1:11/11 worker responses/0 external;0.3.2:11/11 worker responses/0 external; real-sample reimport observed |
-| AEL-EFFECTS | VCC-6; zero runtime model/billed API paths, blocked unexpected network, source/config scan, emitted bytes/module count | Published0.3.1 serving calls0/JS67,987B;0.3.2 observed0 external requests; JS68,402B (+415B), offline adapter7,324B; native budgets passed |
-| AEL-RECOVERY | Corrupt/stale input recovery; selected-session reset; originals restored with equal identity; exact shell predecessor recovery | Published0.3.1 repair controls passed;0.3.2 old-v2-pack identity verified; corrupt-source tests passed |
-| AEL-RELEASE | Native check:plan/check receipts, exact publication/PR and protected integration; deployment separate | Published00de702/PR7 with green synthetic-merge CI;0.3.2 pending; no protected merge/deploy |
+Focused owner tests live in `test/evidence-core.test.mjs`, `test/evidence-readsb.test.mjs` and the actual tool/volume test owners. Core APIs include `admit`, `inspect`, `sourceEvidence`, `exportPack`, `originalBytes` (copy), `canonicalJson`, `createSession` and `replay`. `sourceEvidence` returns frozen exact source/reference/resolved-record data; unknown fact IDs fail. The volume owner exports `projectVolume` and `altitudeFromScreen`; profile/config remain authored data. Record actual declarations/commands at final verification, not invented test names.
 
-Focused entry points: `node --test test/evidence-core.test.mjs` and `node --test test/evidence-tools.test.mjs test/contracts.test.mjs`; published0.3.1 `npm run check` executed54 tests and budgets. Seven focused adapter tests now pass; 61 successor tests and budgets passed. Core exports are `admit(bytes,profile)`, `inspect(handle)`, `exportPack(handle)`, `originalBytes(handle)` (copy), `canonicalJson(value)`, `createSession(profile)` with read/import/clear, and `replay(handle,entityId,atUtc)`; adapters await admission/export rather than making a competing parser.
-
-**Published predecessor proof:** [00de702 runbook](https://github.com/huijoohwee/81rv10/blob/00de702300d6369e304bd7d39a9e04d8ceb71a92/docs/aviation-evidence/validation-runbook.md) preserves54-test/browser receipts and all older failures. `output/aviation-completion-audit-20261004/publication-binding.json`, SHA-256 `39757f9600106c775cdbeab9555b44bce3915c2166edd90780e8f194e8700b63`, binds16 product files. [CI37166071733](https://github.com/huijoohwee/81rv10/actions/runs/37166071733) passed test/budgets at2026-10-04T00:48:39Z/00:49:13Z on synthetic merge `a9d4789d39cf5625d8ceabff58237f54b55da101`. No protected merge/deploy or complete phone setup/primary save follows.
-
-**Current0.3.2 source checkpoint:** real bundle276,932B SHA-256 `e88ad4100e1ac1d164087e17c87d55190ccc13dd8fbf9e120c3a0ec2ec7b8926`, derived `4913a0c5fb4a3d3155f967807552f07435c3f0152a23555b341b2eef90b531e4`; source envelope digest `82ee633949cb9bcff6215eeb128af6a9f7c09a49268d0fb529d068833fa47055`. Raw upstream bytes/selection/rights are bound in the joined plan and `output/aviation-singapore-corpus-20261004/receipt.json` outside this source lane. 61 native tests/budgets passed; receipt `validation-receipt.json`, SHA-256 `b8ec097d986126033eff3160347dc620ebc379d1bc7ee3d38b1a9388ea5aaa91`; exact publication pending. Reproduce offline using `node scripts/import-readsb.mjs <retained-source.json> app/profiles/singapore-region.json <new-bundle.json>`; output must not exist. Compare exact bundle digest,117 facts,56 selected row pairs/5 unknowns and raw upstream hash. Reject altered SHA, stale/empty/oversized selection and malformed rows; no adapter fetch is required.
-
-**0.3.2 browser checkpoint:** `output/aviation-singapore-corpus-20261004/browser-receipt.json` SHA-256 `0a3b2dc1a2dc1d5c835ac8eb77683e7edb7f3836152093edc941db6637a3a68d` records117 facts, Previous UTC10:48:27.060Z,390px/scrollWidth390, and UI-generated354,029B pack → actual file chooser → identical identities. Pack SHA-256 `f95ccd450d0e0f77841d47c3fb28a57982756c303f6324c490ee298842578073`; `browser-network.json` `4d94abac855ede5b4a94b9228830a04e18f12275453e5398762bee8c7db8709a` records11/11 worker responses/0 external. Screenshots: `singapore-desktop.png`, `singapore-mobile.png`. `browser-tool-parity.json` records canonical UI/WebMCP equality at10:48:27.060Z; `browser-cache-manifest.json` binds13/13 cached-resource hashes to source. Clipboard bridge failed; complete pack was read from DOM chunks and saved externally before chooser reimport. This is not primary download, copy-save or three-action export proof. Physical iPhone, native200% zoom and completed clean setup remain open.
-
-Each receipt records schema/version, evidence ID, timestamp, source commit/tree, input hashes, environment, executed command, exit, assertions, negative controls, limitations, evaluator identity and artifact hashes. Do not use edited receipts as raw stdout. Hashes bind bytes, not truth. Browser screenshots accompany structured readbacks.
+Receipts bind time, source/tree/inputs, environment, command/exit, assertions/controls, limits, evaluator and artifacts. Retain raw stdout and structured browser readback; hashes prove integrity, not truth.
 
 ## 180-second demo
 
-Rehearse with **Load Singapore flight observations**; name its2026-10-03 crowdsourced source, authored study bounds and observation limits. Keep **Load synthetic example** as a separately labelled conflict/rejection control. Keep unexpected failures visible and retain the previously accepted record.
-
-| Beat | Seconds | Action / Reveal / acceptance |
+| Beat | Seconds | Action / evidence |
 |---|---:|---|
-| Hook | 20 | State the Singapore–Riau historical segment, ODbL attribution and what observations cannot establish |
-| Probe | 40 | Import real observations; show5 explicit unknown fields; use labelled synthetic control for conflicts; VCC-1 |
-| Reveal | 40 | Run an equal-input replay twice and compare canonical identity; VCC-2 |
-| Scrub and reproduce | 60 | Choose UTC, export/reimport, then reject a corrupt replacement while retaining accepted state; VCC-8 |
-| Close | 20 | State what remains unknown and invite an authorized future case; no customer/prediction claim |
-| Total | 180 | Time-box target, not an observed completion time |
+| Hook | 20 | Name Singapore–Riau historical segment and ODbL limitations |
+| Probe | 40 | Show real unknowns and exact fact/source reference; synthetic control separately labelled; VCC-1 |
+| Reveal | 40 | Repeat equal-input UTC replay and compare canonical result; VCC-2 |
+| Reproduce | 60 | Export/reimport; reject corrupt replacement while retaining accepted state; VCC-8 |
+| Close | 20 | State remaining uncertainty and authorized next-case decision |
+| Total | 180 | Target, not measured completion time |
 
-For TTV, log start, setup completion, first accepted record, first useful replay, export verification, actions and interruptions separately. A rehearsed demonstration is not the clean-environment measurement. A participant success needs independent observation and consent.
+The synthetic volume walkthrough is a separate timed segment; do not silently expand this demo or represent volume geometry as real notice data. Log setup, import, useful replay, verified export, actions and interruptions separately. Buyer task value requires independent consented observation.
 
 ## Browser and accessibility record
 
-User target: **iPhone Safari**; physical device/iOS version and a phone-accessible secure URL remain unavailable. The server binds loopback only. Record version and a cleared test origin; time setup, provision/cache activation, first accepted real record, replay and actual Save-to-Files/reimport; count primary actions and OS chooser actions separately. Test physical touch, native200% zoom, keyboard/focus/reduced motion, then disconnect and reopen/replay/export/reimport; retain exact file hashes and network evidence. Desktop emulation cannot close these checks. Detailed steps remain in `output/aviation-singapore-corpus-20261004/region-safari-notes.md`; its proposed study extent is superseded by the authored0.3.2 config. [Safari17.2](https://webkit.org/blog/14787/webkit-features-in-safari-17-2/) supports JSON import attributes; [Safari26](https://webkit.org/blog/17333/webkit-features-in-safari-26-0/) allows Home Screen web apps. [Storage may be evicted](https://webkit.org/blog/14403/updates-to-storage-policy/); retain exported files. These platform capabilities are not device proof.
+**iPhone Safari: SKIP/KIV by explicit user decision.** Do not re-request access or label emulation as a pass. If the user later resumes this test, record physical model/iOS/Safari, an authorized secure origin, clean setup, Save-to-Files/reimport, touch, native200% zoom and provisioned offline reload with exact hashes/requests. Loopback desktop access does not establish phone access. Platform capability is not device proof.
 
-Record device/viewport, table readability, accessible names/headings, keyboard/focus,44px targets,200% native zoom, reduced motion and non-colour status. Measure composited contrast; bounded checks do not establish WCAG certification. Provision before offline reload; identify whether data is cached or operator-provided. Exercise unavailable API/storage failure honestly; never clear unrelated origins.
+Current browser verification should identify desktop environment and 360–430px emulation, table readability, accessible names, keyboard/focus, 44px targets, reduced motion, non-colour status and composited contrast. Test offline after provisioning and record storage/API failures. Avoid clearing unrelated origins. Full WCAG certification is not claimed.
 
 ## Check and release procedure
 
-Run the repository's actual `npm run check:plan` and `npm run check` after affected tests; the repository validator owns required checks. Retain exact command outputs and predecessor failures. Once source changes, earlier receipts are historical unless a native mechanism explicitly grants reuse.
+Run actual `npm run check:plan`, affected tests, then required `npm run check`; native policy owns the final selected checks. Earlier receipts become historical when source changes unless native reuse is explicitly granted. Parent release owner runs `npm run release:common -- publish --message="<reviewable change>"`; this handbook grants no independent publication. PR/green CI/protected merge/local preview/deployment remain separate outcomes. [Recovery](rights-recovery.md) owns rollback prerequisites.
 
-Publication is `npm run release:common -- publish --message="<reviewable change>"` through the parent release owner. This handbook authorizes no independent publication. An open PR, green checks, protected merge, local preview and production readback are separate outcomes. [Rights/recovery](rights-recovery.md) owns rollback prerequisites.
+
+## Current 0.3.3 bounded proof
+
+Artifacts are under `output/aviation-volume-source-20261004/` outside the lane. `browser-receipt.json` SHA-256 `aa99da6e9146012bf7757d07e0ca0264e3aefae221046ca33f2ff4930623722d` binds the actual204,589-byte Singapore source envelope readback to its original hash and fact pointer, volume command/WebMCP canonical equality,10 SVG points (max1.5916157281026244e-12m vertical readback error),304.8m/609.6m AMSL, live AGL-mismatch rejection with unchanged identity,390px/scrollWidth390, and15/15 service-worker responses/0 external. `browser-cache-manifest.json` hashes18 cached resources against current source. `volume-desktop.png` and `volume-mobile-layout.png` are screenshots. The first offline attempt toggled network before activation and was discarded; the confirmed-activation fresh-tab run passed. A later offline Blob readback failed; this is export-preparation evidence, not primary download or current browser roundtrip proof. Kernel volume pack roundtrip is tested separately.
+
+`validation-receipt.json` SHA-256 `0c518ebc19d22d4d4511b112f05a36e5bed2ce9bb8dcb342f9f8f8932f21596c` records75/75 tests plus budgets. The initial run had one old tool-count expectation; the six-tool contract was corrected and rechecked. Native publication rebinds final source and required checks; exact commit/tree/provider identity must be read from its receipt. Aviation profile v1, evidence-order/v2 and the real Singapore fixture bytes remain unchanged.

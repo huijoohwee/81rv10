@@ -1,11 +1,11 @@
 import { MAX_BYTES, newDossier, readDossier, summary, digest, inspectPath, ownerLinks, replayUrl } from './contracts.mjs';
-import { capabilities, invokeCommand, registerBrowserTools } from './tools.mjs';
+import { invokeCommand, registerBrowserTools } from './tools.mjs';
 import { mountEvidence, evidenceContext } from './evidence-view.mjs';
 import workspaceConnections from './profiles/workspaces.json' with { type: 'json' };
 const $ = id => document.getElementById(id);
 let dossier = newDossier(), selected = 0, surface = 'program', pathBytes = null, revision = 0;
 let config = { graph: $('graph-url').value, game: '', program: $('program-path').value, mission: '' };
-let exportUrl = null;
+let exportUrl = null, volumeModule = null, volumeLoading = null;
 const previews = new Map();
 function notice(message, error = false) { $('notice').textContent = message; $('notice').classList.toggle('error', error); }
 function guard(action) { return async event => { try { await action(event); } catch (error) { notice(error.message, true); } }; }
@@ -170,7 +170,11 @@ async function registerWebMcp() {
     report: toolStatus,
     resolveArgs(name, args) {
       if (name === 'drone_dashboard.inspect' && args?.dossier === undefined) return { ...args, dossier: JSON.stringify(dossier) };
-      if (capabilities.find(tool => tool.name === name)?.inputSchema.properties.bundle && args?.bundle === undefined) return { bundle: evidenceContext().bundle, ...args };
+      if (name.startsWith('aviation.') && args?.bundle === undefined) return { bundle: evidenceContext().bundle, ...args };
+      if (name === 'volume.project' && args?.bundle === undefined) {
+        if (!volumeModule) throw new Error('Open Volumes and import a volume first.');
+        return { bundle: volumeModule.volumeContext().bundle, ...args };
+      }
       return args;
     },
   });
@@ -190,7 +194,7 @@ $('offline-enable').onclick = guard(async () => {
     pending.addEventListener('statechange', check); check();
   });
   await navigator.serviceWorker.ready;
-  $('offline-status').textContent = 'Shell, evidence profile and synthetic example cached. External native owners need their own offline setup.';
+  $('offline-status').textContent = 'Shell, evidence profile and bundled examples cached. External native owners need their own offline setup.';
   notice('Offline shell prepared. Save your evidence pack or dossier, then reload to use the prepared revision.');
 });
 $('offline-remove').onclick = guard(async () => {
@@ -202,15 +206,21 @@ $('offline-remove').onclick = guard(async () => {
   notice('Offline assets removed. Reload from the local server before preparing offline again.');
 });
 window.addEventListener('pagehide', () => { releasePreviews(); if (exportUrl) URL.revokeObjectURL(exportUrl); });
-function selectWorkspace(name) {
+async function selectWorkspace(name) {
   closeSurface();
-  for (const key of ['evidence', 'native', 'drone']) {
+  for (const key of ['evidence', 'volume', 'native', 'drone']) {
     $(key + '-workspace-panel').hidden = key !== name;
     $(key + '-workspace').setAttribute('aria-pressed', String(key === name));
   }
   $('settings-open').hidden = name !== 'drone';
+  if (name === 'volume' && !volumeModule) {
+    volumeLoading ||= import('./volume-view.mjs').then(module => {
+      module.mountVolumes($('volume-workspace-panel')); volumeModule = module;
+    }).catch(error => { volumeLoading = null; throw error; });
+    await volumeLoading;
+  }
 }
-for (const key of ['evidence', 'native', 'drone']) $(key + '-workspace').onclick = () => selectWorkspace(key);
+for (const key of ['evidence', 'volume', 'native', 'drone']) $(key + '-workspace').onclick = guard(() => selectWorkspace(key));
 const connection = workspaceConnections.native;
 $('native-title').textContent = connection.title; $('native-workspace').textContent = connection.title;
 $('native-description').textContent = connection.description;

@@ -82,6 +82,22 @@ test('readsb owns input bytes across asynchronous admission even for a mutable N
   assert.equal(source.upstream.sha256, sha(sample.raw));
 });
 
+test('readsb snapshots authored labels and nested selection filters before asynchronous work', async () => {
+  const sample = synthetic(), supplied = copy(sample.config);
+  const pending = importReadsb(sample.raw, sample.config);
+  sample.config.title = 'Changed after call'; sample.config.entityLabel = 'Changed entity';
+  sample.config.studyArea.latitude[0] = 2;
+  sample.config.positionSource = 'mlat'; sample.config.sourceSha256 = '0'.repeat(64);
+  const admitted = await pending, bundle = JSON.parse(decoder.decode(admitted));
+  const source = JSON.parse(bundle.sources[0].original.text);
+  assert.equal(bundle.dataset.title, supplied.title);
+  assert.equal(bundle.entities[0].label, supplied.entityLabel);
+  assert.deepEqual(source.selection, supplied);
+  assert.deepEqual(source.selectedIndices, [0]);
+  assert.deepEqual(admitted, await importReadsb(sample.raw, supplied));
+  await assert.rejects(importReadsb(sample.raw, { ...supplied, unsupported: undefined }), /Only JSON/);
+});
+
 test('readsb synthetic edges retain ground and absent altitude as unknown and add decimal milliseconds exactly', async () => {
   const sample = synthetic([row(0.2, 'ground'), row(0.201, null), row(0.202, 1000)]);
   const bundle = await mapped(sample), altitude = bundle.facts.filter(fact => fact.kind === 'altitude');

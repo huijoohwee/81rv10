@@ -1,9 +1,9 @@
 ---
 title: "Aviation Evidence — rights, operations and recovery"
 doc_type: "Handbook"
-version: "0.3.2"
+version: "0.3.3"
 continuity_id: "aviation-evidence-layer"
-source_revision: "aviation-evidence-layer@0.3.2"
+source_revision: "aviation-evidence-layer@0.3.3"
 date: "2026-10-04"
 owner: "Operator and release owner"
 ---
@@ -16,7 +16,7 @@ This [joined-plan](prd-tad-adr-mvp-gtm.md) section is an operational preparation
 | Item | Present evidence / use | Condition before broader use |
 |---|---|---|
 | 81rv10 code | MIT at inspected438038865fd25c9d2a07ff50fcb75e2666e08b7c; use its existing shell/server/tools | Preserve license/notices; recheck added dependencies and exact distributed bytes |
-| Authored synthetic fixture | Newly authored demonstration facts must carry synthetic labels and no real-person/customer identifiers | Record author, profile/fixture hashes, creation date and allowed demo/export use; do not represent it as observation |
+| Authored synthetic fixture | Authored flight control and Singapore volume exercise carry synthetic labels and no real-person/customer identifiers | Record author, profile/fixture hashes, creation date and allowed demo/export use; do not represent it as observation |
 | Operator-supplied file | Not automatically permitted because import succeeds | Source owner, access authority, purpose, retention, redistribution/export and confidentiality terms recorded |
 | Other live/provider/airport/weather/airspace data | Not adopted by this increment | Exact source/version/terms, coverage, quota, allowed derivation, attribution, offline/cache, export and termination conditions |
 | Private native surfaces | No source/assets bundled for this aviation page | A link/frame or local access does not grant redistribution; retain each owner's separate contract |
@@ -27,6 +27,8 @@ The real Singapore–Riau sample uses [ADSB.lol history terms](https://github.co
 Source: [2026-10-03 trace76b452](https://adsb.lol/globe_history/2026/10/03/traces/52/trace_full_76b452.json), retrieved2026-10-04T00:58:26.294Z. Mapping follows [readsb trace schema](https://github.com/wiedehopf/readsb/blob/094720939c01943de82b14df6f42f67fff1cd514/README-json.md#trace-jsons), pin `094720939c01943de82b14df6f42f67fff1cd514`. The retained receipt binds HTTP/source/schema/licence bytes. Selection is56 non-stale `adsb_icao` points within the authored Singapore/Johor/Riau window; observed points are Singapore–Riau, not proof of Johor coverage. It is historical crowdsourced observation, without independent accuracy, touchdown, schedule, restriction or clearance truth.
 
 OneMap restriction geometry remains conditional: [CAAS](https://www.caas.gov.sg/unmanned-aircraft/no-fly-zones-and-ua-flying-areas/) points to its [Theme API](https://www.onemap.gov.sg/apidocs/themes) under [data terms](https://www.onemap.gov.sg/legal/opendatalicence.html). No token, selected layer or actual geometry is admitted; no official FIR/notice/clearance, independent label or VCC-10 acceptance follows. Other regional sources need separate rights review.
+
+The volume exercise is independently authored synthetic geometry, not a derived CAAS/OneMap notice or operational boundary. Its AMSL declaration is a test condition, not measured terrain/airspace truth. Source inspection displays full original source text locally; hashes do not prove authenticity or authorize redistribution. Preserve the existing ODbL statement with the real observed sample.
 
 ### Per-source rights record
 
@@ -59,8 +61,9 @@ Incident record: case ID; discovered UTC; source/runtime/profile identity; permi
 | Failure | Immediate recovery | Evidence of recovery / limit |
 |---|---|---|
 | Invalid/corrupt import | Retain accepted state; show reason; choose a valid file explicitly | Accepted revision and digest unchanged; failed bytes never committed |
-| Delayed prior read | Discard stale completion using current selection token | Later accepted selection remains; negative concurrency test |
-| Existing algorithm-v2 pack | Reimport normally under unchanged aviation profile v1/algorithm v2 |0.3.2 corpus choice adds no migration; exact compatibility check remains pending |
+| Delayed read or caller mutation | Snapshot direct bytes and nested authored selection before awaits; discard stale completions | Accepted data reflects the submitted snapshot; later accepted selection remains |
+| Invalid volume/datum | Keep accepted view and show typed failure; supply compatible explicit facts | No pressure/geometric/AGL inference, hidden geometry repair or original rewriting |
+| Existing algorithm-v2 pack | Reimport using its matching unchanged profile and algorithm v2 | Source inspection does not change identity; aviation and volume profiles remain distinct; current final compatibility checks pending |
 | Prior algorithm-v1 pack | Keep the pack; extract `original.text` as UTF-8, verify against `original.sha256`, explicitly import those raw originals into v2 | Old derived identity is rejected; new profile/algorithm-bound identity is explicit. Retain the old pack and never silently relabel it |
 | Tab crash / session reset | Reopen shell and reimport saved originals with matching profile/algorithm | Recomputed identity matches; unsaved session can be lost |
 | Export uncertainty | Keep current session; use inspectable/copyable original data fallback if implemented | A prepared link is not completed download; verify actual saved bytes |

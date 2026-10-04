@@ -276,6 +276,14 @@ export function inspect(handle) {
   const data = readEvidence(handle);
   return freeze({ ...data.derived, schema: 'evidence-inspection/v1', identity: data.identity, stats: data.stats, cost });
 }
+export function sourceEvidence(handle, factId) {
+  const data = readEvidence(handle), fact = data.derived.facts.find(item => item.id === factId);
+  requireValue(typeof factId === 'string' && fact, 'FACT', 'Select an admitted fact.', 'factId');
+  const source = data.bundle.sources.find(item => item.id === fact.source_id);
+  const referencedRecord = pointerValue(parseJson(source.original.text, source.id + '.original'), fact.evidence_ref, fact.id);
+  return freeze({ schema: 'evidence-source/v1', identity: data.identity, profile: data.derived.profile,
+    fact, source, reference: fact.evidence_ref, referencedRecord });
+}
 export async function exportPack(handle) {
   const data = readEvidence(handle);
   const pack = { schema: PACK_SCHEMA, profile: data.derived.profile, algorithm: ALGORITHM,
@@ -294,7 +302,8 @@ export function createSession(profile) {
     async import(input) {
       const intent = ++generation;
       try {
-        const value = await admit(await input, admittedProfile);
+        const supplied = input instanceof Uint8Array ? new Uint8Array(input) : input;
+        const value = await admit(await supplied, admittedProfile);
         if (intent !== generation) return Object.freeze({ accepted: false, stale: true, value: current });
         current = value; return Object.freeze({ accepted: true, stale: false, value });
       } catch (error) {

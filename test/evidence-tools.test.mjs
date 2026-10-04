@@ -3,13 +3,19 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
 import { capabilities, invoke, invokeCommand, registerBrowserTools } from '../app/tools.mjs';
-import { admit, inspect, canonicalJson, exportPack } from '../app/evidence-kernel.mjs';
+import { admit, inspect, canonicalJson, exportPack, sourceEvidence } from '../app/evidence-kernel.mjs';
 import { replay } from '../app/evidence-replay.mjs';
 import { handle, invokeEnvelope, MAX_REQUEST_BYTES, PROTOCOL_VERSION } from '../mcp.mjs';
+import { projectVolume } from '../app/volume-project.mjs';
+import volumeProfile from '../app/profiles/volume-v1.json' with { type: 'json' };
+import volumeView from '../app/profiles/volume-view.json' with { type: 'json' };
 import profile from '../app/profiles/aviation-v1.json' with { type: 'json' };
 
 const bundle = await readFile(new URL('../app/fixtures/aviation-synthetic-v1.json', import.meta.url), 'utf8');
 const fixture = JSON.parse(bundle);
+const volumeBundle = await readFile(new URL('../app/fixtures/volume-singapore-synthetic-v1.json', import.meta.url), 'utf8');
+const entityId = JSON.parse(volumeBundle).entities[0].id;
+const factId = fixture.facts[0].id;
 const flightId = fixture.entities[0].id;
 const atUtc = fixture.facts.map(fact => fact.observed_at).sort().at(-1);
 const root = new URL('..', import.meta.url);
@@ -28,7 +34,7 @@ function success(result) {
 
 test('one catalogue declares exact read aliases and bounded schemas', () => {
   assert.deepEqual(capabilities.map(tool => tool.name), [
-    'drone_dashboard.inspect', 'drone_dashboard.resolve_owners', 'aviation.inspect', 'aviation.replay',
+    'drone_dashboard.inspect', 'drone_dashboard.resolve_owners', 'aviation.inspect', 'aviation.replay', 'aviation.source', 'volume.project',
   ]);
   for (const tool of capabilities.slice(2)) {
     assert.equal(tool.inputSchema.additionalProperties, false);
@@ -40,9 +46,12 @@ test('one catalogue declares exact read aliases and bounded schemas', () => {
 
 test('inspection and replay share core, alias, CLI and MCP results', async () => {
   const admitted = await admit(bytes(bundle), profile);
+  const volume = await admit(bytes(volumeBundle), volumeProfile);
   for (const [name, args, expected] of [
     ['aviation.inspect', { bundle }, inspect(admitted)],
     ['aviation.replay', { bundle, flightId, atUtc }, replay(admitted, flightId, atUtc)],
+    ['aviation.source', { bundle, factId }, sourceEvidence(admitted, factId)],
+    ['volume.project', { bundle: volumeBundle, entityId, atUtc: volumeView.ui.defaultAtUtc }, projectVolume(volume, entityId, volumeView.ui.defaultAtUtc, volumeView)],
   ]) {
     assert.deepEqual(await invoke(name, args), expected);
     const command = capabilities.find(tool => tool.name === name).command;
@@ -75,6 +84,11 @@ test('all entry points reject unknown tools, mutation and invalid argument shape
     ['aviation.replay', { bundle, flightId, atUtc, throttle: 1 }],
     ['aviation.replay', { bundle, flightId: '', atUtc }],
     ['aviation.replay', { bundle, flightId, atUtc: 'not-utc' }],
+    ['aviation.source', { bundle, factId: 'missing' }],
+    ['aviation.source', { bundle, factId, entityId }],
+    ['volume.project', { bundle, entityId, atUtc }],
+    ['aviation.inspect', { bundle: volumeBundle }],
+    ['volume.project', { bundle: volumeBundle, entityId, atUtc: volumeView.ui.defaultAtUtc, flightId }],
   ]) {
     await assert.rejects(async () => invoke(name, args));
     await assert.rejects(invokeEnvelope({ name, arguments: args }));
@@ -162,7 +176,7 @@ test('actual browser adapter reports unavailable API with usable local fallback'
   for (const context of [undefined, null, {}, { registerTool: false }]) {
     const reports = [];
     const result = await registerBrowserTools(context, { report: message => reports.push(message) });
-    assert.deepEqual(result, { status: 'unavailable', registeredCount: 0, totalCount: 4 });
+    assert.deepEqual(result, { status: 'unavailable', registeredCount: 0, totalCount: 6 });
     assert.equal(reports.length, 1);
     assert.match(reports[0], /WebMCP unavailable.*read-only command.*CLI.*stdio MCP/u);
   }
@@ -175,10 +189,10 @@ test('actual browser adapter reports rejected and partial registration truthfull
       attempts.push(tool.name);
       if (attempts.length > acknowledged) throw new Error('Registration denied');
     } }, { report: message => reports.push(message) });
-    assert.deepEqual(result, { status: acknowledged ? 'partial' : 'failed', registeredCount: acknowledged, totalCount: 4 });
+    assert.deepEqual(result, { status: acknowledged ? 'partial' : 'failed', registeredCount: acknowledged, totalCount: 6 });
     assert.deepEqual(attempts, capabilities.slice(0, acknowledged + 1).map(tool => tool.name));
     assert.equal(reports.length, 1);
-    assert.match(reports[0], new RegExp(`failed after ${acknowledged} of 4 tools: Registration denied`));
+    assert.match(reports[0], new RegExp(`failed after ${acknowledged} of 6 tools: Registration denied`));
     assert.match(reports[0], /visible read-only command/u);
     assert.doesNotMatch(reports[0], /tools registered/u);
   }
@@ -195,8 +209,8 @@ test('actual registered browser execute awaits context resolution and shared ins
     },
     report: message => reports.push(message),
   });
-  assert.deepEqual(result, { status: 'registered', registeredCount: 4, totalCount: 4 });
-  assert.equal(reports.length, 1); assert.match(reports[0], /tools registered \(4\/4\)/u);
+  assert.deepEqual(result, { status: 'registered', registeredCount: 6, totalCount: 6 });
+  assert.equal(reports.length, 1); assert.match(reports[0], /tools registered \(6\/6\)/u);
   assert.deepEqual([...registered.keys()], capabilities.map(tool => tool.name));
   for (const tool of capabilities) {
     const adapter = registered.get(tool.name);
@@ -212,4 +226,11 @@ test('actual registered browser execute awaits context resolution and shared ins
   assert.deepEqual(JSON.parse((await registered.get('aviation.inspect').execute({})).content[0].text), await invoke('aviation.inspect', { bundle }));
   await assert.rejects(registered.get('aviation.replay').execute({ bundle, flightId, atUtc: 'not-utc' }), error => error.code === 'UTC');
   await assert.rejects(registered.get('aviation.inspect').execute({ bundle, mutate: true }));
+});
+
+
+test('async tool admission owns the complete caller query before yielding', async () => {
+  const args = { bundle, factId }, expected = await invoke('aviation.source', args);
+  const pending = invoke('aviation.source', args); args.factId = 'replaced'; args.bundle = '{}';
+  assert.deepEqual(await pending, expected);
 });

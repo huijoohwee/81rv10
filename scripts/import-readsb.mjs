@@ -1,7 +1,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
 import { createHash } from 'node:crypto';
-import { admit, inspect, parseJson, utcMillis } from '../app/evidence-kernel.mjs';
+import { admit, canonicalJson, inspect, parseJson, utcMillis } from '../app/evidence-kernel.mjs';
 import profile from '../app/profiles/aviation-v1.json' with { type: 'json' };
 
 const encoder = new TextEncoder();
@@ -17,6 +17,8 @@ function milliseconds(seconds) {
 export async function importReadsb(raw, selection) {
   requireValue(raw instanceof Uint8Array && raw.length < 400000, 'Source must be UTF-8 JSON below 400 kB.');
   raw = Uint8Array.from(raw);
+  canonicalJson(selection);
+  selection = parseJson(JSON.stringify(selection), 'selection');
   requireValue(selection.schema === 'readsb-selection/v1', 'Unsupported selection schema.');
   requireValue(await digest(raw) === selection.sourceSha256, 'Source SHA-256 does not match the selected artifact.');
   const originalText = new TextDecoder('utf-8', { fatal: true, ignoreBOM: true }).decode(raw);

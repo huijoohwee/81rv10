@@ -1,9 +1,9 @@
 ---
 title: "Aviation Evidence — discovery and pilot preparation"
 doc_type: "Experiment and offer record"
-version: "0.3.2"
+version: "0.3.3"
 continuity_id: "aviation-evidence-layer"
-source_revision: "aviation-evidence-layer@0.3.2"
+source_revision: "aviation-evidence-layer@0.3.3"
 date: "2026-10-04"
 owner: "Product Manager and Founder"
 ---
@@ -11,12 +11,14 @@ owner: "Product Manager and Founder"
 
 Prepared for the [joined plan](prd-tad-adr-mvp-gtm.md). No participant has been contacted, consented, interviewed, offered a price or charged by this record. The initial walkthrough is grounded in the Singapore–Riau observed segment within an authored Singapore/Johor/Riau study window. This selects a scenario, not a validated regional buyer segment. Empty outcome cells mean unknown, not failure or zero. Use one pilot and the stated observation windows; external waits are rechecked on authorized access or response.
 
+Authorized source/volume implementation does not change the unsent offer. ETA/advisory, notice parsing and benchmarking remain pending software work; their real-label/model acceptance gates remain separate from this discovery record.
+
 ## Experiment ledger
 
 | Experiment / hypothesis | Method and pre-registered threshold | Bound / decision / current state |
 |---|---|---|
 | EXP-1 pain H1 / channel H5 | ≤10 qualified analysts; ≥3/10 independently describe recurring reconciliation and quantify frequency/minutes; ≥1/10 qualified referral is a separate channel threshold | 14 days after authorized access; spend0. Continue pain at threshold; otherwise revise/stop. Referral failure does not reverse pain result. Unrun. |
-| EXP-2 feasibility H3 | One permitted synthetic/real-labelled case; 2/2 equal-input offline reconstructions byte-identical; all six Must VCCs judged separately | ≤8 active h /3 cycles; stop/refresh after2 no-progress attempts. Engineering/evaluator owns exact receipts. Published0.3.1 repair proof retained;0.3.2 seven adapter tests and bounded browser proof passed; native checks pending; device acceptance remains partial. No customer claim. |
+| EXP-2 feasibility H3 | One permitted synthetic/real-labelled case; 2/2 equal-input offline reconstructions byte-identical; all six Must VCCs judged separately | ≤8 active h /3 cycles; stop/refresh after2 no-progress attempts. Engineering/evaluator owns exact receipts. Published PR8 has 61 tests/budgets and bounded observed-corpus browser proof; current 0.3.3 checks are pending. iPhone Safari is SKIP/KIV; technical progress is no customer claim. |
 | EXP-3 payer H2 | ≤2 qualified buyers receive a declared-price reconstruction offer; ≥1 accepts and completes genuine payment | 7 days after authorized offer; one pilot/spend0. Two rejections trigger revise/stop. No offer or price selected. |
 | EXP-4 value/retention H4 | One consented paid pilot: ≥10min saved on comparable task AND accepted use weekly for4 weeks | Four observations/28days; baseline+product timings and support denominator. Both required; no observed pilot. |
 

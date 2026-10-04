@@ -15,20 +15,21 @@ test('evidence modules and complete served assets respect the admitted budgets',
     try { baselineBytes += execFileSync('git', ['show', '438038865fd25c9d2a07ff50fcb75e2666e08b7c:app/' + name], { stdio: ['ignore', 'pipe', 'ignore'] }).length; } catch { /* New module. */ }
   }
   assert.deepEqual(names.filter(name => name.startsWith('evidence-')).sort(), ['evidence-kernel.mjs', 'evidence-replay.mjs', 'evidence-view.mjs']);
+  assert.deepEqual(names.filter(name => name.startsWith('volume-')).sort(), ['volume-project.mjs', 'volume-view.mjs']);
   assert.ok(bytes - baselineBytes <= 75000, `Added JS ${bytes - baselineBytes}`);
-  console.log(JSON.stringify({ servedJavaScriptBytes: bytes, baselineBytes, addedJavaScriptBytes: bytes - baselineBytes, newProductModules: 3 }));
+  console.log(JSON.stringify({ servedJavaScriptBytes: bytes, baselineBytes, addedJavaScriptBytes: bytes - baselineBytes, newProductModules: 5 }));
 });
 test('offline shell caches every local module and authored input without external resources', async () => {
   const source = await read('app/sw.mjs');
   const assets = [...source.matchAll(/'\.\/([^']*)'/gu)].map(match => match[1]);
-  for (const name of ['evidence-kernel.mjs', 'evidence-replay.mjs', 'evidence-view.mjs', 'profiles/aviation-v1.json', 'profiles/workspaces.json', 'fixtures/aviation-synthetic-v1.json']) assert.ok(assets.includes(name), name);
+  for (const name of ['evidence-kernel.mjs', 'evidence-replay.mjs', 'evidence-view.mjs', 'profiles/aviation-v1.json', 'profiles/workspaces.json', 'fixtures/aviation-synthetic-v1.json', 'volume-project.mjs', 'volume-view.mjs', 'profiles/volume-v1.json', 'profiles/volume-view.json', 'fixtures/volume-singapore-synthetic-v1.json']) assert.ok(assets.includes(name), name);
   const config = JSON.parse(await read('app/profiles/workspaces.json'));
   for (const example of config.evidence.examples) {
     assert.match(example.path, /^\.\/fixtures\/[a-z0-9-]+\.json$/u);
     assert.ok(assets.includes(example.path.slice(2)), `Offline example missing: ${example.path}`);
   }
   for (const name of assets.filter(Boolean)) assert.ok(Buffer.byteLength(await read('app/' + name)) < 500000, name);
-  for (const name of ['evidence-kernel.mjs', 'evidence-replay.mjs']) {
+  for (const name of ['evidence-kernel.mjs', 'evidence-replay.mjs', 'volume-project.mjs']) {
     const module = await read('app/' + name);
     assert.doesNotMatch(module, /\b(fetch|XMLHttpRequest|WebSocket|localStorage|indexedDB)\b|Date\.now|Math\.random/);
   }

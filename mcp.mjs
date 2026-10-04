@@ -29,7 +29,7 @@ export function handle(message) {
         || !['name', 'version'].every(key => typeof params.clientInfo[key] === 'string' && params.clientInfo[key].length <= 128))))
       return fault(message.id, -32602, `Supported protocolVersion: ${PROTOCOL_VERSION}.`);
     return result({ protocolVersion: PROTOCOL_VERSION, capabilities: { tools: {} },
-      serverInfo: { name: 'agentic-drone-dashboard', version: '0.3.0' } });
+      serverInfo: { name: 'agentic-drone-dashboard', version: '0.3.3' } });
   }
   if (message.method === 'ping' || message.method === 'tools/list') {
     if (Object.keys(params).length) return fault(message.id, -32602, 'Unsupported parameters.');

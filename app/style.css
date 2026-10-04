@@ -320,3 +320,13 @@ details summary{min-height:44px}
 .native-preview{min-height:600px;border:1px solid #39465b;border-radius:8px;overflow:hidden;background:#10151f}
 .native-preview iframe{width:100%;height:80dvh;min-height:600px;border:0;display:block}
 #native-workspace-panel .evidence-actions button,#native-workspace-panel .evidence-actions a{font-size:14px;min-height:44px}
+.volume-projection{display:block;width:100%;height:auto;max-height:480px;background:#101722;border:1px solid #39465b;border-radius:6px;margin:20px 0}
+.volume-side{fill:#73a4eb14;stroke:#8ba8d1;stroke-width:1}
+.volume-floor{fill:none;stroke:#90b5ff;stroke-width:2}
+.volume-ceiling{fill:none;stroke:#a7e0c9;stroke-width:2}
+#volume-query{display:grid;grid-template-columns:1fr 1fr auto;align-items:end;gap:12px;margin-bottom:20px}
+#volume-query button{margin-bottom:12px}
+#volume-result .identity{white-space:pre-wrap}
+#volume-result dt{font-size:14px;color:#e3eafa}#volume-result dd{font-size:13px;margin:6px 0 0}
+#volume-sources article{border-top:1px solid #39465b;padding:12px 0}
+@media(max-width:640px){#volume-query{display:block}#volume-query button{width:100%}}

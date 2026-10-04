@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { digest } from '../app/contracts.mjs';
-import { ALGORITHM, admit, canonicalJson, createSession, EvidenceError, exportPack, inspect, originalBytes, utcMillis } from '../app/evidence-kernel.mjs';
+import { ALGORITHM, admit, canonicalJson, createSession, EvidenceError, exportPack, inspect, originalBytes, sourceEvidence, utcMillis } from '../app/evidence-kernel.mjs';
 import { replay } from '../app/evidence-replay.mjs';
 
 const encoder = new TextEncoder(), decoder = new TextDecoder();
@@ -232,6 +232,61 @@ test('latest import intent owns the session, including pre-read, failure and cle
   session.clear(); resolvePending(original);
   assert.deepEqual(await pending, { accepted: false, stale: true, value: null });
   assert.equal(session.read(), null);
+});
+
+test('session snapshots direct bytes before yielding, preserving the title and identity at call time', async () => {
+  for (const mutable of [original.slice(), Buffer.from(original)]) {
+    const session = createSession(profile), pending = session.import(mutable);
+    const titleOffset = Buffer.from(mutable).indexOf(fixture.dataset.title);
+    assert(titleOffset >= 0);
+    mutable[titleOffset] = 'A'.charCodeAt(0);
+    assert.notEqual(JSON.parse(decoder.decode(mutable)).dataset.title, fixture.dataset.title);
+    const result = await pending;
+    assert.equal(result.accepted, true);
+    assert.equal(inspect(result.value).dataset.title, fixture.dataset.title);
+    assert.equal(inspect(session.read()).identity.originalSha256, await digest(original));
+    assert.deepEqual(originalBytes(result.value), original);
+  }
+});
+
+test('source inspection exposes exact original text, source rights and an immutable referenced record', async () => {
+  const accepted = await admit(original, profile), fact = fixture.facts[0];
+  const result = sourceEvidence(accepted, fact.id), source = fixture.sources.find(item => item.id === fact.source_id);
+  const { evidence_ref, ...record } = fact;
+  assert.equal(result.schema, 'evidence-source/v1');
+  assert.deepEqual(result.identity, inspect(accepted).identity);
+  assert.deepEqual(result.profile, inspect(accepted).profile);
+  assert.deepEqual(result.fact, fact);
+  assert.deepEqual(result.source, source);
+  assert.equal(result.reference, evidence_ref);
+  assert.deepEqual(result.referencedRecord, record);
+  assert.deepEqual(encoder.encode(result.source.original.text), encoder.encode(source.original.text));
+  assert.equal(await digest(encoder.encode(result.source.original.text)), source.original.sha256);
+  for (const mutate of [
+    () => { result.source.original.text = '{}'; }, () => { result.source.rights.statement = 'changed'; },
+    () => { result.fact.value.latitude = 0; }, () => { result.referencedRecord.value.latitude = 0; },
+    () => { result.identity.originalSha256 = 'changed'; }, () => { result.profile.version = 'changed'; },
+  ]) assert.throws(mutate, TypeError);
+  assert(Object.isFrozen(result));
+  assert.deepEqual(sourceEvidence(await admit(await exportPack(accepted), profile), fact.id), result);
+  for (const id of ['unknown', null, {}, 0]) assert.throws(() => sourceEvidence(accepted, id),
+    error => errorCode('FACT')(error) && error.path === 'factId');
+  assert.throws(() => sourceEvidence({}, fact.id), errorCode('SESSION'));
+});
+
+test('source inspection resolves admitted escaped JSON pointers without changing original formatting', async () => {
+  const bundle = copy(fixture), fact = bundle.facts[0];
+  const source = bundle.sources.find(item => item.id === fact.source_id);
+  const { evidence_ref, ...record } = fact;
+  const document = JSON.parse(source.original.text);
+  document.records = { 'a/b~c': record };
+  source.original.text = JSON.stringify(document, null, 2) + '\n';
+  source.original.sha256 = await digest(encoder.encode(source.original.text));
+  fact.evidence_ref = '/records/a~1b~0c';
+  const result = sourceEvidence(await admit(bytes(bundle), profile), fact.id);
+  assert.equal(result.reference, fact.evidence_ref);
+  assert.deepEqual(result.referencedRecord, record);
+  assert.equal(result.source.original.text, source.original.text);
 });
 
 test('admission snapshots caller bytes and profile before asynchronous digest work', async () => {

@@ -1,13 +1,13 @@
 import profile from './profiles/aviation-v1.json' with { type: 'json' };
 import workspaceConnections from './profiles/workspaces.json' with { type: 'json' };
-import { createSession, inspect, exportPack, originalBytes } from './evidence-kernel.mjs';
+import { createSession, inspect, exportPack, originalBytes, sourceEvidence } from './evidence-kernel.mjs';
 import { replay } from './evidence-replay.mjs';
 import { capabilities, invokeCommand } from './tools.mjs';
 
 // This view consumes an authored profile; no mission, geographic or aviation rules live here.
 const $ = id => document.getElementById(id);
 const session = createSession(profile);
-let page = 0, moments = [], exportUrl = null, importIntent = 0;
+let page = 0, moments = [], exportUrl = null, importIntent = 0, selectedFact = null;
 const encoder = new TextEncoder(), decoder = new TextDecoder('utf-8', { fatal: true });
 const PAGE_SIZE = 50;
 const describe = value => typeof value === 'string' ? value : JSON.stringify(value);
@@ -38,10 +38,20 @@ function renderFacts(record) {
     const id = text('td', `${fact.entity_id} · ${fact.kind}`); id.append(text('small', fact.id));
     const value = text('td', valueText(fact)); value.append(text('small', `${fact.unit} · ${fact.datum}`));
     const source = text('td', fact.source_id); source.append(text('small', fact.evidence_ref));
-    row.append(time, id, value, source); return row;
+    const button = text('button', 'Inspect original'); button.type = 'button';
+    button.setAttribute('aria-label', `Inspect original for ${fact.id}`); button.onclick = guard(() => inspectSource(fact.id));
+    source.append(button); row.append(time, id, value, source); return row;
   }));
   $('evidence-page').textContent = `Page ${page + 1} of ${maxPage + 1} · ${PAGE_SIZE} facts per page`;
   $('evidence-page-back').disabled = page === 0; $('evidence-page-next').disabled = page === maxPage;
+}
+function inspectSource(factId) {
+  const result = sourceEvidence(session.read(), factId); selectedFact = factId;
+  $('evidence-source-detail').hidden = false;
+  $('evidence-source-identity').textContent = `${factId} · ${result.source.id} · ${result.reference}\nOrigin: ${result.source.origin}\nRights: ${describe(result.source.rights)}\nRetrieved: ${result.source.retrieved_at}\nSHA-256 ${result.source.original.sha256}`;
+  $('evidence-source-record').textContent = JSON.stringify(result.referencedRecord, null, 2);
+  $('evidence-source-original').value = result.source.original.text;
+  $('evidence-source-heading').focus();
 }
 function query() {
   const accepted = session.read(); if (!accepted) return;
@@ -75,6 +85,8 @@ function setMoment(index) {
   query();
 }
 function render() {
+  selectedFact = null; $('evidence-source-detail').hidden = true;
+  $('evidence-source-identity').textContent = ''; $('evidence-source-record').textContent = ''; $('evidence-source-original').value = '';
   const accepted = session.read();
   for (const id of ['evidence-clear', 'evidence-entity', 'evidence-time', 'evidence-replay', 'evidence-export', 'evidence-command-run', 'evidence-timeline']) $(id).disabled = !accepted;
   $('evidence-results').hidden = !accepted; $('evidence-replay-result').hidden = true;
@@ -119,14 +131,14 @@ async function importEvidence(input) {
 export function evidenceContext() {
   const accepted = session.read();
   if (!accepted) throw new Error('Import evidence first.');
-  return { bundle: decoder.decode(originalBytes(accepted)), flightId: $('evidence-entity').value, atUtc: $('evidence-time').value };
+  return { bundle: decoder.decode(originalBytes(accepted)), flightId: $('evidence-entity').value, atUtc: $('evidence-time').value, ...(selectedFact ? { factId: selectedFact } : {}) };
 }
 export function mountEvidence() {
   $('evidence-title').textContent = profile.ui?.title || 'Evidence workspace';
   $('evidence-description').textContent = profile.ui?.description || 'Inspect a record, replay a moment, keep a verifiable copy.';
   $('evidence-entity-label').textContent = profile.ui?.entityLabel || 'Entity';
   $('evidence-limits').textContent = `UTF-8 JSON · original at most ${profile.limits.maxBytes.toLocaleString()} bytes · pack at most ${profile.limits.maxPackBytes.toLocaleString()} bytes. Source declarations are retained as supplied.`;
-  $('evidence-command').value = capabilities.find(tool => tool.inputSchema.properties.bundle && !tool.inputSchema.properties.flightId).command;
+  $('evidence-command').value = capabilities.find(tool => tool.name === 'aviation.inspect').command;
   $('evidence-file').onchange = guard(() => {
     const file = $('evidence-file').files[0]; if (!file) return;
     return importEvidence(file.size > profile.limits.maxPackBytes ? Promise.reject(new Error('File exceeds the profile admission limit.')) : file.arrayBuffer().then(bytes => new Uint8Array(bytes)));

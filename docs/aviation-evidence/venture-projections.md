@@ -1,15 +1,15 @@
 ---
 title: "Aviation Evidence — internal deck and business plan"
 doc_type: "Venture projections"
-version: "0.3.2"
+version: "0.3.3"
 continuity_id: "aviation-evidence-layer"
-source_revision: "aviation-evidence-layer@0.3.2"
+source_revision: "aviation-evidence-layer@0.3.3"
 date: "2026-10-04"
 owner: "Product and Financial Modeler"
 ---
 # Internal venture projections
 
-These are compact, **unpresented internal drafts** of the [joined plan](prd-tad-adr-mvp-gtm.md), not investor-ready materials. No claim first originates here. Sources resolve to the owned PRD, ADRs, experiment record or model at aviation-evidence-layer@0.3.2. No external sharing, outreach, buyer acceptance or funding request has occurred.
+These are compact, **unpresented internal drafts** of the [joined plan](prd-tad-adr-mvp-gtm.md), not investor-ready materials. No claim first originates here. Sources resolve to the owned PRD, ADRs, experiment record or model at aviation-evidence-layer@0.3.3. No external sharing, outreach, buyer acceptance or funding request has occurred.
 
 ## Compact deck / slide register
 
@@ -19,10 +19,10 @@ Audience hypothesis: a team lead reviewing Singapore and surrounding airspace an
 |---|---|---|
 | S1 /15 | One flight, one reproducible evidence bundle | PRD outcome; proposed value |
 | S2 /25 | Reconciliation and chronology gaps may consume analyst time | PRD P2/P3; unvalidated hypothesis, no customer quotation |
-| S3 /20 | Import → inspect sources/gaps → replay UTC → export/reimport | PRD J1–J6; published0.3.1:54 checks;0.3.2 seven adapter tests/browser proof; native checks pending; device partial |
+| S3 /20 | Import → inspect sources/gaps → replay UTC → export/reimport | PRD J1–J6; PR8:61 tests/budgets and bounded browser proof; current 0.3.3 checks pending; iPhone SKIP/KIV |
 | S4 /35 | Reveal: equal inputs yield equal canonical output; tampering fails | VCC-2/8 and demo; run only against actual passing receipt, otherwise show pending |
-| S5 /20 | Real Singapore–Riau observations,5 explicit unknowns and separate synthetic control | TAD/ODbL rights;0.3.2 offline11/11 worker responses/0 external; device partial |
-| S6 /20 | Existing MIT shell, three generic modules, authored profile | ADR-004; published0.3.1 JS67,987B;0.3.2 budget/publication pending |
+| S5 /20 | Real Singapore–Riau observations,5 explicit unknowns and separate synthetic control | TAD/ODbL rights; PR8 offline11/11 worker responses/0 external; current checks pending |
+| S6 /20 | MIT shell and original three generic modules; two new lazy volume owners with authored synthetic data | ADR-004; current budget/browser/publication pending; no official-airspace claim |
 | S7 /20 | Compare one real workflow before claiming value | EXP-1/4; no observations |
 | S8 /15 | One bounded pilot; price/currency and terms unset | EXP-3 unsent offer; no payment/revenue |
 | S9 /10 | Request an authorized discovery decision and permitted data review | Planning successor; no funding ask or outreach authorization |
@@ -50,11 +50,11 @@ Claim manifest: each slide inherits its source status. No invented customer/TAM/
 
 **Milestones.** M1 exact six-Must technical proof; M2 qualified pain and authorized permitted case; M3 accepted offer, delivered reconstruction and genuine payment; M4 measured saved time and four weekly uses. Each requires separate evidence. A technical pass does not advance M2–M4.
 
-**Learning and exit.** Continue when the relevant pre-registered threshold is met; revise/stop when it fails. Prediction expansion requires paying P1 priority plus permitted truth and new VCC-3/4 evidence. Restriction/benchmark/volume work requires separately admitted inputs and criteria. Preserve negative results in the successor Context.
+**Learning and exit.** Continue when the relevant pre-registered threshold is met; revise/stop when it fails. The user authorized ETA/advisory, notice, benchmark and volume software. ETA/notice/benchmark implementation remains pending; source drilldown and the synthetic volume candidate await final checks. Acceptance still requires VCC-3/4 truth, VCC-7 independent labels, VCC-9 stated model/constraints and VCC-10 compatible-datum render proof. Phone work remains SKIP/KIV. Preserve negative results in the successor Context.
 
 ## Projection reconciliation and audience checklist
 
-- All files bind aviation-evidence-layer@0.3.2 and the same owned facts/assumptions.
+- All files bind aviation-evidence-layer@0.3.3 and the same owned facts/assumptions.
 - Price/currency unset in deck, plan, offer and model; no invented revenue or funding ask.
 - Market/WTP/retention remain unknown everywhere.
 - Technical assertions consume exact current receipts and their limitations; no inference from precursor Drone/Flight proof.
