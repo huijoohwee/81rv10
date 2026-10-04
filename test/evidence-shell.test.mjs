@@ -65,3 +65,54 @@ for (const scenario of ['hit', 'miss', 'open-failure', 'match-failure']) {
     assert.deepEqual(calls.fetch, scenario === 'hit' ? [] : [request]);
   });
 }
+
+function worker(state) {
+  const listeners = new Set();
+  return { state, addEventListener: (_, fn) => listeners.add(fn), removeEventListener: (_, fn) => listeners.delete(fn),
+    transition(next) { this.state = next; for (const fn of [...listeners]) fn(); }, listeners };
+}
+async function preparation(reg) {
+  const source = await read('app/app.mjs'), elements = {}, reports = [], timers = new Set();
+  let readyReads = 0;
+  const $ = id => elements[id] ||= {};
+  runInNewContext(source.slice(source.indexOf("$('offline-enable').onclick"), source.indexOf("$('offline-remove').onclick")), {
+    $, guard: fn => fn, notice: value => reports.push(value),
+    navigator: { serviceWorker: { register: async () => reg,
+      get ready() { readyReads++; return Promise.resolve(reg); } } },
+    setTimeout: fn => { timers.add(fn); return fn; }, clearTimeout: fn => timers.delete(fn),
+  }, { filename: 'app/app.mjs#offline-enable', timeout: 1000 });
+  return { run: $('offline-enable').onclick, reports, timers, readyReads: () => readyReads };
+}
+const settle = () => new Promise(resolve => setImmediate(resolve));
+
+test('offline preparation awaits update and activation over an old worker', async () => {
+  let release;
+  const next = worker('installing'), reg = { active: worker('activated'),
+    update: () => new Promise(resolve => { release = resolve; }) };
+  const view = await preparation(reg), pending = view.run();
+  await settle(); assert.equal(view.readyReads(), 0);
+  reg.installing = next; release(); await settle();
+  assert.equal(view.reports.length, 0); next.transition('installed'); await settle();
+  assert.equal(view.readyReads(), 0);
+  next.transition('activated'); await pending;
+  assert.match(view.reports[0], /Save.*reload.*prepared revision/u);
+  assert.equal(view.readyReads(), 1); assert.equal(view.timers.size, 0); assert.equal(next.listeners.size, 0);
+});
+
+test('offline preparation waits for an activating active worker', async () => {
+  const active = worker('activating'), view = await preparation({ active, update: async () => {} });
+  const pending = view.run(); await settle();
+  assert.equal(view.readyReads(), 0); assert.equal(view.reports.length, 0);
+  active.transition('activated'); await pending;
+  assert.equal(view.reports.length, 1); assert.equal(view.timers.size, 0);
+});
+
+for (const failure of ['redundant', 'update-failure']) test(`offline preparation rejects ${failure} without success`, async () => {
+  const active = worker('activated'), installing = worker('redundant');
+  const view = await preparation({ active, installing, update: async () => {
+    if (failure === 'update-failure') throw new Error('Update fetch failed');
+  } });
+  await assert.rejects(view.run(), failure === 'redundant' ? /installation failed/u : /Update fetch failed/u);
+  assert.equal(view.readyReads(), 0); assert.equal(view.reports.length, 0);
+ assert.equal(view.timers.size, 0); assert.equal(installing.listeners.size, 0);
+});

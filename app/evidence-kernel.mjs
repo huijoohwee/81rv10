@@ -1,6 +1,6 @@
 import { digest, MAX_BYTES } from './contracts.mjs';
 
-export const ALGORITHM = 'evidence-order/v1';
+export const ALGORITHM = 'evidence-order/v2';
 export const PACK_SCHEMA = 'evidence-pack/v1';
 const handles = new WeakMap();
 const encoder = new TextEncoder();
@@ -116,11 +116,36 @@ function validateProfile(input) {
   requireValue(profile.requiredKinds.every(kind => profile.fields.some(field => field.key === kind)), 'PROFILE', 'Unknown required field.');
   return freeze(profile);
 }
+function decimalParts(value) {
+  const [mantissa, exponent = '0'] = String(value).split('e');
+  const [integer, fraction = ''] = mantissa.split('.');
+  return [BigInt(integer + fraction), Number(exponent) - fraction.length];
+}
+function decimalValue(fact, field) {
+  requireValue(typeof fact.value === 'number' && Number.isFinite(fact.value), 'RANGE', 'Expected a finite numeric value.', fact.id);
+  let [coefficient, exponent] = decimalParts(fact.value);
+  if (fact.unit !== field.canonicalUnit) {
+    const conversion = field.conversions.find(item => item.from === fact.unit);
+    requireValue(conversion, 'UNIT', 'Unit conversion is not declared.', fact.id);
+    const [factor, factorExponent] = decimalParts(conversion.factor);
+    coefficient *= factor; exponent += factorExponent;
+  }
+  // Compare exact decimal products, without a tolerance or binary multiply noise.
+  if (coefficient === 0n) return '0e0';
+  while (coefficient % 10n === 0n) { coefficient /= 10n; exponent += 1; }
+  return `${coefficient}e${exponent}`;
+}
+export function comparisonValue(fact, field) {
+  return fact.value !== null && field.type === 'number' ? decimalValue(fact, field) : normalizedValue(fact, field);
+}
 export function normalizedValue(fact, field) {
-  if (fact.value === null || fact.unit === field.canonicalUnit) return fact.value;
+  if (fact.value === null) return null;
+  if (field.type === 'utc') return new Date(utcMillis(fact.value, fact.id + '.value')).toISOString();
+  if (fact.unit === field.canonicalUnit) return fact.value;
   const conversion = field.conversions.find(item => item.from === fact.unit);
   requireValue(conversion, 'UNIT', 'Unit conversion is not declared.', fact.id);
-  return fact.value * conversion.factor;
+  // The display number rounds once from the exact product; comparison keeps its exact key.
+  return Number(decimalValue(fact, field));
 }
 function validateValue(fact, field, profile) {
   requireValue(field.units.includes(fact.unit), 'UNIT', 'Unknown unit.', fact.id);
@@ -208,7 +233,7 @@ function sortedFacts(facts) {
 }
 export async function admit(input, authoredProfile) {
   const profile = validateProfile(authoredProfile);
-  const supplied = input instanceof Uint8Array ? input.slice() : input;
+  const supplied = input instanceof Uint8Array ? new Uint8Array(input) : input;
   const textInput = decode(supplied, profile.limits.maxPackBytes, 'input');
   let bundle = parseJson(textInput, 'input'), bytes = supplied, pack = null;
   if (bundle?.schema === PACK_SCHEMA) {
@@ -216,7 +241,8 @@ export async function admit(input, authoredProfile) {
     keys(pack, ['schema', 'profile', 'algorithm', 'original', 'derivedSha256'], 'pack');
     keys(pack.profile, ['id', 'version', 'sha256'], 'pack.profile');
     keys(pack.original, ['text', 'sha256'], 'pack.original');
-    requireValue(typeof pack.original.text === 'string' && pack.algorithm === ALGORITHM, 'PACK', 'Unsupported portable evidence pack.');
+    requireValue(typeof pack.original.text === 'string', 'PACK', 'Unsupported portable evidence pack.');
+    requireValue(pack.algorithm === ALGORITHM, 'PACK', `Unsupported pack algorithm. This runtime uses ${ALGORITHM}; retain the old pack and explicitly import its original.text as a raw bundle to create a new identity. No automatic migration.`, 'pack.algorithm');
     bytes = encoder.encode(pack.original.text);
     bundle = parseJson(decode(bytes, profile.limits.maxBytes, 'pack.original'), 'pack.original');
   } else requireValue(bytes.length <= profile.limits.maxBytes, 'LIMIT', 'Original bundle exceeds its byte bound.');
@@ -235,7 +261,7 @@ export async function admit(input, authoredProfile) {
     stats: { entityCount: bundle.entities.length, factCount: bundle.facts.length, sourceCount: bundle.sources.length,
       startUtc: new Date(checked.minimum).toISOString(), endUtc: new Date(checked.maximum).toISOString() } });
   const handle = Object.freeze({ identity: snapshot.identity, profile: snapshot.profile });
-  handles.set(handle, { snapshot, bytes: bytes.slice() });
+  handles.set(handle, { snapshot, bytes: new Uint8Array(bytes) });
   return handle;
 }
 export function readEvidence(handle) {
@@ -244,7 +270,7 @@ export function readEvidence(handle) {
   return value.snapshot;
 }
 export function originalBytes(handle) {
-  readEvidence(handle); return handles.get(handle).bytes.slice();
+  readEvidence(handle); return new Uint8Array(handles.get(handle).bytes);
 }
 export function inspect(handle) {
   const data = readEvidence(handle);

@@ -1,16 +1,16 @@
 ---
 title: "Aviation Evidence Layer — local file MVP"
 doc_type: "PRD-TAD-ADR-MVP-GTM"
-version: "0.3.0"
-revision: "0.3.0"
+version: "0.3.1"
+revision: "0.3.1"
 date: "2026-10-04"
 lang: "en-US"
 continuity_id: "aviation-evidence-layer"
-prd_revision: "0.3.0"
-tad_revision: "0.3.0"
-adr_revision: "0.3.0"
-mvp_revision: "0.3.0"
-gtm_revision: "0.3.0"
+prd_revision: "0.3.1"
+tad_revision: "0.3.1"
+adr_revision: "0.3.1"
+mvp_revision: "0.3.1"
+gtm_revision: "0.3.1"
 owner: "Aviation Evidence product function"
 local_rung: "spec-complete"
 delivered_rung: "undocumented"
@@ -24,9 +24,9 @@ guideline_revision: "3.4.0"
 
 # Aviation Evidence Layer
 
-This joined package is the implementation successor **aviation-evidence-layer@0.3.0**. Its bounded sections are [validation and runbook](validation-runbook.md), [rights and recovery](rights-recovery.md), [discovery and pilot](discovery-pilot.md), [financial model](financial-model.md), and [venture projections](venture-projections.md). They consume this revision; they do not introduce independent product ownership.
+This joined package is the implementation successor **aviation-evidence-layer@0.3.1**. Its bounded sections are [validation and runbook](validation-runbook.md), [rights and recovery](rights-recovery.md), [discovery and pilot](discovery-pilot.md), [financial model](financial-model.md), and [venture projections](venture-projections.md). They consume this revision; they do not introduce independent product ownership.
 
-The predecessor is the aviation specification @0.2.0, SHA-256 `817d6af75e5d8e327560dbf6408291c1e0bd0f3fce9b5095501d2e24b1d185d9`. Its historical sources, diagrams, findings and evidence remain preserved in that record and its immutable sidecars. This increment changes the real-data feasibility host to the user-selected **81rv10 FOSS shell**, and implements the three Must stories using an explicitly synthetic local bundle. It does not claim observed flight data, validated demand or operational aviation authority.
+Published predecessor0.3.0 is `209483a5fc777ace22d8acca1e9d6fe9a6921418`, tree `b807272b4915a8347aa434cd6b2de895a53464bc`, [PR6](https://github.com/huijoohwee/81rv10/pull/6). Its green synthetic-merge CI is not protected integration. Native successor `aviation-normalization-proof` admits this repair; its54-test/browser repair proof is recorded below; publication is pending. The historical specification is @0.2.0, SHA-256 `817d6af75e5d8e327560dbf6408291c1e0bd0f3fce9b5095501d2e24b1d185d9`. Its historical sources, diagrams, findings and evidence remain preserved in that record and its immutable sidecars. This increment changes the real-data feasibility host to the user-selected **81rv10 FOSS shell**, and implements the three Must stories using an explicitly synthetic local bundle. It does not claim observed flight data, validated demand or operational aviation authority.
 
 ## Context, scope and authority
 
@@ -65,12 +65,12 @@ The deferred criteria retain the exact predecessor thresholds; omission from thi
 
 | Metric | Target and basis | Current disposition |
 |---|---|---|
-| Clean setup | ≤60 minutes on the documented supported environment | Pending timed reproducible setup |
-| First useful record | ≤15 minutes / 3 main actions after provisioned shell and fixture | Pending timed fixture walkthrough; not buyer validation |
-| Replay and export | ≤5 minutes after accepted import / 3 main actions | Pending timed walkthrough |
+| Clean setup | ≤60 minutes on the documented supported environment | Predecessor clean archive installed in1.443673792s on Node22.22.3/npm10.9.8/macOS27; fresh origin53350 had0 workers/caches before provision succeeded. Full setup timing pending |
+| First useful record | ≤15 minutes / 3 main actions after provisioned shell and fixture | Algorithm-v2 provisioned offline record375ms/1action; predecessor fresh-origin record391ms/1action. Synthetic, not buyer value |
+| Replay and export | ≤5 minutes after accepted import / 3 main actions | Published209483a Previous+Prepare638ms/2actions; actual save unverified, so target remains open |
 | Local serving effects | 0 models, 0 billed APIs, 0 required external requests | Verified for bounded fixture read paths; native workspace remains a separate explicit external connection |
-| Bounds | Original UTF-8 JSON <500,000 B; ≤10 flights, ≤5,000 facts, ≤24-hour window | Contract checks passed within46-test native validation |
-| New product code | ≤2 generic core modules +1 generic UI module; <600 lines/file; each emitted resource <500,000 B; initial added JS ≤75,000 B |3 new modules; served JS66,210B versus23,022B baseline, added43,188B; largest kernel20,535B/280lines; budgets passed |
+| Bounds | Original UTF-8 JSON <500,000 B; ≤10 flights, ≤5,000 facts, ≤24-hour window | Successor54-test validation passed; exact candidate publication pending |
+| New product code | ≤2 generic core modules +1 generic UI module; <600 lines/file; each emitted resource <500,000 B; initial added JS ≤75,000 B |3 original modules/0 added by repair; served JS67,987B versus23,022B baseline, added44,965B; largest kernel22,197B/306lines; budgets passed |
 | Device reach | Desktop and 360–430 CSS px mobile; keyboard/touch, readable table, focus, reduced motion, 200% zoom | Emulated widths/keyboard/sample contrast/reduced motion/page scale observed; physical touch/full text zoom/clean new-device setup untested |
 | Value / retention | ≥10 minutes saved on a comparable task and weekly use for four weeks | EXP-4 unrun; cannot be inferred from synthetic tests |
 
@@ -101,7 +101,7 @@ The original byte sequence is authoritative. Decode strict UTF-8, enforce byte/c
 
 Every fact has stable fact/flight/source identity, observed and retrieved UTC, declared units/reference and evidence linkage. Unknown registration/operator/weather/schedule/restrictions retain an explicit reason. WGS84 coordinate and altitude interpretation belongs to the authored aviation profile. Do not equate pressure, geometric, AMSL, AGL or flight level; only declared compatible unit conversion is allowed.
 
-Algorithm `evidence-order/v1` binds canonical JSON (sorted object keys, finite JSON values, original array order), stable observed-UTC/source-ID/fact-ID ordering and replay rules. Replay selects the latest fact per source/kind at or before explicit UTC, retaining all exact-time ties. Disagreement is compared after authored compatible unit conversion while originals remain unchanged. Any selected source age beyond the profile's60-second threshold marks the field stale; gaps cover eligible source/kind intervals and latest observation→query, without inventing a leading interval before the first known fact. No implicit interpolation, clock, randomness, simulation substitution or remote enrichment enters output.
+Successor algorithm `evidence-order/v2` binds canonical JSON (sorted object keys, finite JSON values, original array order), stable observed-UTC/source-ID/fact-ID ordering and replay rules. Replay selects the latest fact per source/kind at or before explicit UTC, retaining all exact-time ties. Disagreement compares UTC instants and authored compatible decimal unit values while detached original bytes remain unchanged. Comparison multiplies the canonical number spellings as integer coefficients and powers of ten, with no epsilon; display numbers round once from that exact product. Source values are never rewritten. Any selected source age beyond the profile's60-second threshold marks the field stale; gaps cover eligible source/kind intervals and latest observation→query, without inventing a leading interval before the first known fact. No implicit interpolation, clock, randomness, simulation substitution or remote enrichment enters output.
 
 Invalid import keeps the accepted state. An earlier asynchronous read cannot overwrite a later accepted selection; commit binds the same admission revision. Text is rendered as text. Source URLs are evidence strings, never automatically fetched. Delete/reset clears the selected session; exported files remain under their owner's control.
 
@@ -131,7 +131,7 @@ All choices below concern one local synthetic-file feasibility slice. Unknown da
 |---|---|---|
 | ADR-001 | Deterministic record/replay first; defer predictive models and free-text agents | No model/paid dependency or predictive promise. Revisit on paid P1 demand plus permitted truth; fall back to record/replay. |
 | ADR-002 | Local synthetic/permitted file input first; live aggregator/receiver adapter deferred | Synthetic authoring resolves this fixture's source provenance without granting real-data rights. No live completeness; disable a drifted source and retain originals. |
-| ADR-003 | Portable originals + rebuildable memory; database/sync deferred | Small bounded sessions and explicit exports; unsaved work can be lost. Restore exact originals/profile/algorithm; no silent migration. |
+| ADR-003 | Portable originals + rebuildable memory; database/sync deferred | Detach caller-owned byte views. Algorithm v2 rejects v1-derived packs; explicit original-byte reimport creates a new derived identity. Container schema stays evidence-pack/v1; no silent migration. |
 | ADR-004 | User-selected 81rv10 MIT shell at 4380388; existing server/cache/tools reused. Private Graph wrapper and new renderer excluded | Small inspected source delta and FOSS distribution basis for this repository's own code. No Graph assets or host chunk waiver. Measure every new emitted resource and offline dependency. |
 | ADR-005 | One read-only declared tool owner, shared across adapters; write-back/gateway deferred | Add no independent schemas or external authority. Unsupported WebMCP falls back visibly. Revisit remote gateway only for two authorized consumers. |
 | ADR-006 | Original-byte hashes plus revision-bound derived digest; signing/notarization deferred | Integrity comparison, not authenticity/legal evidence. Retain exact originals and disclose this limit; signing requires a separate custody/recovery design. |
@@ -140,13 +140,13 @@ Constraint screen: selected local shell passes the inspected MIT source/no-paid-
 
 ## MVP and verification
 
-The implemented slice is PRD-E1-S1/E1-S2/E5-S1. [Validation](validation-runbook.md) binds actual checks. VCC-1/2/6/8/11 pass bounded synthetic-fixture technical verification, including46/46 tests and budgets in the final working-tree validation; publication commit binding follows separately. VCC-5 is partial: offline/emulated widths/keyboard and sampled appearance are observed; physical touch, full200% browser text zoom and clean new-device setup remain untested. Deferred VCC-3/4/7/9/10 are unchanged. No all-six-Must, full-product runtime acceptance or operational-data claim follows.
+The implemented slice remains PRD-E1-S1/E1-S2/E5-S1. New counterexamples invalidate the predecessor's broad5/6-Must claim: caller Buffer mutation changed admitted originals; equivalent UTC strings and decimal-converted units produced false conflicts. Successor54 tests and v2 browser checks now exercise those corrections and offline update-race recovery; prior46-test receipts remain historical. [Validation](validation-runbook.md) retains history. VCC-5 remains partial, including primary-download timing, phone/touch and full200% browser zoom. Deferred VCC-3/4/7/9/10 and their thresholds are unchanged; no full-product acceptance follows.
 
-Browser evaluation SHA-256 `813c9c36ee149fe44fc3bb05f85e0639364ff93676e4a29b86a0041849fea8a4` records UI/WebMCP inspection and replay equality; copied13,734B pack→saved file→actual file-chooser reimport→CLI agreement;13/13 service-worker responses and0 external/model/billed-API calls. Original identity `4750f8d966fc1ebbe690343a1c44ed2d60241d5035844b55642be96fb93438fd`; derived `5707401b826894efc2cf53c362aa13e26453461debbcc2cdfdbf8d25a37f1e95`. Direct in-app download events timed out; the verified clipboard/file fallback is explicit. Actual adapter-unavailable/rejection and worker storage-failure handler tests passed in final validation.
+Historical0.3.0 browser evaluation SHA-256 `813c9c36ee149fe44fc3bb05f85e0639364ff93676e4a29b86a0041849fea8a4` records UI/WebMCP inspection and replay equality; copied13,734B pack→saved file→actual file-chooser reimport→CLI agreement;13/13 service-worker responses and0 external/model/billed-API calls. Original identity `4750f8d966fc1ebbe690343a1c44ed2d60241d5035844b55642be96fb93438fd`; derived `5707401b826894efc2cf53c362aa13e26453461debbcc2cdfdbf8d25a37f1e95`. Direct in-app download events timed out; the verified clipboard/file fallback is explicit. Actual adapter-unavailable/rejection and worker storage-failure handler tests passed in final validation.
 
-The product-frozen browser recheck after shared registration refactoring retained UI/WebMCP equality (`browser-parity-final.json`, SHA-256 `53067df4d49834649f907cfce2a932adc9a0d93debbb52c98ec37d7d76c7d353`) and recorded11/11 service-worker responses in the newest cache reload (`offline-network-exact.json`, `034c8db08822540c1c4d1490a9ac7405d757464230981692a834ebc6c77a013f`). Earlier counts remain historical. Mixed-timestamp selection, cleared hidden data and corrupt-pack identity retention were observed; the exact external Flight document was Ready in the native embed. Local rung stays spec-complete, delivered rung undocumented because VCC-5 is incomplete.
+The historical0.3.0 browser recheck after shared registration refactoring retained UI/WebMCP equality (`browser-parity-final.json`, SHA-256 `53067df4d49834649f907cfce2a932adc9a0d93debbb52c98ec37d7d76c7d353`) and recorded11/11 service-worker responses in the newest cache reload (`offline-network-exact.json`, `034c8db08822540c1c4d1490a9ac7405d757464230981692a834ebc6c77a013f`). Earlier counts remain historical. Mixed-timestamp selection, cleared hidden data and corrupt-pack identity retention were observed; the exact external Flight document was Ready in the native embed. Local rung stays spec-complete, delivered rung undocumented because VCC-5 is incomplete.
 
-Final native validation receipt `final-validation/receipt.json`, SHA-256 `f3868e08790da6bf338d59a23e5450f5cbd54cf42b322d35ffffd73e90ddd270`, passed46/46 tests and budgets across24 changed paths at sourceDigest `5f4135dd246f6e3e87d76b5435d09c3c8d363206dd5e655af9419aaee11f71bc`. It includes actual adapter/worker negatives. The final documentation update follows this receipt; native publication revalidates the resulting exact candidate. Commit/tree/PR and integration receipts belong to release handover, not a fabricated self-pin.
+Historical0.3.0 native validation receipt `final-validation/receipt.json`, SHA-256 `f3868e08790da6bf338d59a23e5450f5cbd54cf42b322d35ffffd73e90ddd270`, passed46/46 tests and budgets across24 changed paths at sourceDigest `5f4135dd246f6e3e87d76b5435d09c3c8d363206dd5e655af9419aaee11f71bc`. It includes actual adapter/worker negatives. Predecessor publication binds209483a/PR6 with green synthetic-merge CI; no protected merge/deploy follows. Successor54-test/budget receipt and browser artifacts are in the runbook; this documentation update follows that receipt. Native publication must bind its resulting exact candidate.
 
 Use the 180-second [demo](validation-runbook.md#180-second-demo). Its Reveal is repeatable canonical output plus original-byte export/reimport, not a simulation. Rehearsal can prove a bounded technical workflow; only EXP-1/3/4 can supply buyer and usage evidence.
 
@@ -183,12 +183,12 @@ Offer hypothesis: one team receives a portable reconstruction walkthrough for on
 
 | PRD-TAD-ADR-MVP-GTM | CID | RAO | Updated Date |
 |---|---|---|---|
-| aviation-evidence-layer@0.3.0 | C: permitted synthetic-file MVP selected; predecessor817d and native host4380388. I: deliver reproducible local evidence review. D: implement and independently test three Must stories in the admitted owner. | R: Engineering. A: implement generic contracts/replay/UI with authored profile and shared adapters. O: bounded local import/replay/export with exact-source VCC evidence. check: VCC-1/2/5/6/8/11. | 2026-10-04 |
-| aviation-evidence-layer@0.3.0 | C: no customer, rights or payment outcomes. I: prepare an honest paid learning loop. D: prepare consent/interview/offer/model records without sending or collecting. | R: Product. A: prepare bounded experiment and venture materials. O: usable drafts with pending inputs and effect boundaries. check: package joins, formulas, claim/source labels; outcomes require EXP-1/3/4. | 2026-10-04 |
+| aviation-evidence-layer@0.3.1 | C: permitted synthetic-file MVP selected; predecessor817d and native host4380388. I: deliver reproducible local evidence review. D: implement and independently test three Must stories in the admitted owner. | R: Engineering. A: implement generic contracts/replay/UI with authored profile and shared adapters. O: bounded local import/replay/export with exact-source VCC evidence. check: VCC-1/2/5/6/8/11. | 2026-10-04 |
+| aviation-evidence-layer@0.3.1 | C: no customer, rights or payment outcomes. I: prepare an honest paid learning loop. D: prepare consent/interview/offer/model records without sending or collecting. | R: Product. A: prepare bounded experiment and venture materials. O: usable drafts with pending inputs and effect boundaries. check: package joins, formulas, claim/source labels; outcomes require EXP-1/3/4. | 2026-10-04 |
 
 ## ADLC and handover
 
-Source inspection baseline: 81rv10 `438038865fd25c9d2a07ff50fcb75e2666e08b7c`; repository MIT license; Agentic OS package `e0ef770860905830157e64c455f0a342084b6d25`. Preserve the original Drone Dashboard @0.2.1 joins. Implementation files, committed candidate, checks and artifact hashes will be joined after root verification. No proof fabricated in advance.
+Source inspection baseline: 81rv10 `438038865fd25c9d2a07ff50fcb75e2666e08b7c`; repository MIT license; Agentic OS package `e0ef770860905830157e64c455f0a342084b6d25`. Preserve the original Drone Dashboard @0.2.1 joins. Predecessor release and successor working-tree proof are bound above; successor publication remains pending.
 
 R1 cap: ≤8 active hours, ≤3 iterations and stop/refresh after two no-progress attempts; first cycle≤90 active minutes; ≤3 new product modules, source limits above. Documentation cap refreshed after the full model/consent/projection and workspace-connection scope: ≤20 active minutes, six new documents, ≤75 KiB, <600 lines/file. Paid/model serving spend cap0; authoring token/cost actuals remain unknown unless telemetry supplies them. External waits name the missing input and recheck on response, not an ETA.
 

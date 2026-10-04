@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { digest } from '../app/contracts.mjs';
-import { admit, canonicalJson, createSession, EvidenceError, exportPack, inspect, originalBytes, utcMillis } from '../app/evidence-kernel.mjs';
+import { ALGORITHM, admit, canonicalJson, createSession, EvidenceError, exportPack, inspect, originalBytes, utcMillis } from '../app/evidence-kernel.mjs';
 import { replay } from '../app/evidence-replay.mjs';
 
 const encoder = new TextEncoder(), decoder = new TextDecoder();
@@ -167,7 +167,7 @@ test('portable packs are deterministic, profile-bound and reject changed origina
   await assert.rejects(admit(packed, changedPolicy), errorCode('DIGEST'));
   const pack = JSON.parse(decoder.decode(packed)); pack.algorithm = 'other/v1';
   await assert.rejects(admit(bytes(pack), profile), errorCode('PACK'));
-  pack.algorithm = 'evidence-order/v1'; pack.original.text = decoder.decode(packed);
+  pack.algorithm = ALGORITHM; pack.original.text = decoder.decode(packed);
   await assert.rejects(admit(bytes(pack), profile), errorCode('SCHEMA'));
   const reordered = copy(fixture); reordered.facts.reverse(); reordered.entities.reverse(); reordered.sources.reverse();
   const alternate = inspect(await admit(bytes(reordered), profile));
@@ -241,6 +241,73 @@ test('admission snapshots caller bytes and profile before asynchronous digest wo
   const accepted = await pending;
   assert.deepEqual(originalBytes(accepted), original);
   assert.equal(accepted.profile.staleAfterSeconds, 60);
+});
+
+test('Buffer ownership is copied at admission and every original-byte read', async () => {
+  const callerBytes = Buffer.from(original), pending = admit(callerBytes, profile);
+  callerBytes.fill(0); // Mutation while source digests are still awaited.
+  const accepted = await pending, identity = inspect(accepted).identity;
+  assert.equal(identity.originalSha256, await digest(original));
+  const returned = originalBytes(accepted);
+  assert.equal(Buffer.isBuffer(returned), false);
+  assert.deepEqual(returned, original);
+  returned.fill(32);
+  assert.deepEqual(originalBytes(accepted), original);
+  assert.deepEqual(inspect(await admit(await exportPack(accepted), profile)), inspect(accepted));
+
+  const fileBuffer = await readFile(new URL('../app/fixtures/aviation-synthetic-v1.json', import.meta.url));
+  const completed = await admit(fileBuffer, profile);
+  fileBuffer.fill(0); // Mutation after the handle was returned cannot alter its originals either.
+  assert.deepEqual(originalBytes(completed), original);
+  assert.deepEqual(inspect(completed).identity, identity);
+});
+
+test('UTC value comparison recognizes the same instant while preserving original spelling', async () => {
+  const bundle = copy(fixture), schedule = bundle.facts.find(fact => fact.kind === 'schedule');
+  schedule.value = '2026-01-01T13:00:00Z'; schedule.null_reason = null;
+  const second = { ...schedule, id: 'same-instant-schedule', source_id: bundle.sources[1].id, value: '2026-01-01T13:00:00.000Z' };
+  bundle.facts.push(second);
+  const accepted = await admit(bytes(await seal(bundle)), profile);
+  const result = field(replay(accepted, entityId, at), 'schedule');
+  assert.equal(result.conflict, false);
+  assert.deepEqual(result.values.map(value => value.value), [second.value, second.value]);
+  assert.deepEqual(result.facts.map(fact => fact.value), [schedule.value, second.value]);
+  assert.deepEqual(inspect(await admit(await exportPack(accepted), profile)), inspect(accepted));
+  second.value = '2026-01-01T13:00:00.001Z';
+  assert.equal(field(replay(await admit(bytes(await seal(bundle)), profile), entityId, at), 'schedule').conflict, true);
+});
+
+test('exact decimal conversion removes arithmetic noise without hiding nearby discrepancies', async () => {
+  for (const [metres, feet, equivalent] of [
+    [0.9144, 3, true], [-0.9144, -3, true], [9.144e-7, 3e-6, true], [0, -0, true],
+    [0.9144000000000001, 3, false], [Number.MIN_VALUE, 1e-323, false],
+  ]) {
+    const bundle = copy(fixture), facts = bundle.facts.filter(fact => fact.kind === 'altitude' && fact.observed_at === at);
+    facts[0].value = metres; facts[0].unit = 'm'; facts[1].value = feet; facts[1].unit = 'ft';
+    const admittedBytes = bytes(await seal(bundle)), accepted = await admit(admittedBytes, profile);
+    const result = field(replay(accepted, entityId, at), 'altitude');
+    assert.equal(result.conflict, !equivalent, `${metres} m / ${feet} ft`);
+    if (equivalent) assert.equal(result.values[0].value, result.values[1].value);
+    if (metres === Number.MIN_VALUE) assert.equal(result.values[0].value, result.values[1].value, 'Rounded display values must not hide an exact decimal difference.');
+    assert.deepEqual(originalBytes(accepted), admittedBytes);
+    assert.deepEqual(result.facts.map(fact => [fact.value, fact.unit]), JSON.parse(decoder.decode(admittedBytes)).facts
+      .filter(fact => fact.kind === 'altitude' && fact.observed_at === at).map(fact => [fact.value, fact.unit]));
+    assert.equal(canonicalJson(replay(accepted, entityId, at)), canonicalJson(replay(await admit(admittedBytes, profile), entityId, at)));
+  }
+});
+
+test('v1 packs fail with explicit migration guidance while original bundles receive v2 identities', async () => {
+  const accepted = await admit(original, profile), legacy = JSON.parse(decoder.decode(await exportPack(accepted)));
+  const { identity, stats, cost, ...legacyDerived } = inspect(accepted);
+  legacyDerived.schema = 'evidence-record/v1'; legacyDerived.algorithm = legacy.algorithm = 'evidence-order/v1';
+  legacy.derivedSha256 = await digest(encoder.encode(canonicalJson(legacyDerived)));
+  await assert.rejects(admit(bytes(legacy), profile), error => error instanceof EvidenceError && error.code === 'PACK'
+    && error.path === 'pack.algorithm' && /retain the old pack.*original\.text.*new identity.*No automatic migration/u.test(error.message));
+  const restored = await admit(encoder.encode(legacy.original.text), profile);
+  assert.equal(inspect(restored).algorithm, 'evidence-order/v2');
+  assert.equal(inspect(restored).identity.originalSha256, legacy.original.sha256);
+  assert.notEqual(inspect(restored).identity.derivedSha256, legacy.derivedSha256);
+  assert.deepEqual(inspect(await admit(await exportPack(restored), profile)), inspect(restored));
 });
 
 test('the same engine consumes an independently authored non-aviation profile', async () => {

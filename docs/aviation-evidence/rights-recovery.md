@@ -1,9 +1,9 @@
 ---
 title: "Aviation Evidence — rights, operations and recovery"
 doc_type: "Handbook"
-version: "0.3.0"
+version: "0.3.1"
 continuity_id: "aviation-evidence-layer"
-source_revision: "aviation-evidence-layer@0.3.0"
+source_revision: "aviation-evidence-layer@0.3.1"
 date: "2026-10-04"
 owner: "Operator and release owner"
 ---
@@ -54,6 +54,7 @@ Incident record: case ID; discovered UTC; source/runtime/profile identity; permi
 |---|---|---|
 | Invalid/corrupt import | Retain accepted state; show reason; choose a valid file explicitly | Accepted revision and digest unchanged; failed bytes never committed |
 | Delayed prior read | Discard stale completion using current selection token | Later accepted selection remains; negative concurrency test |
+| Prior algorithm-v1 pack | Keep the pack; extract `original.text` as UTF-8, verify against `original.sha256`, explicitly import those raw originals into v2 | Old derived identity is rejected; new profile/algorithm-bound identity is explicit. Retain the old pack and never silently relabel it |
 | Tab crash / session reset | Reopen shell and reimport saved originals with matching profile/algorithm | Recomputed identity matches; unsaved session can be lost |
 | Export uncertainty | Keep current session; use inspectable/copyable original data fallback if implemented | A prepared link is not completed download; verify actual saved bytes |
 | Cache/storage unavailable | Report failure; keep current page/session where possible; export before leaving | No offline claim until a provisioned reload succeeds |

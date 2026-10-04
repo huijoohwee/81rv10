@@ -1,15 +1,15 @@
 ---
 title: "Aviation Evidence — internal deck and business plan"
 doc_type: "Venture projections"
-version: "0.3.0"
+version: "0.3.1"
 continuity_id: "aviation-evidence-layer"
-source_revision: "aviation-evidence-layer@0.3.0"
+source_revision: "aviation-evidence-layer@0.3.1"
 date: "2026-10-04"
 owner: "Product and Financial Modeler"
 ---
 # Internal venture projections
 
-These are compact, **unpresented internal drafts** of the [joined plan](prd-tad-adr-mvp-gtm.md), not investor-ready materials. No claim first originates here. Sources resolve to the owned PRD, ADRs, experiment record or model at aviation-evidence-layer@0.3.0. No external sharing, outreach, buyer acceptance or funding request has occurred.
+These are compact, **unpresented internal drafts** of the [joined plan](prd-tad-adr-mvp-gtm.md), not investor-ready materials. No claim first originates here. Sources resolve to the owned PRD, ADRs, experiment record or model at aviation-evidence-layer@0.3.1. No external sharing, outreach, buyer acceptance or funding request has occurred.
 
 ## Compact deck / slide register
 
@@ -19,10 +19,10 @@ Audience hypothesis: an analyst team lead considering a bounded reconstruction t
 |---|---|---|
 | S1 /15 | One flight, one reproducible evidence bundle | PRD outcome; proposed value |
 | S2 /25 | Reconciliation and chronology gaps may consume analyst time | PRD P2/P3; unvalidated hypothesis, no customer quotation |
-| S3 /20 | Import → inspect sources/gaps → replay UTC → export/reimport | PRD J1–J6; technical implementation proof pending |
+| S3 /20 | Import → inspect sources/gaps → replay UTC → export/reimport | PRD J1–J6;54 successor checks; device proof partial |
 | S4 /35 | Reveal: equal inputs yield equal canonical output; tampering fails | VCC-2/8 and demo; run only against actual passing receipt, otherwise show pending |
-| S5 /20 | Files stay local; synthetic/unknown evidence is explicit | TAD and rights record; implementation/network proof pending |
-| S6 /20 | Existing MIT shell, three generic modules, authored profile | ADR-004/inventory; exact emitted-size and source proof pending |
+| S5 /20 | Files stay local; synthetic/unknown evidence is explicit | TAD/rights; successor offline fixture0 external requests |
+| S6 /20 | Existing MIT shell, three generic modules, authored profile | ADR-004; successor67,987B served JS; publication pending |
 | S7 /20 | Compare one real workflow before claiming value | EXP-1/4; no observations |
 | S8 /15 | One bounded pilot; price/currency and terms unset | EXP-3 unsent offer; no payment/revenue |
 | S9 /10 | Request an authorized discovery decision and permitted data review | Planning successor; no funding ask or outreach authorization |
@@ -54,7 +54,7 @@ Claim manifest: each slide inherits its source status. No customer logos, invent
 
 ## Projection reconciliation and audience checklist
 
-- All files bind aviation-evidence-layer@0.3.0 and the same owned facts/assumptions.
+- All files bind aviation-evidence-layer@0.3.1 and the same owned facts/assumptions.
 - Price/currency unset in deck, plan, offer and model; no invented revenue or funding ask.
 - Market/WTP/retention remain unknown everywhere.
 - Technical assertions consume exact current receipts and their limitations; no inference from precursor Drone/Flight proof.

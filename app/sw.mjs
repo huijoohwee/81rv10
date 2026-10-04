@@ -1,5 +1,5 @@
 const PREFIX = 'drone-dashboard-shell-';
-const CACHE = `${PREFIX}v0.3.0-evidence`;
+const CACHE = `${PREFIX}v0.3.1-evidence`;
 const SHELL = ['./', './index.html', './style.css', './app.mjs', './contracts.mjs', './tools.mjs',
   './evidence-kernel.mjs', './evidence-replay.mjs', './evidence-view.mjs',
   './profiles/aviation-v1.json', './profiles/workspaces.json', './fixtures/aviation-synthetic-v1.json'];

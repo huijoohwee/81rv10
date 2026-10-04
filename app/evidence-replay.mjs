@@ -1,4 +1,4 @@
-import { canonicalJson, EvidenceError, normalizedValue, readEvidence, utcMillis } from './evidence-kernel.mjs';
+import { canonicalJson, comparisonValue, EvidenceError, normalizedValue, readEvidence, utcMillis } from './evidence-kernel.mjs';
 
 function freeze(value) {
   if (value && typeof value === 'object') { Object.values(value).forEach(freeze); Object.freeze(value); }
@@ -33,7 +33,7 @@ export function replay(handle, entityId, atUtc) {
     const ageSeconds = selected.length ? Math.max(...selected.map(fact => (query - utcMillis(fact.observed_at)) / 1000)) : null;
     const values = selected.map(fact => ({ factId: fact.id, sourceId: fact.source_id, value: normalizedValue(fact, field),
       unit: field.canonicalUnit, datum: fact.datum, null_reason: fact.null_reason }));
-    const distinct = new Set(values.map(value => canonicalJson({ value: value.value, unit: value.unit, datum: value.datum })));
+    const distinct = new Set(selected.map(fact => canonicalJson({ value: comparisonValue(fact, field), unit: field.canonicalUnit, datum: fact.datum })));
     return { kind: field.key, label: field.label, facts: selected, values,
       missing: selected.length === 0 || selected.every(fact => fact.value === null),
       stale: ageSeconds !== null && ageSeconds > data.profile.staleAfterSeconds,

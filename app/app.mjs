@@ -178,7 +178,8 @@ async function registerWebMcp() {
 $('offline-enable').onclick = guard(async () => {
   if (!('serviceWorker' in navigator)) throw new Error('Offline shell unsupported in this browser.');
   const registration = await navigator.serviceWorker.register('./sw.mjs', { type: 'module' });
-  const pending = registration.installing || registration.waiting;
+  await registration.update();
+  const pending = registration.installing || registration.waiting || registration.active;
   if (pending && pending.state !== 'activated') await new Promise((resolve, reject) => {
     const timer = setTimeout(() => { pending.removeEventListener('statechange', check); reject(new Error('Offline preparation timed out. Keep the server available and retry.')); }, 15000);
     function check() {
@@ -190,7 +191,7 @@ $('offline-enable').onclick = guard(async () => {
   });
   await navigator.serviceWorker.ready;
   $('offline-status').textContent = 'Shell, evidence profile and synthetic example cached. External native owners need their own offline setup.';
-  notice('Offline shell prepared. Save your evidence pack or dossier before closing this tab.');
+  notice('Offline shell prepared. Save your evidence pack or dossier, then reload to use the prepared revision.');
 });
 $('offline-remove').onclick = guard(async () => {
   if (!('serviceWorker' in navigator) || !('caches' in window)) throw new Error('Offline storage unsupported.');

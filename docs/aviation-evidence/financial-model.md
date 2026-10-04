@@ -1,9 +1,9 @@
 ---
 title: "Aviation Evidence — financial model preparation"
 doc_type: "Financial model"
-version: "0.3.0"
+version: "0.3.1"
 continuity_id: "aviation-evidence-layer"
-source_revision: "aviation-evidence-layer@0.3.0"
+source_revision: "aviation-evidence-layer@0.3.1"
 date: "2026-10-04"
 owner: "Financial Modeler"
 ---
@@ -26,7 +26,7 @@ All money must use one declared currency per scenario, currently unset. Currency
 | A07 | operator labour valuation / currency per hour | Unknown; owner-declared opportunity-cost input, not a fabricated wage |
 | A08 | build hours and allocation / hours, currency | Unknown; actual execution ledger and declared allocation policy |
 | A09 | compute, data, storage, security / currency per month by variant | Unknown economic cost; incremental paid provider spend capped0 by user instruction |
-| A10 | serving model/API use and unit price | Target0 calls/tokens/billed APIs; measured proof pending; future nonzero path disallowed |
+| A10 | serving model/API use and unit price | Constraint0; predecessor synthetic paths observed0, successor fixture paths observed0; nonzero path disallowed |
 | A11 | available operating hours / hours per month | Unknown; one-pilot-at-a-time planning cap is not a measured hourly capacity |
 | A12 | opening cash, assets, liabilities, owner capital / currency | Unknown; owner-supplied balances, no funding assumed |
 | A13 | tax and revenue recognition basis | Unknown; actual entity/jurisdiction/qualified review before commercial reporting |
@@ -87,7 +87,7 @@ Avoid double counting labour/build as both cash payment and imputed cost in one 
 - Customer value = comparable tasks×observed saved minutes/60×declared analyst value/hour. Frequency, accuracy and causality require EXP-4, not demo timing.
 - Feature ROI ratio = incremental attributable benefit in currency / total incremental build+operating cost in the same currency and period. Planning threshold≥1; impact1–5 and reach are separately sourced drivers, never added to currency or presented as observed ROI.
 
-Reconcile the guideline's required feature inputs in one row per Must: impact1–5, monthly reach, build hours, monthly TCO, serving-token cost, period, source and threshold result. Currently all economic benefit drivers are unknown; target serving token use0 is a constraint pending runtime evidence. Cost-free provider access does not make development or customer effort free.
+Reconcile the guideline's required feature inputs in one row per Must: impact1–5, monthly reach, build hours, monthly TCO, serving-token cost, period, source and threshold result. Currently all economic benefit drivers are unknown; serving token use0 has bounded predecessor-fixture evidence, with successor fixture observation also0. Cost-free provider access does not make development or customer effort free.
 
 ## Base, Downside and Upside
 
@@ -106,9 +106,9 @@ Top-down market = eligible organisations×relevant teams×tested annual value. B
 |---|---|---|
 | L-DISCOVERY | source review/research/consent preparation time and tool use | Active time partially observable; no numeric allocation yet |
 | L-BUILD | code/test/docs active work, failed attempts, compute and authoring tokens | Exact execution receipts to be joined; token/cost absent stays unknown |
-| L-VERIFY | contracts, parity, browser/offline, resource measurement and evaluator time | Pending actual command receipts |
-| L-RELEASE | native source/CI/publication/integration | Pending exact candidate receipts; not production |
+| L-VERIFY | contracts, parity, browser/offline, resource measurement and evaluator time | Historical46-test receipts;54 successor checks and v2 browser proof recorded; active time unknown |
+| L-RELEASE | native source/CI/publication/integration |209483a/PR6 published with green synthetic-merge CI; successor pending; no protected merge/deploy |
 | L-PILOT | onboarding/support/fulfilment/retention observations | No pilot; not zero-cost evidence |
-| L-SERVING | runtime model/API/provider calls per accepted operation | Constraint0; actual measurement pending |
+| L-SERVING | runtime model/API/provider calls per accepted operation | Constraint0; predecessor and successor fixture paths observed0 |
 
 Record elapsed versus active time separately and do not count parallel wall time twice. Store failed-work cost, retained reusable outputs and opportunity-cost assumptions; no savings claim without a comparable baseline. Projection numbers must cite these owned inputs, formulas and dates. Before audience or commercial use, populate/reconcile independently or retain an explicit incomplete status.
