@@ -2,8 +2,8 @@ import { fileURLToPath } from 'node:url';
 import { capabilities, invoke } from './app/tools.mjs';
 
 export const PROTOCOL_VERSION = '2024-11-05';
-// Six-byte JSON escapes for every permitted pack byte, plus bounded query metadata.
-export const MAX_REQUEST_BYTES = 12010000;
+// Six-byte JSON escapes per permitted dossier byte, plus bounded query metadata.
+export const MAX_REQUEST_BYTES = 3001000;
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 const only = (value, keys) => object(value) && Object.keys(value).every(key => keys.includes(key));
 const fault = (id, code, message) => ({ jsonrpc: '2.0', id, error: { code, message } });
@@ -29,7 +29,7 @@ export function handle(message) {
         || !['name', 'version'].every(key => typeof params.clientInfo[key] === 'string' && params.clientInfo[key].length <= 128))))
       return fault(message.id, -32602, `Supported protocolVersion: ${PROTOCOL_VERSION}.`);
     return result({ protocolVersion: PROTOCOL_VERSION, capabilities: { tools: {} },
-      serverInfo: { name: 'agentic-drone-dashboard', version: '0.3.3' } });
+      serverInfo: { name: 'agentic-drone-dashboard', version: '0.3.4' } });
   }
   if (message.method === 'ping' || message.method === 'tools/list') {
     if (Object.keys(params).length) return fault(message.id, -32602, 'Unsupported parameters.');
@@ -54,8 +54,7 @@ export async function invokeEnvelope(envelope) {
 }
 const parse = bytes => JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes));
 async function write(value) {
-  const { canonicalJson } = await import('./app/evidence-kernel.mjs');
-  const text = canonicalJson(value) + '\n';
+  const text = JSON.stringify(value) + '\n';
   if (!process.stdout.write(text)) await new Promise(resolve => process.stdout.once('drain', resolve));
 }
 async function runCli() {

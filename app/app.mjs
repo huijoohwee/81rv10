@@ -1,11 +1,9 @@
 import { MAX_BYTES, newDossier, readDossier, summary, digest, inspectPath, ownerLinks, replayUrl } from './contracts.mjs';
 import { invokeCommand, registerBrowserTools } from './tools.mjs';
-import { mountEvidence, evidenceContext } from './evidence-view.mjs';
-import workspaceConnections from './profiles/workspaces.json' with { type: 'json' };
 const $ = id => document.getElementById(id);
 let dossier = newDossier(), selected = 0, surface = 'program', pathBytes = null, revision = 0;
 let config = { graph: $('graph-url').value, game: '', program: $('program-path').value, mission: '' };
-let exportUrl = null, volumeModule = null, volumeLoading = null;
+let exportUrl = null;
 const previews = new Map();
 function notice(message, error = false) { $('notice').textContent = message; $('notice').classList.toggle('error', error); }
 function guard(action) { return async event => { try { await action(event); } catch (error) { notice(error.message, true); } }; }
@@ -81,8 +79,6 @@ function mountNativeFrame(url, title, host) {
   frame.src = url; host.replaceChildren(frame);
 }
 function closeSurface(message = 'Closed · native rendering stopped') {
-  $('native-preview').replaceChildren(); $('native-close').disabled = true;
-  $('native-status').textContent = message;
   $('native-frame').replaceChildren(); const empty = document.createElement('div'); empty.className = 'empty';
   const title = document.createElement('h3'); title.textContent = 'Ready when you are.';
   const text = document.createElement('p'); text.textContent = 'Load the selected native surface to continue.';
@@ -109,7 +105,7 @@ $('load-surface').onclick = guard(() => {
   $('graph-open').href = url;
 });
 $('close-surface').onclick = () => closeSurface();
-document.addEventListener('visibilitychange', () => { if (document.hidden && (!$('close-surface').disabled || !$('native-close').disabled)) closeSurface('Tab hidden · load again to resume'); });
+document.addEventListener('visibilitychange', () => { if (document.hidden && !$('close-surface').disabled) closeSurface('Tab hidden · load again to resume'); });
 $('settings-open').onclick = () => $('settings').showModal();
 $('save-settings').onclick = guard(event => {
   event.preventDefault();
@@ -164,17 +160,12 @@ $('dossier-file').onchange = guard(async () => {
 $('command-form').onsubmit = guard(async event => {
   event.preventDefault(); $('command-result').textContent = JSON.stringify(await invokeCommand($('command').value, dossier), null, 2);
 });
-function toolStatus(value) { $('webmcp-status').textContent = value; $('evidence-webmcp-status').textContent = value; }
+function toolStatus(value) { $('webmcp-status').textContent = value; }
 async function registerWebMcp() {
   return registerBrowserTools(document.modelContext || navigator.modelContext, {
     report: toolStatus,
     resolveArgs(name, args) {
       if (name === 'drone_dashboard.inspect' && args?.dossier === undefined) return { ...args, dossier: JSON.stringify(dossier) };
-      if (name.startsWith('aviation.') && args?.bundle === undefined) return { bundle: evidenceContext().bundle, ...args };
-      if (name === 'volume.project' && args?.bundle === undefined) {
-        if (!volumeModule) throw new Error('Open Volumes and import a volume first.');
-        return { bundle: volumeModule.volumeContext().bundle, ...args };
-      }
       return args;
     },
   });
@@ -194,45 +185,17 @@ $('offline-enable').onclick = guard(async () => {
     pending.addEventListener('statechange', check); check();
   });
   await navigator.serviceWorker.ready;
-  $('offline-status').textContent = 'Shell, evidence profile and bundled examples cached. External native owners need their own offline setup.';
-  notice('Offline shell prepared. Save your evidence pack or dossier, then reload to use the prepared revision.');
+  $('offline-status').textContent = 'Dashboard shell cached. External native owners need their own offline setup.';
+  notice('Offline shell prepared. Save your dossier, then reload to use the prepared revision.');
 });
 $('offline-remove').onclick = guard(async () => {
   if (!('serviceWorker' in navigator) || !('caches' in window)) throw new Error('Offline storage unsupported.');
   const registration = await navigator.serviceWorker.getRegistration('./');
   if (registration && new URL(registration.active?.scriptURL || registration.waiting?.scriptURL || registration.installing?.scriptURL).pathname === '/sw.mjs') await registration.unregister();
   for (const key of await caches.keys()) if (key.startsWith('drone-dashboard-shell-')) await caches.delete(key);
-  $('offline-status').textContent = 'Offline cache removed. Current imported evidence remains in this tab.';
+  $('offline-status').textContent = 'Offline cache removed. The current dossier remains in this tab.';
   notice('Offline assets removed. Reload from the local server before preparing offline again.');
 });
 window.addEventListener('pagehide', () => { releasePreviews(); if (exportUrl) URL.revokeObjectURL(exportUrl); });
-async function selectWorkspace(name) {
-  closeSurface();
-  for (const key of ['evidence', 'volume', 'native', 'drone']) {
-    $(key + '-workspace-panel').hidden = key !== name;
-    $(key + '-workspace').setAttribute('aria-pressed', String(key === name));
-  }
-  $('settings-open').hidden = name !== 'drone';
-  if (name === 'volume' && !volumeModule) {
-    volumeLoading ||= import('./volume-view.mjs').then(module => {
-      module.mountVolumes($('volume-workspace-panel')); volumeModule = module;
-    }).catch(error => { volumeLoading = null; throw error; });
-    await volumeLoading;
-  }
-}
-for (const key of ['evidence', 'volume', 'native', 'drone']) $(key + '-workspace').onclick = guard(() => selectWorkspace(key));
-const connection = workspaceConnections.native;
-$('native-title').textContent = connection.title; $('native-workspace').textContent = connection.title;
-$('native-description').textContent = connection.description;
-const nativeSourceUrl = ownerLinks(connection.baseUrl, null, connection.documentPath).graph;
-const nativeEmbedUrl = new URL(nativeSourceUrl);
-for (const [key, value] of Object.entries(connection.parameters || {})) nativeEmbedUrl.searchParams.set(key, value);
-const nativeUrl = nativeEmbedUrl.toString();
-$('native-open').href = nativeSourceUrl;
-$('native-load').onclick = () => {
-  mountNativeFrame(nativeUrl, connection.title, $('native-preview')); $('native-close').disabled = false;
-  $('native-status').textContent = `Requested ${connection.documentPath}. Verify the source workspace status below.`;
-};
-$('native-close').onclick = () => closeSurface();
-render(); updateLinks(); mountEvidence(); void registerWebMcp();
-if (navigator.serviceWorker?.controller) $('offline-status').textContent = 'Using the provisioned shell. Save evidence files separately.';
+render(); updateLinks(); void registerWebMcp();
+if (navigator.serviceWorker?.controller) $('offline-status').textContent = 'Using the provisioned dashboard shell. Save dossier files separately.';

@@ -7,13 +7,15 @@ import { validateRepositoryProfile } from 'agentic-os';
 const json = async path => JSON.parse(await readFile(path, 'utf8'));
 if (process.argv.includes('--budgets')) {
   const files = execFileSync('git', ['ls-files', '-z', '--cached', '--others', '--exclude-standard'], { encoding: 'utf8' }).split('\0').filter(Boolean);
+  const removed = new Set(execFileSync('git', ['ls-files', '--deleted', '-z'], { encoding: 'utf8' }).split('\0'));
+  const present = [...new Set(files)].filter(file => !removed.has(file));
   let bytes = 0;
-  for (const file of [...new Set(files)]) {
+  for (const file of present) {
     const data = await readFile(file); bytes += data.length;
     assert.ok(data.length < 500000, `${file}: exceeds 500 kB`);
     assert.ok(data.toString('utf8').split('\n').length < 600, `${file}: exceeds 599 lines`);
   }
-  console.log(JSON.stringify({ files: files.length, bytes, bounds: 'each file <600 lines and <500 kB' }));
+  console.log(JSON.stringify({ files: present.length, bytes, bounds: 'each file <600 lines and <500 kB' }));
 } else {
   test('native profile binds the target and requires protected checks', async () => {
     const profile = validateRepositoryProfile(await json('.agentic-os.json'));
