@@ -21,6 +21,7 @@ worktree_id: "agent/device-0232231d4a19/drone-dashboard-layout"
 agent_id: "codex-root"
 load_policy: "on-demand"
 guideline_revision: "3.3.0"
+guideline_reference: "https://github.com/huijoohwee/agentic-gateway/blob/cdb000925729a729732206a32de36e6bc7db011c/references/README.md#guidelineprd-tad-adr-mvp-gtm"
 ---
 # Reference implementation — Agentic Drone Dashboard
 
